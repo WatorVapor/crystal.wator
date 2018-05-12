@@ -5,4 +5,5 @@ let api = new ApiWS(myWallet);
 
 let addressAll = myWallet.getAllAddress();
 console.log('addressAll=<',addressAll,'>');
-myWallet.signTransaction(addressAll[0],'test');
+let first = myWallet.signTransaction(addressAll[0],'test');
+console.log('first=<',first,'>');
