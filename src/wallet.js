@@ -76,12 +76,12 @@ module.exports = class Wallet {
     
     let d = new SHA3.SHA3Hash();
     d.update(pub);
-    let sumPub = d.digest('binary');
+    let sumPub = d.digest('hex');
     console.log('sumPub=<',sumPub,'>');
 
     let d2 = new SHA3.SHA3Hash(224);
     d2.update(sumPub);
-    let sumPub2 = d2.digest('binary');
+    let sumPub2 = d2.digest('hex');
     //console.log('sumPub2=<',sumPub2,'>');
     let sumBuff = new Buffer.from(sumPub2);
     let address = bs58.encode(sumBuff);
