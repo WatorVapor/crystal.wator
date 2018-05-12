@@ -54,13 +54,14 @@ module.exports = class Wallet {
     //console.log('signTransaction::key=<',key,'>');
     let prvKey = key.prv;
     //console.log('signTransaction::prvKey=<',prvKey,'>');
+    let signs = {};
     if(prvKey) {
       let signature = prvKey.sign(msgHash);
       //console.log('signTransaction::signature=<',signature,'>');
       let derSign = signature.toDER('hex');
-      return derSign;      
+      signs.msgSign = derSign;
+      signs.msgOrig = msgHash;
     }
-    
     let pubKey = key.pub;
     let pub = pubKey.getPublic('hex');
     console.log('pub=<',pub,'>');
@@ -68,6 +69,14 @@ module.exports = class Wallet {
     d.update(pub);
     let sumPub = d.digest('hex');
     console.log('sumPub=<',sumPub,'>');
+    if(prvKey) {
+      let signaturePub = prvKey.sign(sumPub);
+      //console.log('signTransaction::signaturePub=<',signaturePub,'>');
+      let pubSign = signaturePub.toDER('hex');
+      signs.pubSign = pubSign;
+      signs.pubOrig = sumPub;
+    }
+    return signs;
     
   }
     
