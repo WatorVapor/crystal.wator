@@ -63,6 +63,7 @@ module.exports = class Wallet {
       signs.msgOrig = msgHash;
     }
     let pubKey = key.pub;
+    console.log('pubKey=<',pubKey,'>');
     let pub = pubKey.getPublic('hex');
     console.log('pub=<',pub,'>');
     let d = new SHA3.SHA3Hash();
