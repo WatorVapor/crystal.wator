@@ -37,7 +37,7 @@ module.exports = class Wallet {
     return address;
   }
   
-  getAddress() {
+  getAllAddress() {
     let adds = [];
     let indexKesy = Object.keys(this.hexKeys);
     for(let i = 0; i < indexKesy.length ;i++) {
@@ -60,12 +60,17 @@ module.exports = class Wallet {
       let derSign = signature.toDER('hex');
       return derSign;      
     }
+    
+    let pubKey = key.pub;
+    let pub = pubKey.getPublic('hex');
+    console.log('pub=<',pub,'>');
+    let d = new SHA3.SHA3Hash();
+    d.update(pub);
+    let sumPub = d.digest('hex');
+    console.log('sumPub=<',sumPub,'>');
+    
   }
-  
-  
-  
-  
-  
+    
   
   createECDSA_() {
     let key = ec.genKeyPair();
