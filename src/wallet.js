@@ -85,7 +85,7 @@ module.exports = class Wallet {
     //console.log('sumPub2=<',sumPub2,'>');
     let sumBuff = new Buffer(sumPub2);
     let address = bs58.encode(sumBuff);
-    //console.log('address=<',address,'>');
+    console.log('address=<',address,'>');
     
     this.hexKeys[address] = prv;
     return address;
