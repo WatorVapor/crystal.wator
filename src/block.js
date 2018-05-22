@@ -1,12 +1,21 @@
 const SHA3  = require('sha3');
 const Miner  = require('./mine.js');
 
+// WC => 1000 mWc
+// mWC => 1000 uWc
+
+// unit uWC
+const transactionFee = 100;
+
 
 class Bill {
-  constructor(dst,src,amount,msg) {
+  constructor(dst,src,input,msg,original) {
+    this.fee_ = transactionFee;
     this.dst_ = dst;
     this.src_ = src;
-    this.amount_ = amount;
+    this.input_ = input;
+    this.ouput_ = this.input_ - transFee;
+    this.original_ = original;
     this.msg_ = msg;
     this.sign =[];
   }
@@ -14,10 +23,14 @@ class Bill {
 
 
 const BlockSize = 1000*1000*1000;
+const blockDifficulty = 1000;
+
 class Block {
   constructor() {
     this.Bills_ = [];
     this.prevBlock_ = '';
+    this.difficulty_ = blockDifficulty;
+    this.version_ = 1.0;
     this.size_ = 0;
     this.miner_ = new Miner();
     this.sign =[];
