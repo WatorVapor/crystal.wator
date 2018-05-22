@@ -32,6 +32,9 @@ module.exports = class wsAPI {
         if(msgJson.request === 'address') {
           this.onRequestAddress_(ws);
         }
+        if(msgJson.request === 'createAddress') {
+          this.onRequestCreateAddress_(ws,msgJson.comment);
+        }
       }
     }
   }
@@ -39,6 +42,17 @@ module.exports = class wsAPI {
   onRequestAddress_(ws) {
     let address = this.wallet.getAllAddress();
     console.log('onRequestAddress_::address=<',address,'>');
+    let res = {
+      response:'address',
+      address:address
+    }
+    ws.send(JSON.stringify(res));
+  }
+
+  onRequestCreateAddress_(ws,comment) {
+    this.wallet.createAddress(comment,);
+    let address = this.wallet.getAllAddress();
+    console.log('onRequestCreateAddress_::address=<',address,'>');
     let res = {
       response:'address',
       address:address
