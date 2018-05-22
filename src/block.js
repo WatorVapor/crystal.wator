@@ -45,6 +45,7 @@ class Block {
     let sum = d.digest('hex');
     //console.log('sum=<',sum,'>');
     this.billSum_ = sum;
+    this.ver = 1.0;
     let pow = this.miner_.run(this.billSum_);
     this.powNounce_  = pow.nounce;
     this.powSum_  = pow.sum;
