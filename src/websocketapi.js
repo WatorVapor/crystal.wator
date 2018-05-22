@@ -37,7 +37,7 @@ module.exports = class wsAPI {
   }
   
   onRequestAddress_(ws) {
-    let address = this.wallet.getAddress();
+    let address = this.wallet.getAllAddress();
     console.log('onRequestAddress_::address=<',address,'>');
     let res = {
       response:'address',
