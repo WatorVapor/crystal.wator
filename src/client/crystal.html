@@ -42,7 +42,37 @@
         </form>
       </div>
     </header>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <div class="container-fluid">
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Address</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Message</th>
+          </tr>
+        </thead>
+        <tbody id="address-list">
+          <tr v-for="address in allAddress">
+            <td class="d-none">{{address}}</td>
+            <td><button type="button" class="btn btn-success" onclick="onClickGotoDevice(this)">{{address}}</button></td>
+            <td><button type="button" class="btn btn-danger" onclick="onClickUnbindDevice(this)">1.0</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">comment:</span>
+                </div>
+                <input type="text" class="form-control"></input>
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-primary" onclick="onClickCreateAddress(this)">+</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
@@ -91,11 +121,28 @@
         };
         ws.send(JSON.stringify(api));
       }
-      function onReadAddress(address) {
-        console.log('onReadAddress::address=<',address,'>');
+      function onReadAddress(addresses) {
+        console.log('onReadAddress::addresses=<',addresses,'>');
+        let listBindDevice = new Vue({
+          el: '#address-list',
+          data: { allAddress: addresses }
+        })
       }  
     </script>
     
+
+    <script>
+      function onClickCreateAddress(elem) {
+        console.log('onClickCreateAddress::elem=<',elem,'>');
+        let message = elem.parentNode.parentNode.getElementsByTagName('input')[0].value || '';
+        console.log('onClickCreateAddress::message=<',message,'>');
+        let api = {
+          request:'createAddress',
+          comment:message
+        };
+        ws.send(JSON.stringify(api));
+      }
+    </script>
     
     
   </body>
