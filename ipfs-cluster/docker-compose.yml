@@ -1,9 +1,9 @@
 version: '3'
 services:
   ipfs-dameon:
-    image: ipfs/js-ipfs:v0.29.0
+    image: ipfs/go-ipfs:release
     volumes:
-      - ./storage-ipfs:/root/.jsipfs
+      - ./storage-ipfs:/data/ipfs
     networks:
       - outside
     deploy:
