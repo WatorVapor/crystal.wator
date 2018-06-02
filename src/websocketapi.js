@@ -35,6 +35,12 @@ module.exports = class wsAPI {
         if(msgJson.request === 'createAddress') {
           this.onRequestCreateAddress_(ws,msgJson.comment);
         }
+        if(msgJson.request === 'blance') {
+          this.onRequestReadBlance_(ws);
+        }
+        if(msgJson.request === 'transaction') {
+          this.onRequestReadTransaction_(ws);
+        }
       }
     }
   }
@@ -56,6 +62,43 @@ module.exports = class wsAPI {
     let res = {
       response:'address',
       address:address
+    }
+    ws.send(JSON.stringify(res));
+  }
+
+  onRequestReadBlance_(ws) {
+    let verifiedAmount = 0.0;
+    let verifyingAmount = 0.0;
+    let totalAmount = verifiedAmount + verifyingAmount;
+    let res = {
+      response:'blance',
+      blance:{
+        verified:verifiedAmount.toFixed(6),
+        verifying:verifyingAmount.toFixed(6),
+        total:totalAmount.toFixed(6)
+      }
+    }
+    ws.send(JSON.stringify(res));
+  }
+
+  onRequestReadTransaction_(ws) {
+    let amount = 0.0;
+    let res = {
+      response:'transaction',
+      transaction:[
+        {
+          dir_icon:'add_circle',
+          date:new Date(),
+          message:'test +',
+          amount:amount.toFixed(6)
+        },
+        {
+          dir_icon:'remove_circle',
+          date:new Date(),
+          message:'test -',
+          amount:amount.toFixed(6)
+        }
+      ]
     }
     ws.send(JSON.stringify(res));
   }
