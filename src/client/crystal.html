@@ -42,7 +42,6 @@
         </form>
       </div>
     </header>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <div class="container-fluid">
       <table class="table table-striped table-dark">
         <thead>
@@ -77,73 +76,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-    <script>
-      //let uri = "ws://127.0.0.1:18020";
-      let uri = "ws://192.168.100.200:18020";
-      let ws = new WebSocket(uri);
-      ws.onopen = onOpen;
-      ws.onmessage = onMessage;
-      ws.onclose = onClose;
-      ws.onerror = onError;
-      function onOpen(evt) {
-        console.log('onOpen::evt=<',evt,'>');
-        setTimeout(function(){
-          readAddress();
-        },1);
-      }
-      function onMessage(evt) {
-        console.log('onMessage::evt=<',evt,'>');
-        let msgJson = JSON.parse(evt.data);
-        console.log('onMessage::msgJson=<',msgJson,'>');
-        if(msgJson) {
-          if(msgJson.response) {
-            if(msgJson.response === 'address') {
-              onReadAddress(msgJson.address);
-            }
-          }
-        }
-      }
-      function onClose(evt) {
-        console.log('onClose::evt=<',evt,'>');
-      }
-      function onError(evt) {
-        console.log('onError::evt=<',evt,'>');
-      } 
-    </script>
-    
-    
-    
-    <script>
-      function readAddress(evt) {
-        console.log('readAddress::evt=<',evt,'>');
-        let api = {
-          request:'address'
-        };
-        ws.send(JSON.stringify(api));
-      }
-      function onReadAddress(addresses) {
-        console.log('onReadAddress::addresses=<',addresses,'>');
-        let listBindDevice = new Vue({
-          el: '#address-list',
-          data: { allAddress: addresses }
-        })
-      }  
-    </script>
-    
-
-    <script>
-      function onClickCreateAddress(elem) {
-        console.log('onClickCreateAddress::elem=<',elem,'>');
-        let message = elem.parentNode.parentNode.getElementsByTagName('input')[0].value || '';
-        console.log('onClickCreateAddress::message=<',message,'>');
-        let api = {
-          request:'createAddress',
-          comment:message
-        };
-        ws.send(JSON.stringify(api));
-      }
-    </script>
-    
-    
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./client.js"></script>
   </body>
 </html>
