@@ -59,7 +59,7 @@ function readAddress(evt) {
 function onReadAddress(addresses) {
   console.log('onReadAddress::addresses=<',addresses,'>');
   let listAddredd = new Vue({
-    el: '#wc-address-list',
+    el: '#wc-body-recieve-address-list',
     data: { allAddress: addresses }
   })
 }  

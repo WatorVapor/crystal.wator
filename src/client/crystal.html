@@ -78,10 +78,52 @@
     
     
     
+    <div class="container-fluid wc-navbar-response-btn d-none" id="wc-navbar-response-send">
+      <div class="row">
+        <div class="col">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">付给:</span>
+            </div>
+            <input type="text" class="form-control"></input>
+            <div class="input-group-append">
+              <button type="button" class="btn btn-primary ml-2" onclick="onClickSendLoadContacts(this)">
+                <i class="material-icons">contacts</i>
+              </button>
+              <button type="button" class="btn btn-danger ml-2" onclick="onClickSendClean(this)">
+                <i class="material-icons red">remove</i>
+              </button>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">标签:</span>
+            </div>
+            <input type="text" class="form-control"></input>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">金额:</span>
+            </div>
+            <input type="text" class="form-control"></input>
+            <div class="input-group-append">
+              <select class="custom-select ml-3  mr-3">
+                <option selected>WC</option>
+                <option>mWC</option>
+                <option>uWC</option>
+              </select>
+              <div class="input-group-text">
+                <input type="checkbox"><b class="ml-3">从金额中减去交易费</b></input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     
     
     
-    <div class="container-fluid d-none">
+    <div class="container-fluid wc-navbar-response-btn d-none" id="wc-navbar-response-recieve">
       <table class="table table-striped table-dark">
         <thead>
           <tr>
@@ -90,12 +132,7 @@
             <th scope="col">Message</th>
           </tr>
         </thead>
-        <tbody id="wc-address-list">
-          <tr v-for="address in allAddress">
-            <td class="d-none">{{address}}</td>
-            <td><button type="button" class="btn btn-success" onclick="onClickGotoDevice(this)">{{address}}</button></td>
-            <td><button type="button" class="btn btn-danger" onclick="onClickUnbindDevice(this)">1.0</button></td>
-          </tr>
+        <tbody id="wc-body-recieve-address-list">
           <tr>
             <td>
               <div class="input-group mb-3">
@@ -108,6 +145,12 @@
                 </div>
               </div>
             </td>
+          </tr>
+          <tr v-for="address in allAddress">
+            <td class="d-none">{{address.address}}</td>
+            <td><button type="button" class="btn btn-sm btn-success" onclick="onClickGotoAddress(this)">{{address.address}}</button></td>
+            <td><p class="text-primary"><b>0.0</b></p></td>
+            <td><p class="text-secondary">{{address.comment}}</p></td>
           </tr>
         </tbody>
       </table>

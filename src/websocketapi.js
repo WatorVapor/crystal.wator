@@ -56,7 +56,7 @@ module.exports = class wsAPI {
   }
 
   onRequestCreateAddress_(ws,comment) {
-    this.wallet.createAddress(comment,);
+    this.wallet.createAddress(comment);
     let address = this.wallet.getAllAddress();
     console.log('onRequestCreateAddress_::address=<',address,'>');
     let res = {

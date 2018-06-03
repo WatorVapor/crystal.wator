@@ -19,7 +19,7 @@ module.exports = class Wallet {
     }
     if(!isExistFile(this.path_)) {
       this.hexKeys = {};
-      this.createECDSA_();
+      this.createECDSA_('init address');
       this.saveWallet_();
     }
     this.rawKeys = {};
@@ -31,8 +31,8 @@ module.exports = class Wallet {
     this.saveWallet_();
   }
   
-  createAddress() {
-    let address = this.createECDSA_();
+  createAddress(comment) {
+    let address = this.createECDSA_(comment);
     this.saveWallet_();
     return address;
   }
@@ -42,7 +42,8 @@ module.exports = class Wallet {
     let indexKesy = Object.keys(this.hexKeys);
     for(let i = 0; i < indexKesy.length ;i++) {
       let address = indexKesy[i];
-      adds.push(address);
+      let comment = this.hexKeys[address].comment;
+      adds.push({address:address,comment:comment});
     }
     return adds;
   }
@@ -80,7 +81,7 @@ module.exports = class Wallet {
   }
     
   
-  createECDSA_() {
+  createECDSA_(comment) {
     let key = ec.genKeyPair();
     let pub = key.getPublic('hex');
     //console.log('pub=<',pub,'>');
@@ -97,10 +98,10 @@ module.exports = class Wallet {
     let sumPub2 = d2.digest('hex');
     //console.log('sumPub2=<',sumPub2,'>');
     let sumBuff = new Buffer.from(sumPub2);
-    let address = bs58.encode(sumBuff);
+    let address = 'Wc1' + bs58.encode(sumBuff);
     console.log('address=<',address,'>');
     
-    this.hexKeys[address] = prv;
+    this.hexKeys[address] = {key:prv,comment:comment};
     return address;
   }
   
@@ -114,7 +115,7 @@ module.exports = class Wallet {
     for(let i = 0; i < indexKesy.length ;i++) {
       let address = indexKesy[i];
       //console.log('loadWallet_::address=<',address,'>');
-      let keyHex = this.hexKeys[address];
+      let keyHex = this.hexKeys[address].key;
       //console.log('loadWallet_::keyHex=<',keyHex,'>');
       let prvKey = ec.keyFromPrivate(keyHex, 'hex');
       //console.log('loadWallet_::prvKey=<',prvKey,'>');
