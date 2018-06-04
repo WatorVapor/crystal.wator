@@ -124,7 +124,7 @@
     
     
     <div class="container-fluid wc-navbar-response-btn d-none" id="wc-navbar-response-recieve">
-      <table class="table table-striped table-dark">
+      <table class="table table-striped table-bordered table-dark">
         <thead>
           <tr>
             <th scope="col">Address</th>
@@ -135,20 +135,24 @@
         <tbody id="wc-body-recieve-address-list">
           <tr>
             <td>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">comment:</span>
-                </div>
-                <input type="text" class="form-control"></input>
+              <div class="input-group input-group-sm mb-3">
+                <input type="text" class="form-control" placeholder="add address comment" style="width:150px;"></input>
                 <div class="input-group-append">
-                  <button type="button" class="btn btn-primary" onclick="onClickCreateAddress(this)">+</button>
+                  <button type="button" class="btn btn-primary" onclick="onClickCreateAddress(this)">
+                    <i class="material-icons">add_circle</i>
+                  </button>
                 </div>
               </div>
             </td>
           </tr>
           <tr v-for="address in allAddress">
-            <td class="d-none">{{address.address}}</td>
-            <td><button type="button" class="btn btn-sm btn-success" onclick="onClickGotoAddress(this)">{{address.address}}</button></td>
+            <td class="d-none" >{{address.address}}</td>
+            <td>
+              <button type="button" class="btn btn-sm btn-success btn-clipboard" data-clipboard-text="{{address.address}}">
+                <i class="material-icons">file_copy</i>
+              </button>
+              <small>{{address.address}}</small>
+            </td>
             <td><p class="text-primary"><b>0.0</b></p></td>
             <td><p class="text-secondary">{{address.comment}}</p></td>
           </tr>
@@ -163,6 +167,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js"></script>
     <script src="./client.js"></script>
     <script >
       function onClickGotoSummary(elem) {
@@ -185,6 +190,19 @@
         $('.wc-navbar-response-btn').addClass('d-none');
         $('#wc-navbar-response-transcation').removeClass('d-none');
       }
+    </script>
+    <script type="text/javascript">
+      var clipboard = new Clipboard('.btn-clipboard',{
+        text: function(trigger) {
+          console.log('Clipboard::trigger=<',trigger,'>');
+          let root = trigger.parentNode;
+          console.log('Clipboard::root=<',root,'>');
+          let textElem = root.getElementsByTagName('small')[0];
+          console.log('Clipboard::textElem=<',textElem,'>');
+          let text = textElem.textContent;
+          console.log('Clipboard::text=<',text,'>');
+          return text;
+      }});
     </script>
   </body>
 </html>
