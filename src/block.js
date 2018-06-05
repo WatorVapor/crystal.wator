@@ -66,17 +66,5 @@ class Block {
 }
 
 let blockGenesis = new Block();
-let firstBill = new Bill('Oracle','Google',0,'Oracle had sought $9 billion',);
-blockGenesis.addBill(firstBill);
-
-let zeroBill = new Bill('000000000000000','000000000000000',0,'000000000000000',);
-
-for(let i = 0;i < 100000;i++) {
-  let fullBlock = blockGenesis.addBill(zeroBill);
-  if(fullBlock){
-    blockGenesis.pushToChain();
-    break;
-  };
-}
 console.log('blockGenesis=<',blockGenesis,'>');
 
