@@ -1,5 +1,8 @@
 const SHA3  = require('sha3');
 const Miner  = require('./mine.js');
+const ipfsAPI = require('ipfs-api');
+const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5002');
+
 
 // WC => 1000 mWc
 // mWC => 1000 uWc
@@ -77,4 +80,12 @@ let winner = miner.run(genesisMsg);
 blockGenesis.block_ = winner.sum;
 blockGenesis.nounce_ = winner.nounce;
 console.log('blockGenesis=<',blockGenesis,'>');
+
+ipfs.id( (err, identity) => {
+  if (err) {
+    throw err;
+    process.exit();
+  }
+  console.log('identity=<',identity,'>');
+});
 
