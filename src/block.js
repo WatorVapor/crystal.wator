@@ -99,6 +99,13 @@ function createGenesisBlockA(){
     if(err) {
       throw err;
     }
-    console.log('createGenesisBlockA files=<',files,'>');
+    //console.log('createGenesisBlockA files=<',files,'>');
+    if(files.length > 0) {
+      createGenesisBlockB(files[0].path);
+    }
   });
+}
+
+function createGenesisBlockB(prevBlock){
+  console.log('createGenesisBlockB prevBlock=<',prevBlock,'>');
 }
