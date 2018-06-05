@@ -78,17 +78,28 @@ ipfs.id( (err, identity) => {
     process.exit();
   }
   console.log('identity=<',identity,'>');
-  setTimeout(createGenesisBlock,0)
+  setTimeout(createGenesisBlockA,0)
 });
 
-function createGenesisBlock(){
+function createGenesisBlockA(){
   const genesisMsg = '美中贸易战 “川普捡了芝麻 丢了西瓜”';
-  let blockGenesis = new Block(genesisMsg);
-  //console.log('blockGenesis=<',blockGenesis,'>');
+  let blockGenesisA = new Block(genesisMsg);
+  //console.log('blockGenesisA=<',blockGenesisA,'>');
   let miner = new Miner();
   let winner = miner.run(genesisMsg);
   //console.log('winner=<',winner,'>');
-  blockGenesis.block_ = winner.sum;
-  blockGenesis.nounce_ = winner.nounce;
-  console.log('blockGenesis=<',blockGenesis,'>');
+  blockGenesisA.block_ = winner.sum;
+  blockGenesisA.nounce_ = winner.nounce;
+  //console.log('blockGenesisA=<',blockGenesisA,'>');
+  let blockGenesisAStr = JSON.stringify(blockGenesisA);
+  console.log('blockGenesisAStr=<',blockGenesisAStr,'>');
+  
+  const msgBuff = Buffer.from(blockGenesisAStr);
+  ipfs.add(msgBuff, function (err, files) {
+    if(err) {
+      throw err;
+    }
+    console.log('createGenesisBlockA files=<',files,'>');
+    }
+  });
 }
