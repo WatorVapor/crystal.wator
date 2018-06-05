@@ -29,6 +29,7 @@ class Block {
   constructor(msg) {
     this.transactions_ = [];
     this.prevBlock_ = '';
+    this.block_ = '';
     this.difficulty_ = blockDifficulty;
     this.version_ = 1.0;
     this.size_ = 0;
@@ -71,8 +72,9 @@ const genesisMsg = '美中贸易战 “川普捡了芝麻 丢了西瓜”';
 let blockGenesis = new Block(genesisMsg);
 //console.log('blockGenesis=<',blockGenesis,'>');
 let miner = new Miner();
-let nounce = miner.run(genesisMsg);
-console.log('nounce=<',nounce,'>');
-blockGenesis.nounce_ = nounce;
+let winner = miner.run(genesisMsg);
+console.log('winner=<',winner,'>');
+blockGenesis.block_ = winner.sum;
+blockGenesis.nounce_ = winner.nounce;
 console.log('blockGenesis=<',blockGenesis,'>');
 
