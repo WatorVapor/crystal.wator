@@ -14,7 +14,7 @@ class Bill {
     this.dst_ = dst;
     this.src_ = src;
     this.input_ = input;
-    this.ouput_ = this.input_ - transFee;
+    this.ouput_ = this.input_ - transactionFee;
     this.original_ = original;
     this.msg_ = msg;
     this.sign =[];
