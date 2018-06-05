@@ -86,7 +86,7 @@ ipfs.id( (err, identity) => {
 });
 
 function createGenesisBlockA(){
-  const genesisMsg = '美中贸易战 “川普捡了芝麻 丢了西瓜”';
+  const genesisMsg = ':美中贸易战 “川普捡了芝麻 丢了西瓜”';
   let blockGenesisA = new Block(genesisMsg);
   //console.log('blockGenesisA=<',blockGenesisA,'>');
   let miner = new Miner();
@@ -112,7 +112,7 @@ function createGenesisBlockA(){
 
 function createGenesisBlockB(prevBlock,prev){
   console.log('createGenesisBlockB prevBlock=<',prevBlock,'>');
-  const genesisMsg = prevBlock+'大型恐竜、卵温めた？';
+  const genesisMsg = prevBlock+':大型恐竜、卵温めた？';
   let blockGenesisB = new Block(genesisMsg,prev);
   //console.log('blockGenesisB=<',blockGenesisB,'>');
   let miner = new Miner();
