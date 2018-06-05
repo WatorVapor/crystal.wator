@@ -71,15 +71,6 @@ class Block {
   }
 }
 
-const genesisMsg = '美中贸易战 “川普捡了芝麻 丢了西瓜”';
-let blockGenesis = new Block(genesisMsg);
-//console.log('blockGenesis=<',blockGenesis,'>');
-let miner = new Miner();
-let winner = miner.run(genesisMsg);
-//console.log('winner=<',winner,'>');
-blockGenesis.block_ = winner.sum;
-blockGenesis.nounce_ = winner.nounce;
-console.log('blockGenesis=<',blockGenesis,'>');
 
 ipfs.id( (err, identity) => {
   if (err) {
@@ -87,5 +78,17 @@ ipfs.id( (err, identity) => {
     process.exit();
   }
   console.log('identity=<',identity,'>');
+  setTimeout(createGenesisBlock,0)
 });
 
+function createGenesisBlock(){
+  const genesisMsg = '美中贸易战 “川普捡了芝麻 丢了西瓜”';
+  let blockGenesis = new Block(genesisMsg);
+  //console.log('blockGenesis=<',blockGenesis,'>');
+  let miner = new Miner();
+  let winner = miner.run(genesisMsg);
+  //console.log('winner=<',winner,'>');
+  blockGenesis.block_ = winner.sum;
+  blockGenesis.nounce_ = winner.nounce;
+  console.log('blockGenesis=<',blockGenesis,'>');
+}
