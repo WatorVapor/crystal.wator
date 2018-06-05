@@ -29,17 +29,21 @@ const BlockSize = 1000*1000*1000;
 const blockDifficulty = 1000;
 
 class Block {
-  constructor(msg) {
-    this.transactions = [];
-    this.prev = '';
-    this.block = '';
-    this.difficulty = blockDifficulty;
-    this.version = 1.0;
-    this.size = 0;
+  constructor(msg,prev) {
+    this.ts = [];
+    if(prev) {
+      this.p = prev;
+    } else {
+      this.p = '';
+    }
+    this.b = '';
+    this.d = blockDifficulty;
+    this.v = 1.0;
+    this.sz = 0;
     this.sign =[];
     this.msg = msg;
-    this.nounce= '';
-    this.timestamp = new Date();
+    this.n= '';
+    this.tp = new Date();
   }
   
   addTransaction(transactions) {
@@ -88,8 +92,8 @@ function createGenesisBlockA(){
   let miner = new Miner();
   let winner = miner.run(genesisMsg);
   //console.log('winner=<',winner,'>');
-  blockGenesisA.block = winner.sum;
-  blockGenesisA.nounce = winner.nounce;
+  blockGenesisA.b = winner.sum;
+  blockGenesisA.n = winner.nounce;
   //console.log('blockGenesisA=<',blockGenesisA,'>');
   let blockGenesisAStr = JSON.stringify(blockGenesisA);
   console.log('blockGenesisAStr=<',blockGenesisAStr,'>');
@@ -101,21 +105,21 @@ function createGenesisBlockA(){
     }
     //console.log('createGenesisBlockA files=<',files,'>');
     if(files.length > 0) {
-      createGenesisBlockB(files[0].path);
+      createGenesisBlockB(files[0].path,blockGenesisA.b);
     }
   });
 }
 
-function createGenesisBlockB(prevBlock){
+function createGenesisBlockB(prevBlock,prev){
   console.log('createGenesisBlockB prevBlock=<',prevBlock,'>');
   const genesisMsg = prevBlock+'大型恐竜、卵温めた？';
-  let blockGenesisB = new Block(genesisMsg);
+  let blockGenesisB = new Block(genesisMsg,prev);
   //console.log('blockGenesisB=<',blockGenesisB,'>');
   let miner = new Miner();
   let winner = miner.run(genesisMsg);
   //console.log('winner=<',winner,'>');
-  blockGenesisB.block = winner.sum;
-  blockGenesisB.nounce = winner.nounce;
+  blockGenesisB.b = winner.sum;
+  blockGenesisB.n = winner.nounce;
   //console.log('blockGenesisB=<',blockGenesisB,'>');
   let blockGenesisBStr = JSON.stringify(blockGenesisB);
   console.log('blockGenesisBStr=<',blockGenesisBStr,'>');
