@@ -26,17 +26,19 @@ const BlockSize = 1000*1000*1000;
 const blockDifficulty = 1000;
 
 class Block {
-  constructor() {
-    this.Bills_ = [];
+  constructor(msg) {
+    this.transactions_ = [];
     this.prevBlock_ = '';
     this.difficulty_ = blockDifficulty;
     this.version_ = 1.0;
     this.size_ = 0;
     this.miner_ = new Miner();
     this.sign =[];
+    this.msg_ = msg;
+    this.timestamp_ = new Date();
   }
   
-  addBill(bill) {
+  addTransaction(bill) {
     //console.log('typeof bill=<',typeof bill,'>');    
     if(typeof bill === 'object') {
       this.Bills_.push(bill);
