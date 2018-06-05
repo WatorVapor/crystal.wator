@@ -67,6 +67,6 @@ class Block {
   }
 }
 
-let blockGenesis = new Block();
+let blockGenesis = new Block('美中贸易战 “川普捡了芝麻 丢了西瓜”');
 console.log('blockGenesis=<',blockGenesis,'>');
 
