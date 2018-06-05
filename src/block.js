@@ -100,6 +100,5 @@ function createGenesisBlockA(){
       throw err;
     }
     console.log('createGenesisBlockA files=<',files,'>');
-    }
   });
 }
