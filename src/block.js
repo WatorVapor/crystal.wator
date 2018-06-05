@@ -108,4 +108,15 @@ function createGenesisBlockA(){
 
 function createGenesisBlockB(prevBlock){
   console.log('createGenesisBlockB prevBlock=<',prevBlock,'>');
+  const genesisMsg = prevBlock+'大型恐竜、卵温めた？';
+  let blockGenesisB = new Block(genesisMsg);
+  //console.log('blockGenesisB=<',blockGenesisB,'>');
+  let miner = new Miner();
+  let winner = miner.run(genesisMsg);
+  //console.log('winner=<',winner,'>');
+  blockGenesisB.block = winner.sum;
+  blockGenesisB.nounce = winner.nounce;
+  //console.log('blockGenesisB=<',blockGenesisB,'>');
+  let blockGenesisBStr = JSON.stringify(blockGenesisB);
+  console.log('blockGenesisBStr=<',blockGenesisBStr,'>');
 }
