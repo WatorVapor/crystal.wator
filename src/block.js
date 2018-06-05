@@ -32,9 +32,9 @@ class Block {
     this.difficulty_ = blockDifficulty;
     this.version_ = 1.0;
     this.size_ = 0;
-    this.miner_ = new Miner();
     this.sign =[];
     this.msg_ = msg;
+    this.nounce_= '';
     this.timestamp_ = new Date();
   }
   
@@ -67,6 +67,12 @@ class Block {
   }
 }
 
-let blockGenesis = new Block('美中贸易战 “川普捡了芝麻 丢了西瓜”');
+const genesisMsg = '美中贸易战 “川普捡了芝麻 丢了西瓜”';
+let blockGenesis = new Block(genesisMsg);
+//console.log('blockGenesis=<',blockGenesis,'>');
+let miner = new Miner();
+let nounce = miner.run(genesisMsg);
+console.log('nounce=<',nounce,'>');
+blockGenesis.nounce_ = nounce;
 console.log('blockGenesis=<',blockGenesis,'>');
 
