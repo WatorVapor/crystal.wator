@@ -5,10 +5,10 @@ module.exports = class Mine {
     this.nounce_ = 0;
   }
   run(msg,diffculty) {
-    let diffculty = '0'.repeat(diffculty);
+    let diffcultyStr = '0'.repeat(diffculty);
     while(true) {
       let sum = this.calcSha3(msg + (this.nounce_++).toString());
-      if(sum.startsWith(diffculty)) {
+      if(sum.startsWith(diffcultyStr)) {
         return {nounce:this.nounce_,sum:sum};
       }
     }
