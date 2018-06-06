@@ -8,7 +8,7 @@ const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5002');
 // mWC => 1000 uWc
 
 // unit uWC
-const transactionFee = 100;
+const transactionFee = 1;
 
 
 class Bill {
@@ -134,6 +134,12 @@ const onIpfRcvNewBlockCreated = (msg) => {
   console.log('onIpfRcvNewBlockCreated msg=<',msg,'>');
   let cid = msg.data.toString('utf-8');
   console.log('onIpfRcvNewBlockCreated cid=<',cid,'>');
+  ipfs.files.get(cid, (err,files) => {
+    if (err) {
+      throw err;
+    }
+    console.log('onIpfRcvNewBlockCreated files=<',files,'>');
+  });
 }
 ipfs.pubsub.subscribe(ipfsTopicNewBlockCreated, onIpfRcvNewBlockCreated,(err) => {
   if (err) {
