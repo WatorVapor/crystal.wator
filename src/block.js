@@ -31,7 +31,7 @@ const BlockSize = 4*1000*1000;
 const blockDifficulty = 4;
 
 class Block {
-  constructor(msg,prev) {
+  constructor(hash,prev) {
     this.transactions = [];
     if(prev) {
       this.prev = prev;
@@ -40,10 +40,10 @@ class Block {
     }
     this.block = '';
     this.difficulty = blockDifficulty;
-    this.ver = 1.0;
-    this.sizz = 0;
+    this.version = 1.0;
+    this.size = 0;
     this.sign =[];
-    this.msg = msg;
+    this.transHash = hash;
     this.nounce= '';
     let now = new Date();
     this.timestamp = now.toUTCString();
