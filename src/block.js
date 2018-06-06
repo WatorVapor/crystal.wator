@@ -44,7 +44,7 @@ class Block {
     this.msg = msg;
     this.n= '';
     let now = new Date();
-    this.tp = now.toISOString();
+    this.tp = now.toUTCString();
   }
   
   addTransaction(transactions) {
