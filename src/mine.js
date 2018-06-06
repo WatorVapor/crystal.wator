@@ -19,7 +19,7 @@ module.exports = class Mine {
     d.update(msg);
     return d.digest('hex');
   }
-  checkHash(msg,nounce,hash) {
+  checkNounceHash(msg,nounce,hash) {
     let orig = msg + nounce;
     //console.log('checkHash:orig=<',orig,'>');
     let d = new SHA3.SHA3Hash();
