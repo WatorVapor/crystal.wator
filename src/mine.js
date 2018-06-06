@@ -19,10 +19,13 @@ module.exports = class Mine {
     return d.digest('hex');
   }
   checkHash(msg,nounce,hash) {
-    let orig = msg + nounce.toString();
+    let orig = msg + nounce;
+    console.log('checkHash:orig=<',orig,'>');
     let d = new SHA3.SHA3Hash();
     d.update(orig);
     let hashCheck = d.digest('hex')
+    console.log('checkHash:hashCheck=<',hashCheck,'>');
+    console.log('checkHash:hash=<',hash,'>');
     return hash === hashCheck;
   }
 }
