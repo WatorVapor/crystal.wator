@@ -91,7 +91,7 @@ function createGenesisBlockA(){
   let blockGenesisA = new Block(genesisMsg);
   //console.log('blockGenesisA=<',blockGenesisA,'>');
   let miner = new Miner();
-  let winner = miner.run(genesisMsg);
+  let winner = miner.run(genesisMsg,blockDifficulty);
   //console.log('winner=<',winner,'>');
   blockGenesisA.block = winner.sum;
   blockGenesisA.nounce = winner.nounce;
@@ -118,7 +118,7 @@ function createGenesisBlockB(prevBlock,prev){
   let blockGenesisB = new Block(genesisMsg,prev);
   //console.log('blockGenesisB=<',blockGenesisB,'>');
   let miner = new Miner();
-  let winner = miner.run(genesisMsg);
+  let winner = miner.run(genesisMsg,blockDifficulty);
   //console.log('winner=<',winner,'>');
   blockGenesisB.block = winner.sum;
   blockGenesisB.nounce = winner.nounce;
