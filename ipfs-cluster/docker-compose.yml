@@ -1,7 +1,7 @@
 version: '3'
 services:
   ipfs-dameon:
-    image: ipfs/go-ipfs:release
+    image: watorvapor/js-ipfs
     volumes:
       - ./storage-ipfs:/data/ipfs
     networks:
