@@ -43,7 +43,8 @@ class Block {
     this.sign =[];
     this.msg = msg;
     this.n= '';
-    this.tp = new Date();
+    let now = new Date();
+    this.tp = now.toDateString();
   }
   
   addTransaction(transactions) {
