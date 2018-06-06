@@ -142,7 +142,8 @@ const onIpfRcvNewBlockCreated = (msg) => {
     //console.log('onIpfRcvNewBlockCreated files=<',files,'>');
     if(files.length > 0) {
       let block = files[0].content.toString('utf-8');
-      console.log('onIpfRcvNewBlockCreated block=<',block,'>');
+      //console.log('onIpfRcvNewBlockCreated block=<',block,'>');
+      verifyNewBlock(block);
     }
   });
 }
@@ -164,3 +165,11 @@ function broadCastNewBlocks(block) {
     console.log('sented msgBuff=<',msgBuff,'>');
   });
 }
+
+function verifyNewBlock(block) {
+  //console.log('verifyNewBlock block=<',block,'>');
+  let jsonBlock = JSON.parse(block);
+  console.log('verifyNewBlock jsonBlock=<',jsonBlock,'>');
+  
+}
+
