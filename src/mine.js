@@ -7,10 +7,11 @@ module.exports = class Mine {
   run(msg,diffculty) {
     let diffcultyStr = '0'.repeat(diffculty);
     while(true) {
-      let sum = this.calcSha3(msg + (this.nounce_++).toString());
+      let sum = this.calcSha3(msg + (this.nounce_).toString());
       if(sum.startsWith(diffcultyStr)) {
         return {nounce:this.nounce_,sum:sum};
       }
+      this.nounce_++;
     }
   }  
   calcSha3(msg) {
