@@ -176,7 +176,7 @@ function verifyNewBlock(block) {
   let isGoodDiffculty = jsonBlock.block.startsWith(diffcultyStr)
   console.log('verifyNewBlock isGoodDiffculty=<',isGoodDiffculty,'>');  
   let miner = new Miner();
-  let isGoodNounce = miner.checkHash(jsonBlock.transHash,jsonBlock.nounce.toString(),jsonBlock.block);
-  console.log('verifyNewBlock isGoodNounce=<',isGoodNounce,'>');  
+  let isGoodNounce = miner.checkNounceHash(jsonBlock.transHash,jsonBlock.nounce.toString(),jsonBlock.block);
+  console.log('verifyNewBlock isGoodNounce=<',isGoodNounce,'>');
 }
 
