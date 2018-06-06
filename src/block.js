@@ -130,7 +130,9 @@ function createGenesisBlockB(prevBlock,prev){
 
 const ipfsTopicNewBlockCreated = 'QmfR23zCTj8GPQYBtUQywt1AH13bszBZnJkFNUfkrEHyfr-new-block-created';
 
-const onIpfRcvNewBlockCreated = (cid) => {
+const onIpfRcvNewBlockCreated = (msg) => {
+  console.log('onIpfRcvNewBlockCreated msg=<',msg,'>');
+  let cid = msg.data.toString('utf-8');
   console.log('onIpfRcvNewBlockCreated cid=<',cid,'>');
 }
 ipfs.pubsub.subscribe(ipfsTopicNewBlockCreated, onIpfRcvNewBlockCreated,(err) => {
