@@ -172,6 +172,8 @@ function verifyNewBlock(block) {
   //console.log('verifyNewBlock block=<',block,'>');
   let jsonBlock = JSON.parse(block);
   console.log('verifyNewBlock jsonBlock=<',jsonBlock,'>');
-  
+  let miner = new Miner();
+  let isGoodNounce = miner.checkHash(jsonBlock.transHash,jsonBlock.nounce,jsonBlock.block);
+  console.log('verifyNewBlock isGoodNounce=<',isGoodNounce,'>');  
 }
 
