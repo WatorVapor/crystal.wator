@@ -130,17 +130,23 @@ function createGenesisBlockB(prevBlock,prev){
 
 const ipfsTopicNewBlockCreated = 'QmfR23zCTj8GPQYBtUQywt1AH13bszBZnJkFNUfkrEHyfr-new-block-created';
 
+
 const onIpfRcvNewBlockCreated = (msg) => {
-  console.log('onIpfRcvNewBlockCreated msg=<',msg,'>');
+  //console.log('onIpfRcvNewBlockCreated msg=<',msg,'>');
   let cid = msg.data.toString('utf-8');
-  console.log('onIpfRcvNewBlockCreated cid=<',cid,'>');
+  //console.log('onIpfRcvNewBlockCreated cid=<',cid,'>');
   ipfs.files.get(cid, (err,files) => {
     if (err) {
       throw err;
     }
-    console.log('onIpfRcvNewBlockCreated files=<',files,'>');
+    //console.log('onIpfRcvNewBlockCreated files=<',files,'>');
+    if(files.length > 0) {
+      let block = files[0].content.toString('utf-8');
+      console.log('onIpfRcvNewBlockCreated block=<',block,'>');
+    }
   });
 }
+
 ipfs.pubsub.subscribe(ipfsTopicNewBlockCreated, onIpfRcvNewBlockCreated,(err) => {
   if (err) {
     throw err
