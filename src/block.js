@@ -25,7 +25,7 @@ class Bill {
 }
 
 
-const BlockSize = 1000*1000*1000;
+const BlockSize = 4*1000*1000;
 const blockDifficulty = 1000;
 
 class Block {
