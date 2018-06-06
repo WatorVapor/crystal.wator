@@ -18,6 +18,13 @@ module.exports = class Mine {
     d.update(msg);
     return d.digest('hex');
   }
+  checkHash(msg,nounce,hash) {
+    let orig = msg + nounce.toString();
+    let d = new SHA3.SHA3Hash();
+    d.update(orig);
+    let hashCheck = d.digest('hex')
+    return hash === hashCheck;
+  }
 }
 
 
