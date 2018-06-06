@@ -95,6 +95,7 @@ function createGenesisBlockA(){
   //console.log('winner=<',winner,'>');
   blockGenesisA.b = winner.sum;
   blockGenesisA.n = winner.nounce;
+  blockGenesisA.tp = 'Wed, 06 Jun 2018 01:28:14 GMT';
   //console.log('blockGenesisA=<',blockGenesisA,'>');
   let blockGenesisAStr = JSON.stringify(blockGenesisA);
   console.log('blockGenesisAStr=<',blockGenesisAStr,'>');
@@ -121,6 +122,7 @@ function createGenesisBlockB(prevBlock,prev){
   //console.log('winner=<',winner,'>');
   blockGenesisB.b = winner.sum;
   blockGenesisB.n = winner.nounce;
+  blockGenesisB.tp = 'Wed, 06 Jun 2018 01:28:15 GMT';
   //console.log('blockGenesisB=<',blockGenesisB,'>');
   let blockGenesisBStr = JSON.stringify(blockGenesisB);
   console.log('blockGenesisBStr=<',blockGenesisBStr,'>');
