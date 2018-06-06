@@ -26,7 +26,9 @@ class Bill {
 
 
 const BlockSize = 4*1000*1000;
-const blockDifficulty = 1000;
+
+// '000'
+const blockDifficulty = 3;
 
 class Block {
   constructor(msg,prev) {
