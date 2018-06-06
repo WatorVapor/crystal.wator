@@ -107,7 +107,7 @@ function createGenesisBlockA(){
     }
     //console.log('createGenesisBlockA files=<',files,'>');
     if(files.length > 0) {
-      createGenesisBlockB(files[0].path,blockGenesisA.b);
+      broadCastNewBlocks(files[0].path,);
     }
   });
 }
@@ -126,4 +126,27 @@ function createGenesisBlockB(prevBlock,prev){
   //console.log('blockGenesisB=<',blockGenesisB,'>');
   let blockGenesisBStr = JSON.stringify(blockGenesisB);
   console.log('blockGenesisBStr=<',blockGenesisBStr,'>');
+}
+
+const ipfsTopicNewBlockCreated = 'QmfR23zCTj8GPQYBtUQywt1AH13bszBZnJkFNUfkrEHyfr-new-block-created';
+
+const onIpfRcvNewBlockCreated = (cid) => {
+  console.log('onIpfRcvNewBlockCreated cid=<',cid,'>');
+}
+ipfs.pubsub.subscribe(ipfsTopicNewBlockCreated, onIpfRcvNewBlockCreated,(err) => {
+  if (err) {
+    throw err
+  }
+  console.log('subscribe ipfsTopicNewBlockCreated=<',ipfsTopicNewBlockCreated,'>');
+});
+
+function broadCastNewBlocks(block) {
+  console.log('broadCastNewBlocks block=<',block,'>');
+  const msgBuff = Buffer.from(block);
+  ipfs.pubsub.publish(ipfsTopicNewBlockCreated, msgBuff, (err) => {
+    if (err) {
+      throw err;
+    }
+    console.log('sented msgBuff=<',msgBuff,'>');
+  });
 }
