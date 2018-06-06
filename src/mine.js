@@ -1,11 +1,11 @@
 const SHA3  = require('sha3');
 
-const diffculty = '0000';
 module.exports = class Mine {
   constructor() {
     this.nounce_ = 0;
   }
-  run(msg) {
+  run(msg,diffculty) {
+    let diffculty = '0'.repeat(diffculty);
     while(true) {
       let sum = this.calcSha3(msg + (this.nounce_++).toString());
       if(sum.startsWith(diffculty)) {
