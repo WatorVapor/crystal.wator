@@ -30,21 +30,21 @@ const blockDifficulty = 1000;
 
 class Block {
   constructor(msg,prev) {
-    this.ts = [];
+    this.transactions = [];
     if(prev) {
-      this.p = prev;
+      this.prev = prev;
     } else {
-      this.p = '';
+      this.prev = '';
     }
-    this.b = '';
-    this.d = blockDifficulty;
-    this.v = 1.0;
-    this.sz = 0;
+    this.block = '';
+    this.difficulty = blockDifficulty;
+    this.ver = 1.0;
+    this.sizz = 0;
     this.sign =[];
     this.msg = msg;
-    this.n= '';
+    this.nounce= '';
     let now = new Date();
-    this.tp = now.toUTCString();
+    this.timestamp = now.toUTCString();
   }
   
   addTransaction(transactions) {
@@ -93,9 +93,9 @@ function createGenesisBlockA(){
   let miner = new Miner();
   let winner = miner.run(genesisMsg);
   //console.log('winner=<',winner,'>');
-  blockGenesisA.b = winner.sum;
-  blockGenesisA.n = winner.nounce;
-  blockGenesisA.tp = 'Wed, 06 Jun 2018 01:28:14 GMT';
+  blockGenesisA.block = winner.sum;
+  blockGenesisA.nounce = winner.nounce;
+  blockGenesisA.timestamp = 'Wed, 06 Jun 2018 01:28:14 GMT';
   //console.log('blockGenesisA=<',blockGenesisA,'>');
   let blockGenesisAStr = JSON.stringify(blockGenesisA);
   console.log('blockGenesisAStr=<',blockGenesisAStr,'>');
@@ -120,9 +120,9 @@ function createGenesisBlockB(prevBlock,prev){
   let miner = new Miner();
   let winner = miner.run(genesisMsg);
   //console.log('winner=<',winner,'>');
-  blockGenesisB.b = winner.sum;
-  blockGenesisB.n = winner.nounce;
-  blockGenesisB.tp = 'Wed, 06 Jun 2018 01:28:15 GMT';
+  blockGenesisB.block = winner.sum;
+  blockGenesisB.nounce = winner.nounce;
+  blockGenesisB.timestamp = 'Wed, 06 Jun 2018 01:28:15 GMT';
   //console.log('blockGenesisB=<',blockGenesisB,'>');
   let blockGenesisBStr = JSON.stringify(blockGenesisB);
   console.log('blockGenesisBStr=<',blockGenesisBStr,'>');
