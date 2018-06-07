@@ -185,7 +185,7 @@ function publishKnowledge(know) {
   let outputCID = know.output;
   //console.log('publishResult outputCID=<',outputCID,'>');
   //console.log('publishResult blockResult=<',know,'>');
-  let output = myWoWa.signKnowledge(outputCID);
+  let output = myWoWa.signNewKnowledge(outputCID);
   //console.log('publishResult output=<',output,'>');
   know.output = output;
   console.log('publishResult blockResult=<',know,'>');
