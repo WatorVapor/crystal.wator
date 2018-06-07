@@ -19,7 +19,7 @@ module.exports = class WoWaSelf {
     }
     if(!isExistFile(this.path_)) {
       this.hexKeys = {};
-      this.createECDSA_('init address');
+      this.createECDSA_('init wowa');
       this.saveWoWaSelf_();
     }
     this.rawKeys = {};
@@ -47,7 +47,7 @@ module.exports = class WoWaSelf {
     let sumPub2 = d2.digest('hex');
     //console.log('sumPub2=<',sumPub2,'>');
     let sumBuff = new Buffer.from(sumPub2);
-    let address = 'Wc1' + bs58.encode(sumBuff);
+    let address = 'Wo1' + bs58.encode(sumBuff);
     console.log('address=<',address,'>');
     
     this.hexKeys[address] = {key:prv,comment:comment};
