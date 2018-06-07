@@ -27,6 +27,15 @@ module.exports = class WoWaSelf {
     //console.log('this=<',this,'>');
   }
   
+  signKnowledge(cid) {
+    let d = new SHA3.SHA3Hash();
+    d.update(cid);
+    let sumCid = d.digest('hex');
+    console.log('signKnowledge::sumCid=<',sumCid,'>');
+    let signed = {knowHash:sumCid};
+    return signed;
+  }
+  
   save() {
     this.saveWoWaSelf_();
   }
