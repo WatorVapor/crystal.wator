@@ -34,9 +34,11 @@ module.exports = class WoWaSelf {
     console.log('signKnowledge::sumCid=<',sumCid,'>');
     let now = new Date();
     let timestamp = now.toUTCString();
+    console.log('this.pubHex=<',this.pubHex,'>');
     let signed = {
       knowHash:sumCid,
-      timestamp:timestamp
+      timestamp:timestamp,
+      pubHex:this.pubHex
     };
     return signed;
   }
