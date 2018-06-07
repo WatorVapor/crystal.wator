@@ -32,7 +32,12 @@ module.exports = class WoWaSelf {
     d.update(cid);
     let sumCid = d.digest('hex');
     console.log('signKnowledge::sumCid=<',sumCid,'>');
-    let signed = {knowHash:sumCid};
+    let now = new Date();
+    let timestamp = now.toUTCString();
+    let signed = {
+      knowHash:sumCid,
+      timestamp:timestamp
+    };
     return signed;
   }
   
@@ -43,50 +48,26 @@ module.exports = class WoWaSelf {
     let key = ec.genKeyPair();
     let pub = key.getPublic('hex');
     //console.log('pub=<',pub,'>');
-    let prv = key.getPrivate('hex');
-    //console.log('prv=<',prv,'>');
-    
-    let d = new SHA3.SHA3Hash();
-    d.update(pub);
-    let sumPub = d.digest('hex');
-    console.log('sumPub=<',sumPub,'>');
-
-    let d2 = new SHA3.SHA3Hash(224);
-    d2.update(sumPub);
-    let sumPub2 = d2.digest('hex');
-    //console.log('sumPub2=<',sumPub2,'>');
-    let sumBuff = new Buffer.from(sumPub2);
-    let address = 'Wo1' + bs58.encode(sumBuff);
-    console.log('address=<',address,'>');
-    
-    this.hexKeys[address] = {key:prv,comment:comment};
+    this.key = key;
+    this.pubHex = pub;
     return address;
   }
   
   loadWoWaSelf_() {
-    let walletText_ = fs.readFileSync(this.path_, 'utf8');
-    //console.log('loadWallet_::walletText_=<',walletText_,'>');
-    let wallet = JSON.parse(walletText_);
-    //console.log('loadWallet_::wallet=<',wallet,'>');
-    this.hexKeys = wallet.hexKeys;
-    let indexKesy = Object.keys(this.hexKeys);
-    for(let i = 0; i < indexKesy.length ;i++) {
-      let address = indexKesy[i];
-      //console.log('loadWallet_::address=<',address,'>');
-      let keyHex = this.hexKeys[address].key;
-      //console.log('loadWallet_::keyHex=<',keyHex,'>');
-      let prvKey = ec.keyFromPrivate(keyHex, 'hex');
-      //console.log('loadWallet_::prvKey=<',prvKey,'>');
-      let pubKey = prvKey.getPublic('hex');
-      //console.log('loadWallet_::calPubKey=<',calPubKey,'>');
-      this.rawKeys[address] = {pub:pubKey,prv:prvKey};
-    }
+    let wowaText_ = fs.readFileSync(this.path_, 'utf8');
+    //console.log('loadWoWaSelf_::wowaText_=<',wowaText_,'>');
+    let wowa = JSON.parse(wowaText_);
+    //console.log('loadWoWaSelf_::wowa=<',wowa,'>');
+    this.key = wowa.key;
+    let pub = key.getPublic('hex');
+    console.log('pub=<',pub,'>');
+    this.pubHex = pub;
   }
   
   
   saveWoWaSelf_() {
     let save = {};
-    save.hexKeys = this.hexKeys;
+    save.key = this.key;
     let saveJson = JSON.stringify(save,null, 2);
     fs.writeFileSync(this.path_,saveJson);
   }
