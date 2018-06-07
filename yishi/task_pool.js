@@ -184,11 +184,5 @@ function publishResult(blockResult) {
 }
 
 
-const SHA3  = require('sha3');
-const fs = require('fs');
-const crypto = require('crypto');
+let myWoWa = new Wallet('wowaself.dat');
 
-const EC = require('elliptic').ec;
-const ec = new EC('p521');
-//console.log('ec=<',ec,'>');
-const bs58 = require('bs58')
