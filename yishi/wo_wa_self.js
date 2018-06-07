@@ -31,9 +31,8 @@ module.exports = class WoWaSelf {
     console.log('this.pubHex=<',this.pubHex,'>');
     let signature = this.key.sign(cid);
     let derSign = signature.toDER();
-    let derSignHex = derSign.toString('utf8');
     let d = new SHA3.SHA3Hash();
-    d.update(derSignHex);
+    d.update(bs58.encode(derSign));
     let sumCid = d.digest('hex');
     console.log('signKnowledge::sumCid=<',sumCid,'>');
     let now = new Date();
