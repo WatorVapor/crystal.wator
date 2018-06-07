@@ -184,11 +184,11 @@ function publishKnowledge(know) {
   //console.log('publishResult know=<',know,'>');
   let outputCID = know.output;
   //console.log('publishResult outputCID=<',outputCID,'>');
-  //console.log('publishResult blockResult=<',know,'>');
+  //console.log('publishResult know=<',know,'>');
   let output = myWoWa.signNewKnowledge(outputCID);
   //console.log('publishResult output=<',output,'>');
   know.output = output;
-  console.log('publishResult blockResult=<',know,'>');
+  console.log('publishResult know=<',JSON.stringify(know),'>');
 }
 
 
