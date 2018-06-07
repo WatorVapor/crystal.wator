@@ -40,7 +40,7 @@ module.exports = class WoWaSelf {
     let timestamp = now.toUTCString();
 
     let signatureTS = this.key.sign(timestamp);
-    let derSignTS = signatureTS.toDER();
+    let derSignTS = bs58.encode(signatureTS.toDER());
     let signed = {
       knowHash:sumCid,
       ts:timestamp,
