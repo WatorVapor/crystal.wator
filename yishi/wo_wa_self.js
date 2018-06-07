@@ -27,7 +27,7 @@ module.exports = class WoWaSelf {
     //console.log('this=<',this,'>');
   }
   
-  signKnowledge(cid) {
+  signNewKnowledge(cid) {
     console.log('this.pubHex=<',this.pubHex,'>');
     let signature = this.key.sign(cid);
     let derSign = signature.toDER();
@@ -42,8 +42,12 @@ module.exports = class WoWaSelf {
     let derSignTS = bs58.encode(signatureTS.toDER());
     let signed = {
       knowHash:sumCid,
-      ts:timestamp,
-      tsSign:derSignTS,
+      ts:[
+        {
+          orig:timestamp,
+          sign:derSignTS
+        }
+      ],
       pubHex:this.pubHex
     };
     return signed;
