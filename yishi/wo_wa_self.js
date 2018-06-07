@@ -46,11 +46,12 @@ module.exports = class WoWaSelf {
   }
   createECDSA_(comment) {
     let key = ec.genKeyPair();
-    let pub = key.getPublic('hex');
-    //console.log('pub=<',pub,'>');
     this.key = key;
+    let pub = key.getPublic('hex');
     this.pubHex = pub;
-    return address;
+    //console.log('pub=<',pub,'>');
+    let prv = key.getPrivate('hex');
+    this.prvHex = prv;
   }
   
   loadWoWaSelf_() {
@@ -58,16 +59,16 @@ module.exports = class WoWaSelf {
     //console.log('loadWoWaSelf_::wowaText_=<',wowaText_,'>');
     let wowa = JSON.parse(wowaText_);
     //console.log('loadWoWaSelf_::wowa=<',wowa,'>');
-    this.key = wowa.key;
-    let pub = key.getPublic('hex');
-    console.log('pub=<',pub,'>');
+    this.key = ec.keyFromPrivate(wowa.prvHex, 'hex');;
+    let pub = this.key.getPublic('hex');
+    //console.log('pub=<',pub,'>');
     this.pubHex = pub;
   }
   
   
   saveWoWaSelf_() {
     let save = {};
-    save.key = this.key;
+    save.prvHex = this.prvHex;
     let saveJson = JSON.stringify(save,null, 2);
     fs.writeFileSync(this.path_,saveJson);
   }
