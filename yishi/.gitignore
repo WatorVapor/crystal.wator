@@ -60,8 +60,4 @@ typings/
 # next.js build output
 .next
 
-ipfs-cluster/storage-ipfs/blocks/
-ipfs-cluster/storage-ipfs/config
-ipfs-cluster/storage-ipfs/datastore/
-ipfs-cluster/storage-ipfs/datastore_spec
-ipfs-cluster/storage-ipfs/version
+wowaself.dat
