@@ -127,7 +127,7 @@ function finnishOneResourceBlock(blocks) {
       };
       console.log('finnishOneResourceBlock blockAnnounce=<',blockAnnounce,'>');
       saveDoneDB(blockAnnounce);
-      publishResult(blockAnnounce);
+      publishKnowledge(blockAnnounce);
     }
   });
 }
@@ -176,13 +176,19 @@ function saveDoneDB(result) {
   dbDone.put(result.input,JSON.stringify(result));
 }
 
-function publishResult(blockResult) {
-  console.log('publishResult blockResult=<',blockResult,'>');
-  let outputCID = blockResult.output;
-  console.log('publishResult outputCID=<',outputCID,'>');
-  console.log('publishResult blockResult=<',blockResult,'>');
-}
 
 const WoWa  = require('./wo_wa_self.js');
 let myWoWa = new WoWa('./wowaself.dat');
+
+function publishKnowledge(know) {
+  console.log('publishResult know=<',know,'>');
+  let outputCID = know.output;
+  console.log('publishResult outputCID=<',outputCID,'>');
+  console.log('publishResult blockResult=<',know,'>');
+  let output = myWoWa.signKnowledge(outputCID);
+  console.log('publishResult output=<',output,'>');
+  know.output = output;
+  console.log('publishResult blockResult=<',know,'>');
+}
+
 
