@@ -28,16 +28,22 @@ module.exports = class WoWaSelf {
   }
   
   signKnowledge(cid) {
+    console.log('this.pubHex=<',this.pubHex,'>');
+    let signature = this.key.sign(cid);
+    let derSign = signature.toDER();
     let d = new SHA3.SHA3Hash();
-    d.update(cid);
+    d.update(derSign);
     let sumCid = d.digest('hex');
     console.log('signKnowledge::sumCid=<',sumCid,'>');
     let now = new Date();
     let timestamp = now.toUTCString();
-    console.log('this.pubHex=<',this.pubHex,'>');
+
+    let signatureTS = this.key.sign(timestamp);
+    let derSignTS = signatureTS.toDER();
     let signed = {
       knowHash:sumCid,
-      timestamp:timestamp,
+      ts:timestamp,
+      tsSign:derSignTS,
       pubHex:this.pubHex
     };
     return signed;
