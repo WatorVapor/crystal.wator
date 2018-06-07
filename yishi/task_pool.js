@@ -181,12 +181,12 @@ const WoWa  = require('./wo_wa_self.js');
 let myWoWa = new WoWa('./wowaself.dat');
 
 function publishKnowledge(know) {
-  console.log('publishResult know=<',know,'>');
+  //console.log('publishResult know=<',know,'>');
   let outputCID = know.output;
-  console.log('publishResult outputCID=<',outputCID,'>');
-  console.log('publishResult blockResult=<',know,'>');
+  //console.log('publishResult outputCID=<',outputCID,'>');
+  //console.log('publishResult blockResult=<',know,'>');
   let output = myWoWa.signKnowledge(outputCID);
-  console.log('publishResult output=<',output,'>');
+  //console.log('publishResult output=<',output,'>');
   know.output = output;
   console.log('publishResult blockResult=<',know,'>');
 }
