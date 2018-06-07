@@ -42,7 +42,7 @@ module.exports = class WoWaSelf {
     let derSignTS = bs58.encode(signatureTS.toDER());
     let signed = {
       knowHash:sumCid,
-      ts:[
+      timestamp:[
         {
           orig:timestamp,
           sign:derSignTS
