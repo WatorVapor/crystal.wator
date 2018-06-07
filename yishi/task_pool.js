@@ -183,6 +183,6 @@ function publishResult(blockResult) {
   console.log('publishResult blockResult=<',blockResult,'>');
 }
 
-const WoWa  = require('./wallet.js');
-let myWoWa = new WoWa('wowaself.dat');
+const WoWa  = require('./wo_wa_self.js');
+let myWoWa = new WoWa('./wowaself.dat');
 
