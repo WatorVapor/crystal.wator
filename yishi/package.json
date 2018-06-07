@@ -792,6 +792,7 @@
       "resolved": "https://registry.npmjs.org/sha.js/-/sha.js-2.4.10.tgz",
       "version": "2.4.10"
     },
+    "sha3": "^1.2.2",
     "signed-varint": {
       "integrity": "sha1-UKmYnafJjCxh2tEZvJdHDvhSgSk=",
       "requires": {
