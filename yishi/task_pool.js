@@ -119,11 +119,11 @@ function finnishOneResourceBlock(blocks) {
     console.log('finnishOneResourceBlock files=<',files,'>');
     if(files.length > 0) {
       let blockAnnounce = {
+        payment:cTestPaymentAddress,
         input:blocks.cid,
         group:blocks.group,
         task:blocks.task,
-        output:files[0].path,
-        payment:cTestPaymentAddress
+        output:files[0].path
       };
       console.log('finnishOneResourceBlock blockAnnounce=<',blockAnnounce,'>');
       saveDoneDB(blockAnnounce);
