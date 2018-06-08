@@ -21,9 +21,9 @@ module.exports = class WoWaSelf {
     if(!isExistFile(this.path_)) {
       this.hexKeys = {};
       this.createECDSA_();
-      this.createRSA_();
       this.saveWoWaSelf_();
     }
+    this.createRSA_();
     this.rawKeys = {};
     this.loadWoWaSelf_();
     //console.log('this=<',this,'>');
