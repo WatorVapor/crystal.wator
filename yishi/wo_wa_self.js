@@ -41,7 +41,7 @@ module.exports = class WoWaSelf {
     let timestamp = this.mineTimeStamp_();   
     let signed = {
       knowHash:sumCid,
-      timestamp:[timestamp]
+      ts_created:[timestamp]
     };
     return signed;
   }
