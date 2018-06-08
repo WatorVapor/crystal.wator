@@ -47,6 +47,11 @@ module.exports = class WoWaSelf {
     return signed;
   }
   
+  createTimeStamp() {
+    let ts = this.mineTimeStamp_();
+    return ts;
+  }
+  
   save() {
     this.saveWoWaSelf_();
   }
