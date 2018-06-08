@@ -6,7 +6,7 @@ const ec = new EC('p521');
 //console.log('ec=<',ec,'>');
 const NodeRSA = require('node-rsa');
 
-const diffcultyStr = '0'.repeat(1);
+const diffcultyStr = '0'.repeat(2);
 
 
 
