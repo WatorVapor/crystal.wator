@@ -118,7 +118,7 @@ module.exports = class WoWaSelf {
       let d = new SHA3.SHA3Hash();
       d.update(derSignTS);
       let signHash = d.digest('hex');
-      if(sum.startsWith(diffcultyStr)) {
+      if(signHash.startsWith(diffcultyStr)) {
         let ts = 
         {
           orig:timestamp,
