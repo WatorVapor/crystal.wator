@@ -6,7 +6,8 @@ const ec = new EC('p521');
 //console.log('ec=<',ec,'>');
 const NodeRSA = require('node-rsa');
 
-let diffcultyStr = '4'.repeat(2);
+const diffcultyStr = '0'.repeat(4);
+
 
 
 module.exports = class WoWaSelf {
