@@ -567,6 +567,7 @@
       "resolved": "https://registry.npmjs.org/node-forge/-/node-forge-0.7.1.tgz",
       "version": "0.7.1"
     },
+    "node-rsa": "^1.0.0",
     "nodeify": {
       "integrity": "sha1-ZKtpp7268DzhB7TwM1yHwLnpGx0=",
       "requires": {
