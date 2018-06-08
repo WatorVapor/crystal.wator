@@ -114,15 +114,14 @@ module.exports = class WoWaSelf {
       let now = new Date();
       let timestamp = now.toUTCString() + '.' + now.getUTCMilliseconds() + 'ms';
       let signatureTS = this.prvRSA.sign(timestamp,'base64');
-      let derSignTS = Buffer.from(signatureTS.toDER()).toString('base64'); 
       let d = new SHA3.SHA3Hash();
-      d.update(derSignTS);
+      d.update(signatureTS);
       let signHash = d.digest('hex');
       if(signHash.startsWith(diffcultyStr)) {
         let ts = 
         {
           orig:timestamp,
-          sign:derSignTS,
+          sign:signatureTS,
           hash:signHash,
           pubRSA:this.pubRSAb64
         };
