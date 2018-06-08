@@ -4,7 +4,6 @@ const crypto = require('crypto');
 const EC = require('elliptic').ec;
 const ec = new EC('p521');
 //console.log('ec=<',ec,'>');
-const bs58 = require('bs58')
 const NodeRSA = require('node-rsa');
 
 
@@ -34,23 +33,15 @@ module.exports = class WoWaSelf {
     let signature = this.key.sign(cid);
     let derSign = signature.toDER();
     let d = new SHA3.SHA3Hash();
-    d.update(bs58.encode(derSign));
+    let signOrig = Buffer.from(derSign).toString('base64');
+    d.update(signOrig);
     let sumCid = d.digest('hex');
     console.log('signKnowledge::sumCid=<',sumCid,'>');
-    let now = new Date();
-    let timestamp = now.toUTCString();
-
-    let signatureTS = this.key.sign(timestamp);
-    let derSignTS = bs58.encode(signatureTS.toDER());
+    
+    let timestamp = this.mineTimeStamp_();   
     let signed = {
       knowHash:sumCid,
-      timestamp:[
-        {
-          orig:timestamp,
-          sign:derSignTS,
-          pubHex:bs58.encode(this.pubHex)
-        }
-      ]
+      timestamp:[timestamp]
     };
     return signed;
   }
@@ -103,7 +94,8 @@ module.exports = class WoWaSelf {
     
     this.pubRSA = new NodeRSA();
     this.pubRSA.importKey(wowa.RSAHex.pub);
-    this.pubRSA = wowa.RSAHex.pub;
+    this.pubRSAHex = wowa.RSAHex.pub;
+    this.pubRSAb64 = Buffer.from(wowa.RSAHex.pub).toString('base64');
   }
   
   
@@ -116,6 +108,21 @@ module.exports = class WoWaSelf {
     let saveJson = JSON.stringify(save,null, 2);
     fs.writeFileSync(this.path_,saveJson);
   }
+  
+  mineTimeStamp_() {
+    let now = new Date();
+    let timestamp = now.toUTCString();
+    let signatureTS = this.key.sign(timestamp);
+    let derSignTS = Buffer.from(signatureTS.toDER()).toString('base64');
+    let ts = 
+    {
+      orig:timestamp,
+      sign:derSignTS,
+      pubRSA:this.pubRSAb64
+    };
+    return ts;
+  }
+  
 }
 
 
