@@ -112,7 +112,7 @@ module.exports = class WoWaSelf {
   mineTimeStamp_() {
     while(true) {
       let now = new Date();
-      let timestamp = now.toUTCString() + ' + ' now.getUTCMilliseconds() + 'ms';
+      let timestamp = now.toUTCString() + '.' + now.getUTCMilliseconds() + 'ms';
       let signatureTS = this.prvRSA.sign(timestamp,'base64');
       let derSignTS = Buffer.from(signatureTS.toDER()).toString('base64'); 
       let d = new SHA3.SHA3Hash();
