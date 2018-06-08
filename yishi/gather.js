@@ -17,7 +17,8 @@ const ipfsSubTopic = 'wai-ipfs-yisshi-created';
 const onRcvIpfsMsg = (msg) => {
   console.log('onRcvIpfsMsg msg=<',msg,'>');
   //console.trace();
-  pubRedis.publish(redisPubChannel,msg.data.toString('utf8'));
+  let msgJson = JSON.parse(msg.data.toString('utf8'));
+  console.log('onRcvIpfsMsg msgJson=<',msgJson,'>');
 }
 ipfs.pubsub.subscribe(ipfsSubTopic, onRcvIpfsMsg,(err) => {
   if (err) {
