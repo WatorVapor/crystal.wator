@@ -27,8 +27,6 @@ pubRedis.on("ready", (err) => {
 const redisPubChannel = 'wai.relay.ipfs.to.redis';
 const redisSubChannel = 'wai.relay.redis.to.ipfs';
 
-const ipfsSubTopic = 'wai-ipfs-task-switch-created';
-const ipfsPubTopic = 'wai-ipfs-task-switch-finnished';
 
 
 
@@ -58,24 +56,6 @@ subRedis.on("ready", (err) => {
 subRedis.subscribe(redisSubChannel);
 
 
-const onRcvIpfsMsg = (msg) => {
-  console.log('onRcvIpfsMsg msg=<',msg,'>');
-  //console.trace();
-  pubRedis.publish(redisPubChannel,msg.data.toString('utf8'));
-}
-ipfs.pubsub.subscribe(ipfsSubTopic, onRcvIpfsMsg,(err) => {
-  if (err) {
-    throw err
-  }
-  console.log('subscribe ipfsSubTopic=<',ipfsSubTopic,'>');
-});
-
-ipfs.pubsub.peers(ipfsSubTopic, (err, peerIds) => {
-  if (err) {
-    return console.error(`failed to get peers subscribed to ${ipfsSubTopic}`, err)
-  }
-  console.log(peerIds)
-})
 
 
 
@@ -188,7 +168,39 @@ function publishKnowledge(know) {
   let output = myWoWa.signNewKnowledge(outputCID);
   //console.log('publishResult output=<',output,'>');
   know.output = output;
-  console.log('publishResult know=<',JSON.stringify(know),'>');
+  //console.log('publishResult know=<',JSON.stringify(know),'>');
+  broadCastKnowleged(JSON.stringify(know));
 }
 
 
+const ipfsSubTopic = 'wai-ipfs-yisshi-verified';
+const ipfsPubTopic = 'wai-ipfs-yisshi-created';
+
+const onRcvIpfsMsg = (msg) => {
+  console.log('onRcvIpfsMsg msg=<',msg,'>');
+  //console.trace();
+  pubRedis.publish(redisPubChannel,msg.data.toString('utf8'));
+}
+ipfs.pubsub.subscribe(ipfsSubTopic, onRcvIpfsMsg,(err) => {
+  if (err) {
+    throw err
+  }
+  console.log('subscribe ipfsSubTopic=<',ipfsSubTopic,'>');
+});
+
+ipfs.pubsub.peers(ipfsSubTopic, (err, peerIds) => {
+  if (err) {
+    return console.error(`failed to get peers subscribed to ${ipfsSubTopic}`, err)
+  }
+  console.log(peerIds)
+})
+
+function broadCastKnowleged(know) {
+  const msgBuff = Buffer.from(know);
+  ipfs.pubsub.publish(ipfsPubTopic, msgBuff, (err) => {
+    if (err) {
+      throw err;
+    }
+    console.log('sented msgBuff=<',msgBuff,'>');
+  });
+}
