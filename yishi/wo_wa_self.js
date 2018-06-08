@@ -72,6 +72,8 @@ module.exports = class WoWaSelf {
     let keyRSA = new NodeRSA();
     keyRSA.generateKeyPair();
     console.log('createRSA_:: keyRSA=<',keyRSA,'>');
+    console.log('createRSA_:: keyRSA.isPrivate()=<',keyRSA.isPrivate(),'>');   
+    console.log('createRSA_:: keyRSA.isPublic()=<',keyRSA.isPublic(),'>');   
     let prvRSA = keyRSA.exportKey('pkcs8');
     console.log('createRSA_:: prvRSA=<',prvRSA,'>');
     let pubRSA = keyRSA.exportKey('pkcs8-public');
