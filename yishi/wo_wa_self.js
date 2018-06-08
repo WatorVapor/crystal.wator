@@ -47,10 +47,10 @@ module.exports = class WoWaSelf {
       timestamp:[
         {
           orig:timestamp,
-          sign:derSignTS
+          sign:derSignTS,
+          pubHex:this.pubHex
         }
-      ],
-      pubHex:this.pubHex
+      ]
     };
     return signed;
   }
