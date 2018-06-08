@@ -1,11 +1,12 @@
 const SHA3  = require('sha3');
 const fs = require('fs');
 const crypto = require('crypto');
-
 const EC = require('elliptic').ec;
 const ec = new EC('p521');
 //console.log('ec=<',ec,'>');
 const bs58 = require('bs58')
+const NodeRSA = require('node-rsa');
+
 
 
 
@@ -19,7 +20,8 @@ module.exports = class WoWaSelf {
     }
     if(!isExistFile(this.path_)) {
       this.hexKeys = {};
-      this.createECDSA_('init wowa');
+      this.createECDSA_();
+      this.createRSA_();
       this.saveWoWaSelf_();
     }
     this.rawKeys = {};
@@ -56,14 +58,20 @@ module.exports = class WoWaSelf {
   save() {
     this.saveWoWaSelf_();
   }
-  createECDSA_(comment) {
+  createECDSA_() {
     let key = ec.genKeyPair();
     this.key = key;
     let pub = key.getPublic('hex');
     this.pubHex = pub;
-    //console.log('pub=<',pub,'>');
+    //console.log('createECDSA_::pub=<',pub,'>');
     let prv = key.getPrivate('hex');
     this.prvHex = prv;
+  }
+  
+  createRSA_() {
+    let keyRSA = new NodeRSA();
+    keyRSA.generateKeyPair();
+    console.log('createRSA_:: keyRSA=<',keyRSA,'>');
   }
   
   loadWoWaSelf_() {
