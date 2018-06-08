@@ -80,6 +80,11 @@ module.exports = class WoWaSelf {
     let pubRSA = keyRSA.exportKey('pkcs8-public');
     this.pubRSAHex = pubRSA;
     console.log('createRSA_:: pubRSA=<',pubRSA,'>');
+
+    this.prvRSA = new NodeRSA();
+    this.prvRSA.importKey(this.prvRSAHex);    
+    this.pubRSA = new NodeRSA();
+    this.pubRSA.importKey(this.pubRSAHex);
   }
   
   loadWoWaSelf_() {
@@ -91,6 +96,14 @@ module.exports = class WoWaSelf {
     let pub = this.key.getPublic('hex');
     //console.log('pub=<',pub,'>');
     this.pubHex = pub;
+
+    this.prvRSA = new NodeRSA();
+    this.prvRSA.importKey(wowa.RSAHex.prv);
+    this.prvRSAHex = wowa.RSAHex.prv;
+    
+    this.pubRSA = new NodeRSA();
+    this.pubRSA.importKey(wowa.RSAHex.pub);
+    this.pubRSA = wowa.RSAHex.pub;
   }
   
   
