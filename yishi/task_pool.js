@@ -173,7 +173,7 @@ function publishKnowledge(know) {
 }
 
 
-const ipfsSubTopic = 'wai-ipfs-yisshi-created';
+const ipfsSubTopic = 'wai-ipfs-yisshi-verified';
 const ipfsPubTopic = 'wai-ipfs-yisshi-created';
 
 const onRcvIpfsMsg = (msg) => {
