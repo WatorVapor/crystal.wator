@@ -12,13 +12,14 @@ ipfs.id( (err, identity) => {
   //console.log('identity=<',identity,'>');
 });
 
-const ipfsSubTopic = 'wai-ipfs-yisshi-created';
+const ipfsSubTopic = 'wai-ipfs-yishi-created';
 
 const onRcvIpfsMsg = (msg) => {
   console.log('onRcvIpfsMsg msg.data.toString()=<',msg.data.toString('utf8'),'>');
   //console.trace();
   let msgJson = JSON.parse(msg.data.toString('utf8'));
-  console.log('onRcvIpfsMsg msgJson=<',msgJson,'>');
+  //console.log('onRcvIpfsMsg msgJson=<',msgJson,'>');
+  stampNewKnowledge(msgJson);
 }
 ipfs.pubsub.subscribe(ipfsSubTopic, onRcvIpfsMsg,(err) => {
   if (err) {
@@ -33,3 +34,12 @@ ipfs.pubsub.peers(ipfsSubTopic, (err, peerIds) => {
   }
   console.log(peerIds)
 })
+
+const WoWa  = require('./wo_wa_self.js');
+let myWoWa = new WoWa('./wowaself.dat');
+
+function stampNewKnowledge(msgJson) {
+  console.log('stampNewKnowledge msgJson=<',msgJson,'>');
+  let ts_created = msgJson.output.ts_created;
+  console.log('stampNewKnowledge ts_created=<',ts_created,'>');
+}
