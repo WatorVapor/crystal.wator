@@ -70,7 +70,7 @@ module.exports = class WoWaSelf {
   
   createRSA_() {
     let keyRSA = new NodeRSA();
-    keyRSA.generateKeyPair();
+    keyRSA.generateKeyPair(512);
     console.log('createRSA_:: keyRSA=<',keyRSA,'>');
     console.log('createRSA_:: keyRSA.isPrivate()=<',keyRSA.isPrivate(),'>');   
     console.log('createRSA_:: keyRSA.isPublic()=<',keyRSA.isPublic(),'>');   
