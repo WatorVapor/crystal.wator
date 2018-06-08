@@ -21,9 +21,9 @@ module.exports = class WoWaSelf {
     if(!isExistFile(this.path_)) {
       this.hexKeys = {};
       this.createECDSA_();
+      this.createRSA_();
       this.saveWoWaSelf_();
     }
-    this.createRSA_();
     this.rawKeys = {};
     this.loadWoWaSelf_();
     //console.log('this=<',this,'>');
@@ -70,13 +70,15 @@ module.exports = class WoWaSelf {
   
   createRSA_() {
     let keyRSA = new NodeRSA();
-    keyRSA.generateKeyPair(512);
+    keyRSA.generateKeyPair();
     console.log('createRSA_:: keyRSA=<',keyRSA,'>');
     console.log('createRSA_:: keyRSA.isPrivate()=<',keyRSA.isPrivate(),'>');   
     console.log('createRSA_:: keyRSA.isPublic()=<',keyRSA.isPublic(),'>');   
     let prvRSA = keyRSA.exportKey('pkcs8');
     console.log('createRSA_:: prvRSA=<',prvRSA,'>');
+    this.prvRSAHex = prvRSA;
     let pubRSA = keyRSA.exportKey('pkcs8-public');
+    this.pubRSAHex = pubRSA;
     console.log('createRSA_:: pubRSA=<',pubRSA,'>');
   }
   
@@ -95,6 +97,9 @@ module.exports = class WoWaSelf {
   saveWoWaSelf_() {
     let save = {};
     save.prvHex = this.prvHex;
+    save.RSAHex = {};
+    save.RSAHex.prv = this.prvRSAHex;
+    save.RSAHex.pub = this.pubRSAHex;
     let saveJson = JSON.stringify(save,null, 2);
     fs.writeFileSync(this.path_,saveJson);
   }
