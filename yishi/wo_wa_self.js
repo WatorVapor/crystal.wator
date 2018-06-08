@@ -6,7 +6,7 @@ const ec = new EC('p521');
 //console.log('ec=<',ec,'>');
 const NodeRSA = require('node-rsa');
 
-
+let diffcultyStr = '0'.repeat(2);
 
 
 module.exports = class WoWaSelf {
@@ -110,17 +110,25 @@ module.exports = class WoWaSelf {
   }
   
   mineTimeStamp_() {
-    let now = new Date();
-    let timestamp = now.toUTCString();
-    let signatureTS = this.key.sign(timestamp);
-    let derSignTS = Buffer.from(signatureTS.toDER()).toString('base64');
-    let ts = 
-    {
-      orig:timestamp,
-      sign:derSignTS,
-      pubRSA:this.pubRSAb64
-    };
-    return ts;
+    while(true) {
+      let now = new Date();
+      let timestamp = now.toUTCString();
+      let signatureTS = this.key.sign(timestamp);
+      let derSignTS = Buffer.from(signatureTS.toDER()).toString('base64'); 
+      let d = new SHA3.SHA3Hash();
+      d.update(derSignTS);
+      let signHash = d.digest('hex');
+      if(sum.startsWith(diffcultyStr)) {
+        let ts = 
+        {
+          orig:timestamp,
+          sign:derSignTS,
+          hash:signHash,
+          pubRSA:this.pubRSAb64
+        };
+        return ts;
+      }
+    }
   }
   
 }
