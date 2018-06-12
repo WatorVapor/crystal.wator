@@ -39,7 +39,7 @@ module.exports = class WoWaSelf {
     let sumCid = d.digest('hex');
     console.log('signKnowledge::sumCid=<',sumCid,'>');
     
-    let timestamp = this.mineTimeStamp_();   
+    let timestamp = this.mineTimeStamp_(sumCid);   
     let signed = {
       knowHash:sumCid,
       ts_created:[timestamp]
@@ -115,13 +115,15 @@ module.exports = class WoWaSelf {
     fs.writeFileSync(this.path_,saveJson);
   }
   
-  mineTimeStamp_() {
+  mineTimeStamp_(hash) {
     while(true) {
       let now = new Date();
       let timestamp = now.toUTCString();
       timestamp += '.' 
       timestamp += now.getUTCMilliseconds().toString().padStart(3, "0");
       timestamp += 'ms';
+      timestamp += ' ';
+      timestamp += hash;
       let signatureTS = this.prvRSA.sign(timestamp,'base64');
       let d = new SHA3.SHA3Hash();
       d.update(signatureTS);
