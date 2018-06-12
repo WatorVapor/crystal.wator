@@ -40,7 +40,7 @@ let myWoWa = new WoWa('./wowaself.dat');
 
 function stampNewKnowledge(msgJson) {
   console.log('stampNewKnowledge msgJson=<',msgJson,'>');
-  let stamp = myWoWa.createTimeStamp();
+  let stamp = myWoWa.createTimeStamp(msgJson.output.knowHash);
   msgJson.output.ts_created.push(stamp);
   console.log('stampNewKnowledge msgJson=<',JSON.stringify(msgJson),'>');
 }
