@@ -47,8 +47,8 @@ module.exports = class WoWaSelf {
     return signed;
   }
   
-  createTimeStamp() {
-    let ts = this.mineTimeStamp_();
+  createTimeStamp(sumCid) {
+    let ts = this.mineTimeStamp_(sumCid);
     return ts;
   }
   
