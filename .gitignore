@@ -65,3 +65,8 @@ ipfs-cluster/storage-ipfs/config
 ipfs-cluster/storage-ipfs/datastore/
 ipfs-cluster/storage-ipfs/datastore_spec
 ipfs-cluster/storage-ipfs/version
+ipfs-cluster/storage-ipfs/api
+ipfs-cluster/storage-ipfs/config.bak
+ipfs-cluster/storage-ipfs/repo.lock
+
+
