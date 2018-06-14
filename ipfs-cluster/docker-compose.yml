@@ -4,6 +4,8 @@ services:
     image: watorvapor/js-ipfs
     volumes:
       - ./storage-ipfs:/data/ipfs
+      - ./api:/data/ipfs/api
+      - ./config:/data/ipfs/config
     networks:
       - outside
     deploy:
