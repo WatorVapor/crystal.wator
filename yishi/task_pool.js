@@ -201,6 +201,6 @@ function broadCastKnowleged(know) {
     if (err) {
       throw err;
     }
-    console.log('sented msgBuff=<',msgBuff,'>');
+    //console.log('sented msgBuff=<',msgBuff,'>');
   });
 }
