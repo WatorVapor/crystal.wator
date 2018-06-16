@@ -42,7 +42,7 @@ module.exports = class WoWaSelf {
     let timestamp = this.mineTimeStamp_(sumCid);   
     let signed = {
       knowHash:sumCid,
-      ts_created:[timestamp]
+      ts_created:timestamp
     };
     return signed;
   }
@@ -128,7 +128,7 @@ module.exports = class WoWaSelf {
       dT.update(timestamp);
       let origHash = dT.digest('hex');
       
-      let signatureTS = this.key.sign(origHash).toDER().toString('utf8');
+      let signatureTS = this.key.sign(origHash).toDER().toString('base64');
       
       let d = new SHA3.SHA3Hash();
       d.update(signatureTS);
