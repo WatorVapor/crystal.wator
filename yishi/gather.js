@@ -15,7 +15,7 @@ ipfs.id( (err, identity) => {
 const ipfsSubTopic = 'wai-ipfs-yishi-created';
 
 const onRcvIpfsMsg = (msg) => {
-  console.log('onRcvIpfsMsg msg.data.toString()=<',msg.data.toString('utf8'),'>');
+  //console.log('onRcvIpfsMsg msg.data.toString()=<',msg.data.toString('utf8'),'>');
   //console.trace();
   let msgJson = JSON.parse(msg.data.toString('utf8'));
   //console.log('onRcvIpfsMsg msgJson=<',msgJson,'>');
