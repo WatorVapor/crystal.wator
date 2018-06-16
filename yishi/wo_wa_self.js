@@ -129,9 +129,10 @@ module.exports = class WoWaSelf {
       let origHash = dT.digest('hex');
       
       let signatureTS = this.key.sign(origHash);
-      console.log('mineTimeStamp_::signatureTS=<',signatureTS,'>');
-      signatureTS = signatureTS.toDER().toString('base64');
-      console.log('mineTimeStamp_::signatureTS=<',signatureTS,'>');
+      //console.log('mineTimeStamp_::signatureTS=<',signatureTS,'>');
+      signatureTS = signatureTS.toDER();
+      //.toString('base64');
+      console.log('mineTimeStamp_::typeof signatureTS=<',typeof signatureTS,'>');
       
       let d = new SHA3.SHA3Hash();
       d.update(signatureTS);
