@@ -128,8 +128,7 @@ module.exports = class WoWaSelf {
       dT.update(timestamp);
       let origHash = dT.digest('hex');
       
-      //let signatureTS = this.prvRSA.sign(origHash,'base64');
-      let signatureTS = this.key.sign(origHash).toDER();
+      let signatureTS = this.key.sign(origHash);
       
       let d = new SHA3.SHA3Hash();
       d.update(signatureTS);
@@ -137,11 +136,13 @@ module.exports = class WoWaSelf {
       if(signHash.startsWith(diffcultyStr)) {
         let ts = 
         {
-          orig:timestamp,
-          origHash:origHash,
+          orig:{
+            msg:timestamp,
+            hash:origHash
+          },
           sign:signatureTS,
           hash:signHash,
-          pubRSA:this.pubRSAb64
+          pub:this.pubHex
         };
         return ts;
       }
