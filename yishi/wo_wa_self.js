@@ -30,14 +30,14 @@ module.exports = class WoWaSelf {
   }
   
   signNewKnowledge(cid) {
-    console.log('this.pubHex=<',this.pubHex,'>');
+    //console.log('this.pubHex=<',this.pubHex,'>');
     let signature = this.key.sign(cid);
     let derSign = signature.toDER();
     let d = new SHA3.SHA3Hash();
     let signOrig = Buffer.from(derSign).toString('base64');
     d.update(signOrig);
     let sumCid = d.digest('hex');
-    console.log('signKnowledge::sumCid=<',sumCid,'>');
+    //console.log('signKnowledge::sumCid=<',sumCid,'>');
     
     let timestamp = this.mineTimeStamp_(sumCid);   
     let signed = {
