@@ -128,7 +128,9 @@ module.exports = class WoWaSelf {
       dT.update(timestamp);
       let origHash = dT.digest('hex');
       
-      let signatureTS = this.prvRSA.sign(origHash,'base64');
+      //let signatureTS = this.prvRSA.sign(origHash,'base64');
+      let signatureTS = this.key.sign(origHash).toDER();
+      
       let d = new SHA3.SHA3Hash();
       d.update(signatureTS);
       let signHash = d.digest('hex');
