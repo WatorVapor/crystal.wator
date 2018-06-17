@@ -36,12 +36,12 @@ module.exports = class WoWaSelf {
     let d = new SHA3.SHA3Hash();
     let signOrig = Buffer.from(derSign).toString('base64');
     d.update(signOrig);
-    let sumCid = d.digest('hex');
-    //console.log('signKnowledge::sumCid=<',sumCid,'>');
+    let hashCid = d.digest('hex');
+    //console.log('signKnowledge::hashCid=<',hashCid,'>');
     
-    let timestamp = this.mineTimeStamp_(sumCid);   
+    let timestamp = this.mineTimeStamp_(hashCid);   
     let signed = {
-      knowHash:sumCid,
+      knowHash:hashCid,
       ts_created:timestamp
     };
     return signed;
@@ -122,10 +122,8 @@ module.exports = class WoWaSelf {
       timestamp += '.' 
       timestamp += now.getUTCMilliseconds().toString().padStart(3, "0");
       timestamp += 'ms';
-      timestamp += ' ';
-      timestamp += hash;
       let dT = new SHA3.SHA3Hash();
-      dT.update(timestamp);
+      dT.update(timestamp + hash);
       let origHash = dT.digest('hex');
       
       let signatureTS = this.key.sign(origHash);
@@ -141,7 +139,7 @@ module.exports = class WoWaSelf {
         let ts = 
         {
           orig:{
-            msg:timestamp,
+            ts:timestamp,
             hash:origHash
           },
           sign:signatureTS,
