@@ -22,19 +22,20 @@ module.exports = class LevelTaskPump {
       this.dbDone.open();
     }
     let stream = this.dbTodo.createReadStream();
+    let self = this;
     //console.log('stream=<',stream,'>');
     stream.on('data', function (data) {
       //console.log('data.key=<',data.key.toString('utf-8'),'>');
       //console.log('data.value=<',data.value.toString('utf-8'),'>');
       stream.pause();
       let blockCid = data.key.toString('utf-8');
-      this.dbDone.get(blockCid, function (err, value) {
+      self.dbDone.get(blockCid, function (err, value) {
         if (err) {
           if (err.notFound) {
             console.log('blockCid=<',blockCid,'>');
             onTodoBlock(blockCid);
-            this.dbDone.close();
-            this.dbTodo.close();
+            self.dbDone.close();
+            self.dbTodo.close();
           } else {
             throw err;
           }
