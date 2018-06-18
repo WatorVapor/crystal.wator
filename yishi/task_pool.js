@@ -169,7 +169,7 @@ function publishKnowledge(know) {
   //console.log('publishResult output=<',output,'>');
   know.output = output;
   //console.log('publishResult know=<',JSON.stringify(know),'>');
-  broadCastKnowleged(JSON.stringify(know));
+  broadCastKnowlege(JSON.stringify(know));
 }
 
 
@@ -195,7 +195,7 @@ ipfs.pubsub.peers(ipfsSubTopic, (err, peerIds) => {
   console.log(peerIds)
 })
 
-function broadCastKnowleged(know) {
+function broadCastKnowlege(know) {
   const msgBuff = Buffer.from(know);
   ipfs.pubsub.publish(ipfsPubTopic, msgBuff, (err) => {
     if (err) {
