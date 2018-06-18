@@ -12,7 +12,8 @@ ipfs.id( (err, identity) => {
   //console.log('identity=<',identity,'>');
 });
 
-const ipfsSubTopic = 'wai-ipfs-yishi-created';
+const ipfsSubTopicCreated = 'wai-ipfs-yishi-created';
+const ipfsPubTopicVerified = 'wai-ipfs-yishi-verified';
 
 const onRcvIpfsMsg = (msg) => {
   //console.log('onRcvIpfsMsg msg.data.toString()=<',msg.data.toString('utf8'),'>');
@@ -21,16 +22,16 @@ const onRcvIpfsMsg = (msg) => {
   //console.log('onRcvIpfsMsg msgJson=<',msgJson,'>');
   stampNewKnowledge(msgJson);
 }
-ipfs.pubsub.subscribe(ipfsSubTopic, onRcvIpfsMsg,(err) => {
+ipfs.pubsub.subscribe(ipfsSubTopicCreated, onRcvIpfsMsg,(err) => {
   if (err) {
     throw err
   }
-  console.log('subscribe ipfsSubTopic=<',ipfsSubTopic,'>');
+  console.log('subscribe ipfsSubTopicCreated=<',ipfsSubTopicCreated,'>');
 });
 
-ipfs.pubsub.peers(ipfsSubTopic, (err, peerIds) => {
+ipfs.pubsub.peers(ipfsSubTopicCreated, (err, peerIds) => {
   if (err) {
-    return console.error(`failed to get peers subscribed to ${ipfsSubTopic}`, err)
+    return console.error(`failed to get peers subscribed to ${ipfsSubTopicCreated}`, err)
   }
   console.log(peerIds)
 })
@@ -44,4 +45,16 @@ function stampNewKnowledge(msgJson) {
   msgJson.output.ts_verified = ts;
   console.log('stampNewKnowledge msgJson=<',msgJson,'>');
   console.log('stampNewKnowledge msgJson=<',JSON.stringify(msgJson,null,' '),'>');
+  broadCastKnowlegeVerified(JSON.stringify(msgJson));
 }
+
+function broadCastKnowlegeVerified(knowVerified) {
+  const msgBuff = Buffer.from(knowVerified);
+  ipfs.pubsub.publish(ipfsPubTopicVerified, msgBuff, (err) => {
+    if (err) {
+      throw err;
+    }
+    console.log('sented msgBuff=<',msgBuff,'>');
+  });
+}
+
