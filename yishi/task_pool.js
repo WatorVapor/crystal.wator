@@ -181,7 +181,7 @@ const onRcvIpfsVerifiedMsg = (msg) => {
   console.log('onRcvIpfsVerifiedMsg msg=<',msg.data.toString('utf8'),'>');
   //console.trace();
 }
-ipfs.pubsub.subscribe(ipfsSubTopicVerified, onRcvIpfsMsg,(err) => {
+ipfs.pubsub.subscribe(ipfsSubTopicVerified, onRcvIpfsVerifiedMsg,(err) => {
   if (err) {
     throw err
   }
