@@ -32,7 +32,6 @@ module.exports = class LevelTaskPump {
       self.dbDone.get(blockCid, function (err, value) {
         if (err) {
           if (err.notFound) {
-            console.log('blockCid=<',blockCid,'>');
             onTodoBlock(blockCid);
             self.dbDone.close();
             self.dbTodo.close();
