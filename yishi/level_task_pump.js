@@ -34,7 +34,6 @@ stream.on('close', function () {
 });
 stream.on('end', function () {
   console.log('Stream ended');
-  writeBlock();
 });
 
 function saveDoneDB(result) {
@@ -42,4 +41,12 @@ function saveDoneDB(result) {
   dbDone.put(result.input,JSON.stringify(result));
 }
 
-
+module.exports = class LevelTaskPump {
+  constructor() {
+  }
+  fetchOne() {
+  }
+  saveDone(result) {
+  }
+}
+  
