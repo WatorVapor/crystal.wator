@@ -6,7 +6,13 @@ const level = require('level');
 module.exports = class LevelTaskPump {
   constructor() {
     this.dbDone = level(dbBlockPathDone);
+    this.dbDone.on('open',function (evt) {
+      console.log('constructor:dbDone evt=<',evt,'>');
+    })
     this.dbTodo = level(dbBlockPathTodo);
+    this.dbTodo.on('open',function (evt) {
+      console.log('constructor: dbTodo evt=<',evt,'>');
+    })
   }
   fetchOne(onTodoBlock) {
     if(this.dbTodo.isClosed()) {
