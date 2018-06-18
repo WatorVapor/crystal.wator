@@ -119,7 +119,7 @@ taskPump.fetchOne(function(blockCid) {
   console.log('blockCid=<',blockCid,'>');
   let taskJson = {block:blockCid,task:'wator.ipfs.ostrich.app'};
   pubRedis.publish(redisPubChannel,JSON.stringify(taskJson));
-};
+});
 
 
 const WoWa  = require('./wo_wa_self.js');
