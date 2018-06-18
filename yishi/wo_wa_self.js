@@ -29,19 +29,19 @@ module.exports = class WoWaSelf {
     //console.log('this=<',this,'>');
   }
   
-  signNewKnowledge(cid) {
+  signNewKnowledge(content) {
     //console.log('this.pubHex=<',this.pubHex,'>');
-    let signature = this.key.sign(cid);
+    let signature = this.key.sign(content);
     let derSign = signature.toDER();
     let d = new SHA3.SHA3Hash();
     let signOrig = Buffer.from(derSign).toString('base64');
     d.update(signOrig);
-    let hashCid = d.digest('hex');
-    //console.log('signKnowledge::hashCid=<',hashCid,'>');
+    let nounceOfContent = d.digest('hex');
+    //console.log('signKnowledge::nounceOfContent=<',nounceOfContent,'>');
     
-    let timestamp = this.mineTimeStamp_(hashCid);   
+    let timestamp = this.mineTimeStamp_(nounceOfContent);
     let signed = {
-      nounce:hashCid,
+      nounce:nounceOfContent,
       ts_created:timestamp
     };
     return signed;
