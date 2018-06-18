@@ -173,31 +173,31 @@ function publishKnowledge(know) {
 }
 
 
-const ipfsSubTopic = 'wai-ipfs-yishi-verified';
-const ipfsPubTopic = 'wai-ipfs-yishi-created';
+const ipfsSubTopicVerified = 'wai-ipfs-yishi-verified';
+const ipfsPubTopicCreated = 'wai-ipfs-yishi-created';
 
-const onRcvIpfsMsg = (msg) => {
-  console.log('onRcvIpfsMsg msg=<',msg,'>');
+const onRcvIpfsVerifiedMsg = (msg) => {
+  console.log('onRcvIpfsVerifiedMsg msg=<',msg,'>');
+  console.log('onRcvIpfsVerifiedMsg msg=<',msg.data.toString('utf8'),'>');
   //console.trace();
-  pubRedis.publish(redisPubChannel,msg.data.toString('utf8'));
 }
-ipfs.pubsub.subscribe(ipfsSubTopic, onRcvIpfsMsg,(err) => {
+ipfs.pubsub.subscribe(ipfsSubTopicVerified, onRcvIpfsMsg,(err) => {
   if (err) {
     throw err
   }
-  console.log('subscribe ipfsSubTopic=<',ipfsSubTopic,'>');
+  console.log('subscribe ipfsSubTopicVerified=<',ipfsSubTopicVerified,'>');
 });
 
-ipfs.pubsub.peers(ipfsSubTopic, (err, peerIds) => {
+ipfs.pubsub.peers(ipfsSubTopicVerified, (err, peerIds) => {
   if (err) {
-    return console.error(`failed to get peers subscribed to ${ipfsSubTopic}`, err)
+    return console.error(`failed to get peers subscribed to ${ipfsSubTopicVerified}`, err)
   }
   console.log(peerIds)
 })
 
 function broadCastKnowlege(know) {
   const msgBuff = Buffer.from(know);
-  ipfs.pubsub.publish(ipfsPubTopic, msgBuff, (err) => {
+  ipfs.pubsub.publish(ipfsPubTopicCreated, msgBuff, (err) => {
     if (err) {
       throw err;
     }
