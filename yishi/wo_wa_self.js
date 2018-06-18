@@ -41,7 +41,7 @@ module.exports = class WoWaSelf {
     
     let timestamp = this.mineTimeStamp_(hashCid);   
     let signed = {
-      knowHash:hashCid,
+      nounce:hashCid,
       ts_created:timestamp
     };
     return signed;
