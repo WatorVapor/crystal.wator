@@ -82,6 +82,15 @@ console.log('crystal=<',crystal,'>');
 const cTestPaymentAddress = crystal.payaddress;
 console.log('cTestPaymentAddress=<',cTestPaymentAddress,'>');
 
+const LevelTaskPump = require('./level_task_pump.js');
+let taskPump = new LevelTaskPump();
+
+taskPump.fetchOne(function(blockCid) {
+  console.log('blockCid=<',blockCid,'>');
+  let taskJson = {block:blockCid,task:'wator.ipfs.ostrich.app'};
+  pubRedis.publish(redisPubChannel,JSON.stringify(taskJson));
+});
+
 
 function finnishOneResourceBlock(blocks) {
   console.log('finnishOneResourceBlock blocks=<',blocks,'>');
@@ -106,20 +115,12 @@ function finnishOneResourceBlock(blocks) {
         output:files[0].path
       };
       console.log('finnishOneResourceBlock blockAnnounce=<',blockAnnounce,'>');
-      saveDoneDB(blockAnnounce);
+      taskPump.saveDone(blockAnnounce);
       publishKnowledge(blockAnnounce);
     }
   });
 }
 
-const LevelTaskPump = require('./level_task_pump.js');
-let taskPump = new LevelTaskPump();
-
-taskPump.fetchOne(function(blockCid) {
-  console.log('blockCid=<',blockCid,'>');
-  let taskJson = {block:blockCid,task:'wator.ipfs.ostrich.app'};
-  pubRedis.publish(redisPubChannel,JSON.stringify(taskJson));
-});
 
 
 const WoWa  = require('./wo_wa_self.js');
