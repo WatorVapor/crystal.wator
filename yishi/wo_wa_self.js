@@ -2,7 +2,7 @@ const SHA3  = require('sha3');
 const fs = require('fs');
 const crypto = require('crypto');
 const EC = require('elliptic').ec;
-const ec = new EC('p521');
+const ec = new EC('p192');
 //console.log('ec=<',ec,'>');
 const NodeRSA = require('node-rsa');
 
