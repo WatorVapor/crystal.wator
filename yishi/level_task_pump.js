@@ -3,10 +3,6 @@ const dbBlockPathDone = '/watorvapor/wai.storage/crystal.wator/cnwiki/done/block
 const level = require('level');
 
 
-function saveDoneDB(result) {
-  //console.log('saveDoneDB result=<',result,'>');
-}
-
 module.exports = class LevelTaskPump {
   constructor() {
     this.dbDone = level(dbBlockPathDone);
