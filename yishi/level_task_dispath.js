@@ -14,7 +14,7 @@ function readDB2Array(path,out,cb) {
     //console.log('data.value=<',data.value.toString('utf-8'),'>');
     let blockCid = data.key.toString('utf-8');
     stream.pause();
-    out.push(blockCid);
+    out[lockCid] = -1;
     stream.resume();  
   });
   stream.on('error', function (err) {
@@ -32,9 +32,9 @@ function readDB2Array(path,out,cb) {
   });
 }
 
-let gToDoCidList = [];
-let gDoingCidList = [];
-let gDoneCidList = [];
+let gToDoCidList = {};
+let gDoingCidList = {};
+let gDoneCidList = {};
 
 setTimeout(function(){
   readDB2Array(dbBlockPathTodo,gToDoCidList,onReadTodoFinnish);
@@ -56,5 +56,12 @@ function onReadDoneFinnish(){
 }
 
 function runDispatchTask() {
+  console.log('runDispatchTask gDoingCidList=<',gDoingCidList,'>');
+  for(let kDoing of Object.keys(gDoingCidList)) {
+    console.log('runDispatchTask kDoing=<',kDoing,'>');
+  }  
   console.log('runDispatchTask gDoneCidList=<',gDoneCidList,'>');
+  for(let kDone of Object.keys(gDoneCidList)) {
+    console.log('runDispatchTask kDone=<',kDone,'>');
+  }  
 }
