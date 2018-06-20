@@ -3,9 +3,6 @@ const dbBlockPathDoing = '/watorvapor/wai.storage/crystal.wator/cnwiki/doing/blo
 const dbBlockPathDone = '/watorvapor/wai.storage/crystal.wator/cnwiki/done/block';
 const level = require('level');
 
-let gToDoCidList = [];
-let gDoingCidList = [];
-let gDoneCidList = [];
 
 
 function readDB2Array(path,out,cb) {
@@ -35,18 +32,22 @@ function readDB2Array(path,out,cb) {
   });
 }
 
+let gToDoCidList = [];
+let gDoingCidList = [];
+let gDoneCidList = [];
+
 setTimeout(function(){
   readDB2Array(dbBlockPathTodo,gToDoCidList,onReadTodoFinnish);
 },1);
 
 function onReadTodoFinnish(){
   console.log('onReadDoneFinnish gToDoCidList=<',gToDoCidList,'>');
-  readDB2Array(dbBlockPathDoing,gToDoCidList,onReadDoingFinnish);
+  readDB2Array(dbBlockPathDoing,gDoingCidList,onReadDoingFinnish);
 }
 
 function onReadDoingFinnish(){
   console.log('onReadDoneFinnish gDoingCidList=<',gDoingCidList,'>');
-  readDB2Array(dbBlockPathDone,gToDoCidList,onReadDoneFinnish);
+  readDB2Array(dbBlockPathDone,gDoneCidList,onReadDoneFinnish);
 }
 
 function onReadDoneFinnish(){
