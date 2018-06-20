@@ -1,25 +1,30 @@
 const dbBlockPathTodo = '/watorvapor/wai.storage/crystal.wator/cnwiki/todo/block';
+const dbBlockPathDoing = '/watorvapor/wai.storage/crystal.wator/cnwiki/doing/block';
 const dbBlockPathDone = '/watorvapor/wai.storage/crystal.wator/cnwiki/done/block';
 const level = require('level');
 
 
 module.exports = class LevelTaskPump {
   constructor() {
-    this.dbDone = level(dbBlockPathDone);
-    this.dbDone.on('open',function (evt) {
-      console.log('constructor:dbDone evt=<',evt,'>');
-    })
     this.dbTodo = level(dbBlockPathTodo);
     this.dbTodo.on('open',function (evt) {
       console.log('constructor: dbTodo evt=<',evt,'>');
+    })
+    this.dbDoing = level(dbBlockPathDoing);
+    this.dbDoing.on('open',function (evt) {
+      console.log('constructor: dbDoing evt=<',evt,'>');
+    })
+    this.dbDone = level(dbBlockPathDone);
+    this.dbDone.on('open',function (evt) {
+      console.log('constructor:dbDone evt=<',evt,'>');
     })
   }
   fetchOne(onTodoBlock) {
     if(this.dbTodo.isClosed()) {
       this.dbTodo.open();
     }
-    if(this.dbDone.isClosed()) {
-      this.dbDone.open();
+    if(this.dbDoing.isClosed()) {
+      this.dbDoing.open();
     }
     let stream = this.dbTodo.createReadStream();
     let self = this;
@@ -27,21 +32,19 @@ module.exports = class LevelTaskPump {
     stream.on('data', function (data) {
       //console.log('data.key=<',data.key.toString('utf-8'),'>');
       //console.log('data.value=<',data.value.toString('utf-8'),'>');
-      stream.pause();
       let blockCid = data.key.toString('utf-8');
-      self.dbDone.get(blockCid, function (err, value) {
-        if (err) {
-          if (err.notFound) {
-            onTodoBlock(blockCid);
-            self.dbDone.close();
-            self.dbTodo.close();
-          } else {
-            throw err;
-          }
-        } else {
-          console.log('dbDone blockCid=<',blockCid,'>');
-          stream.resume();
+      onTodoBlock(blockCid);
+      this.dbDoing.put(blockCid,'',function(err){
+        if(err) {
+          throw err;
         }
+        self.dbDoing.close();
+      });
+      this.dbTodo.del(blockCid,function(err){
+        if(err) {
+          throw err;
+        }
+        self.dbTodo.close();
       });
     });
     stream.on('error', function (err) {
@@ -54,12 +57,23 @@ module.exports = class LevelTaskPump {
       console.log('Stream ended');
     });
   }
-  saveDone(result) {
+  
+  saveDone(cid,context) {
     if(this.dbDone.isClosed()) {
       this.dbDone.open();
     }
-    this.dbDone.put(result.input,JSON.stringify(result));
-    this.dbDone.close();
+    this.dbDone.put(cid,context,function(err){
+      this.dbDone.close();
+    });
+    if(this.dbDoing.isClosed()) {
+      this.dbDoing.open();
+    }
+    this.dbDoing.del(cid,function(err){
+      if(err) {
+        throw err;
+      }
+      self.dbDoing.close();
+    });
   }
 }
   
