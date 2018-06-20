@@ -78,6 +78,14 @@ module.exports = class LevelTaskPump {
           self.dbDoing.close();
         });
       });
+    } else {
+      this.dbDoing.put(blockCid,'',function(err){
+        if(err) {
+          throw err;
+        }
+        onTodoBlock(blockCid);
+        self.dbDoing.close();
+      });
     }
     this.dbTodo.del(blockCid,function(err){
       if(err) {
