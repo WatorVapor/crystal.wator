@@ -62,9 +62,11 @@ function runDispatchTask() {
   console.log('runDispatchTask gDoingCidList=<',gDoingCidList,'>');
   for(let kDoing of Object.keys(gDoingCidList)) {
     console.log('runDispatchTask kDoing=<',kDoing,'>');
+    delete gToDoCidList[kDoing];
   }  
   console.log('runDispatchTask gDoneCidList=<',gDoneCidList,'>');
   for(let kDone of Object.keys(gDoneCidList)) {
     console.log('runDispatchTask kDone=<',kDone,'>');
+    delete gToDoCidList[kDoing];
   }  
 }
