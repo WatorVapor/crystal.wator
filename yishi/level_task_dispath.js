@@ -8,6 +8,7 @@ const level = require('level');
 function readDB2Array(path,out,cb) {
   let db = level(path);
   let stream = db.createReadStream();
+  let ts = Date.now();
 
   stream.on('data', function (data) {
     //console.log('data.key=<',data.key.toString('utf-8'),'>');
@@ -15,7 +16,7 @@ function readDB2Array(path,out,cb) {
     let blockCid = data.key.toString('utf-8');
     stream.pause();
     if(blockCid.startsWith('Qm')){
-      out[blockCid] = -1;
+      out[blockCid] = ts;
     }
     stream.resume();  
   });
