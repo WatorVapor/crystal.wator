@@ -74,4 +74,9 @@ function runDispatchTask() {
 }
 
 function onDispatchTodo() {
+  let keys = Object.keys(gToDoCidList);
+  if(keys.length > 0) {
+    let keyCID = keys[0];
+    console.log('onDispatchTodo keyCID=<',keyCID,'>');
+  }
 }
