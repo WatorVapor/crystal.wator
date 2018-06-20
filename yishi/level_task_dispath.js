@@ -56,5 +56,5 @@ function onReadDoneFinnish(){
 }
 
 function runDispatchTask() {
-  console.log('onReadDoneFinnish runDispatchTask=<',runDispatchTask,'>');
+  console.log('runDispatchTask gDoneCidList=<',gDoneCidList,'>');
 }
