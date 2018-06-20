@@ -33,6 +33,7 @@ module.exports = class LevelTaskPump {
       //console.log('data.key=<',data.key.toString('utf-8'),'>');
       //console.log('data.value=<',data.value.toString('utf-8'),'>');
       let blockCid = data.key.toString('utf-8');
+      stream.pause();
       setTimeout(function(){
         self.writeOneOut_(blockCid,onTodoBlock);
       },1);
