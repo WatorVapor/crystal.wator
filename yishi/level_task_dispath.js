@@ -16,7 +16,7 @@ function readDB2Array(path,out,cb) {
     let blockCid = data.key.toString('utf-8');
     stream.pause();
     if(blockCid.startsWith('Qm')){
-      out[blockCid] = ts;
+      out[blockCid] = ts.toUTCString();
     }
     stream.resume();  
   });
