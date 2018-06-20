@@ -8,7 +8,7 @@ const level = require('level');
 function readDB2Array(path,out,cb) {
   let db = level(path);
   let stream = db.createReadStream();
-  let ts = Date.now();
+  let ts = new Date();
 
   stream.on('data', function (data) {
     //console.log('data.key=<',data.key.toString('utf-8'),'>');
