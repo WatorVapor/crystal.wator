@@ -78,6 +78,7 @@ function onDispatchTodo() {
   if(keys.length > 0) {
     let keyCID = keys[0];
     console.log('onDispatchTodo keyCID=<',keyCID,'>');
+    broadCastNewTask(keyCID);
   }
 }
 
@@ -85,6 +86,27 @@ const ipfsAPI = require('ipfs-api');
 const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
 
 const ipfsPubTopicNewTask = 'wai-ipfs-yishi-new-task';
+const ipfsPubTopicCatchTask = 'wai-ipfs-yishi-catch-task';
+
+const onRcvIpfsCatchTask = (msg) => {
+  console.log('onRcvIpfsCatchTask msg=<',msg,'>');
+  console.log('onRcvIpfsCatchTask msg=<',msg.data.toString('utf8'),'>');
+  //console.trace();
+}
+ipfs.pubsub.subscribe(ipfsPubTopicCatchTask, onRcvIpfsCatchTask,(err) => {
+  if (err) {
+    throw err
+  }
+  console.log('subscribe ipfsPubTopicCatchTask=<',ipfsPubTopicCatchTask,'>');
+});
+
+ipfs.pubsub.peers(ipfsPubTopicCatchTask, (err, peerIds) => {
+  if (err) {
+    return console.error(`failed to get peers subscribed to ${ipfsPubTopicCatchTask}`, err)
+  }
+  console.log(peerIds)
+})
+
 
 function broadCastNewTask(cid) {
   const msgBuff = Buffer.from(cid);
