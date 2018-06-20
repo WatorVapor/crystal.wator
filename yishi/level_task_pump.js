@@ -34,7 +34,7 @@ module.exports = class LevelTaskPump {
       //console.log('data.value=<',data.value.toString('utf-8'),'>');
       let blockCid = data.key.toString('utf-8');
       setTimeout(function(){
-        self.writeOneOut_.(blockCid,onTodoBlock);
+        self.writeOneOut_(blockCid,onTodoBlock);
       },1);
     });
     stream.on('error', function (err) {
