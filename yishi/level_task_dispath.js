@@ -19,11 +19,11 @@ streamTodo.on('error', function (err) {
   console.log('Oh my!', err);
 });
 streamTodo.on('close', function () {
-  console.log('Stream closed');
+  console.log('streamTodo closed');
 });
 streamTodo.on('end', function () {
-  console.log('Stream ended');
-  console.log('Stream ended gToDoCidList=<',gToDoCidList,'>');
+  console.log('streamTodo ended');
+  console.log('streamTodo ended gToDoCidList=<',gToDoCidList,'>');
 });
 
 let dbDoing = level(dbBlockPathDoing);
@@ -42,11 +42,11 @@ streamDoing.on('error', function (err) {
   console.log('Oh my!', err);
 });
 streamDoing.on('close', function () {
-  console.log('Stream closed');
+  console.log('streamDoing closed');
 });
 streamDoing.on('end', function () {
-  console.log('Stream ended');
-  console.log('Stream ended gDoingCidList=<',gDoingCidList,'>');
+  console.log('streamDoing ended');
+  console.log('streamDoing ended gDoingCidList=<',gDoingCidList,'>');
 });
 
 let dbDone = level(dbBlockPathDone);
@@ -65,11 +65,11 @@ streamDone.on('error', function (err) {
   console.log('Oh my!', err);
 });
 streamDone.on('close', function () {
-  console.log('Stream closed');
+  console.log('streamDone closed');
 });
 streamDone.on('end', function () {
-  console.log('Stream ended');
-  console.log('Stream ended gDoingCidList=<',gDoneCidList,'>');
+  console.log('streamDone ended');
+  console.log('streamDone ended gDoingCidList=<',gDoneCidList,'>');
 });
 
 
