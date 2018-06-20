@@ -33,7 +33,6 @@ module.exports = class LevelTaskPump {
       //console.log('data.key=<',data.key.toString('utf-8'),'>');
       //console.log('data.value=<',data.value.toString('utf-8'),'>');
       let blockCid = data.key.toString('utf-8');
-      onTodoBlock(blockCid);
       self.dbDoing.put(blockCid,'',function(err){
         if(err) {
           throw err;
@@ -44,6 +43,7 @@ module.exports = class LevelTaskPump {
         if(err) {
           throw err;
         }
+        onTodoBlock(blockCid);
         self.dbTodo.close();
       });
     });
