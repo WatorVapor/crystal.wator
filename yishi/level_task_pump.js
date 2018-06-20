@@ -69,7 +69,9 @@ module.exports = class LevelTaskPump {
     let self = this;
     console.log('writeOneOut_::this.dbDoing.isOpen()=<',this.dbDoing.isOpen(),'>');
     if(this.dbDoing.isClosed()) {
-      this.dbDoing.open(function(){
+      this.dbDoing.open();
+      this.dbDoing.on('open',function (evt) {
+        console.log('constructor: dbDoing evt=<',evt,'>');
         self.dbDoing.put(blockCid,'',function(err){
           if(err) {
             throw err;
