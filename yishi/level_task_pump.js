@@ -68,18 +68,19 @@ module.exports = class LevelTaskPump {
   }
   
   writeOneOut_(blockCid,onTodoBlock){
+    let self = this;
     this.dbDoing.put(blockCid,'',function(err){
       if(err) {
         throw err;
       }
       onTodoBlock(blockCid);
-      this.dbDoing.close();
+      self.dbDoing.close();
     });
     this.dbTodo.del(blockCid,function(err){
       if(err) {
         throw err;
       }
-      this.dbTodo.close();
+      self.dbTodo.close();
     });
   }
 }
