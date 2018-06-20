@@ -52,6 +52,9 @@ function onReadDoingFinnish(){
 
 function onReadDoneFinnish(){
   console.log('onReadDoneFinnish gDoneCidList=<',gDoneCidList,'>');
+  setTimeout(runDispatchTask,0);
 }
 
-
+function runDispatchTask() {
+  console.log('onReadDoneFinnish runDispatchTask=<',runDispatchTask,'>');
+}
