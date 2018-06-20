@@ -85,11 +85,13 @@ console.log('cTestPaymentAddress=<',cTestPaymentAddress,'>');
 const LevelTaskPump = require('./level_task_pump.js');
 let taskPump = new LevelTaskPump();
 
-taskPump.fetchOne(function(blockCid) {
+taskPump.fetchOne(scheduleTask);
+
+function scheduleTask(blockCid) {
   console.log('blockCid=<',blockCid,'>');
   let taskJson = {block:blockCid,task:'wator.ipfs.ostrich.app'};
   pubRedis.publish(redisPubChannel,JSON.stringify(taskJson));
-});
+}
 
 
 function finnishOneResourceBlock(blocks) {
