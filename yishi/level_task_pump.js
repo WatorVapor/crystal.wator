@@ -34,13 +34,13 @@ module.exports = class LevelTaskPump {
       //console.log('data.value=<',data.value.toString('utf-8'),'>');
       let blockCid = data.key.toString('utf-8');
       onTodoBlock(blockCid);
-      this.dbDoing.put(blockCid,'',function(err){
+      self.dbDoing.put(blockCid,'',function(err){
         if(err) {
           throw err;
         }
         self.dbDoing.close();
       });
-      this.dbTodo.del(blockCid,function(err){
+      self.dbTodo.del(blockCid,function(err){
         if(err) {
           throw err;
         }
@@ -62,8 +62,9 @@ module.exports = class LevelTaskPump {
     if(this.dbDone.isClosed()) {
       this.dbDone.open();
     }
+    let self = this;
     this.dbDone.put(cid,context,function(err){
-      this.dbDone.close();
+      self.dbDone.close();
     });
     if(this.dbDoing.isClosed()) {
       this.dbDoing.open();
