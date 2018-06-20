@@ -25,7 +25,7 @@ function readDB2Array(path,out,cb) {
   });
   stream.on('end', function () {
     console.log('stream ended');
-    console.log('stream ended out=<',out,'>');
+    //console.log('stream ended out=<',out,'>');
     if(typeof cb === 'function') {
       cb();
     }
