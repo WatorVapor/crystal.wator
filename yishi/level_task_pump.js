@@ -23,9 +23,6 @@ module.exports = class LevelTaskPump {
     if(this.dbTodo.isClosed()) {
       this.dbTodo.open();
     }
-    if(this.dbDoing.isClosed()) {
-      this.dbDoing.open();
-    }
     let stream = this.dbTodo.createReadStream();
     let self = this;
     //console.log('stream=<',stream,'>');
@@ -71,13 +68,17 @@ module.exports = class LevelTaskPump {
   writeOneOut_(blockCid,onTodoBlock){
     let self = this;
     console.log('writeOneOut_::this.dbDoing.isOpen()=<',this.dbDoing.isOpen(),'>');
-    this.dbDoing.put(blockCid,'',function(err){
-      if(err) {
-        throw err;
-      }
-      onTodoBlock(blockCid);
-      self.dbDoing.close();
-    });
+    if(this.dbDoing.isClosed()) {
+      this.dbDoing.open(function(){
+        self.dbDoing.put(blockCid,'',function(err){
+          if(err) {
+            throw err;
+          }
+          onTodoBlock(blockCid);
+          self.dbDoing.close();
+        });
+      });
+    }
     this.dbTodo.del(blockCid,function(err){
       if(err) {
         throw err;
