@@ -80,3 +80,19 @@ function onDispatchTodo() {
     console.log('onDispatchTodo keyCID=<',keyCID,'>');
   }
 }
+
+const ipfsAPI = require('ipfs-api');
+const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
+
+const ipfsPubTopicNewTask = 'wai-ipfs-yishi-new-task';
+
+function broadCastNewTask(cid) {
+  const msgBuff = Buffer.from(cid);
+  ipfs.pubsub.publish(ipfsPubTopicNewTask, msgBuff, (err) => {
+    if (err) {
+      throw err;
+    }
+  });
+  console.log('broadCastNewTask msgBuff=<',msgBuff,'>');
+}
+
