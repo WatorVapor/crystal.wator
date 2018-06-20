@@ -170,5 +170,6 @@ function broadCastKnowlege(know) {
       throw err;
     }
     //console.log('sented msgBuff=<',msgBuff,'>');
+    taskPump.fetchOne(scheduleTask);
   });
 }
