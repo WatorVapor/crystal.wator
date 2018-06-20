@@ -33,19 +33,9 @@ module.exports = class LevelTaskPump {
       //console.log('data.key=<',data.key.toString('utf-8'),'>');
       //console.log('data.value=<',data.value.toString('utf-8'),'>');
       let blockCid = data.key.toString('utf-8');
-      self.dbDoing.put(blockCid,'',function(err){
-        if(err) {
-          throw err;
-        }
-        self.dbDoing.close();
-      });
-      self.dbTodo.del(blockCid,function(err){
-        if(err) {
-          throw err;
-        }
-        onTodoBlock(blockCid);
-        self.dbTodo.close();
-      });
+      setTimeout(function(){
+        self.writeOneOut_.(blockCid,onTodoBlock);
+      },1);
     });
     stream.on('error', function (err) {
       console.log('Oh my!', err);
@@ -74,6 +64,22 @@ module.exports = class LevelTaskPump {
         throw err;
       }
       self.dbDoing.close();
+    });
+  }
+  
+  writeOneOut_(blockCid,onTodoBlock){
+    this.dbDoing.put(blockCid,'',function(err){
+      if(err) {
+        throw err;
+      }
+      onTodoBlock(blockCid);
+      this.dbDoing.close();
+    });
+    this.dbTodo.del(blockCid,function(err){
+      if(err) {
+        throw err;
+      }
+      this.dbTodo.close();
     });
   }
 }
