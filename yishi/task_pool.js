@@ -82,17 +82,37 @@ console.log('crystal=<',crystal,'>');
 const cTestPaymentAddress = crystal.payaddress;
 console.log('cTestPaymentAddress=<',cTestPaymentAddress,'>');
 
-const LevelTaskPump = require('./level_task_pump.js');
-let taskPump = new LevelTaskPump();
 
-taskPump.fetchOne(scheduleTask);
+
+const ipfsSubTopicNewTask = 'wai-ipfs-yishi-new-task';
+const ipfsPubTopicCatchTask = 'wai-ipfs-yishi-catch-task';
+
+
+
+const onRcvIpfsNewTaskMsg = (msg) => {
+  console.log('onRcvIpfsVerifiedMsg msg=<',msg,'>');
+  console.log('onRcvIpfsVerifiedMsg msg=<',msg.data.toString('utf8'),'>');
+  //console.trace();
+}
+ipfs.pubsub.subscribe(ipfsSubTopicNewTask, onRcvIpfsNewTaskMsg,(err) => {
+  if (err) {
+    throw err
+  }
+  console.log('subscribe ipfsSubTopicNewTask=<',ipfsSubTopicNewTask,'>');
+});
+
+ipfs.pubsub.peers(ipfsSubTopicNewTask, (err, peerIds) => {
+  if (err) {
+    return console.error(`failed to get peers subscribed to ${ipfsSubTopicNewTask}`, err)
+  }
+  console.log(peerIds)
+})
 
 function scheduleTask(blockCid) {
   console.log('blockCid=<',blockCid,'>');
   let taskJson = {block:blockCid,task:'wator.ipfs.ostrich.app'};
   pubRedis.publish(redisPubChannel,JSON.stringify(taskJson));
 }
-
 
 function finnishOneResourceBlock(blocks) {
   console.log('finnishOneResourceBlock blocks=<',blocks,'>');
