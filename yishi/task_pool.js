@@ -94,7 +94,7 @@ const onRcvIpfsNewTaskMsg = (msg) => {
   //console.log('onRcvIpfsNewTaskMsg msg=<',msg.data.toString('utf8'),'>');
   //console.trace();
   setTimeout(function(){
-    broadCastCathTask(msg);
+    broadCastCathTask(msg.data);
   },0);
   scheduleTask(msg.data.toString('utf8'));
 }
