@@ -93,6 +93,13 @@ const onRcvIpfsNewTaskMsg = (msg) => {
   //console.log('onRcvIpfsNewTaskMsg msg=<',msg,'>');
   //console.log('onRcvIpfsNewTaskMsg msg=<',msg.data.toString('utf8'),'>');
   //console.trace();
+  const msgBuff = Buffer.from('');
+  ipfs.pubsub.publish(ipfsPubTopicCatchTask, msgBuff, (err) => {
+    if (err) {
+      throw err;
+    }
+    //console.log('sented msgBuff=<',msgBuff,'>');
+  });
   scheduleTask(msg.data.toString('utf8'));
 }
 ipfs.pubsub.subscribe(ipfsSubTopicNewTask, onRcvIpfsNewTaskMsg,(err) => {
