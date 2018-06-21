@@ -90,8 +90,8 @@ const ipfsPubTopicCatchTask = 'wai-ipfs-yishi-catch-task';
 
 
 const onRcvIpfsNewTaskMsg = (msg) => {
-  console.log('onRcvIpfsVerifiedMsg msg=<',msg,'>');
-  console.log('onRcvIpfsVerifiedMsg msg=<',msg.data.toString('utf8'),'>');
+  console.log('onRcvIpfsNewTaskMsg msg=<',msg,'>');
+  console.log('onRcvIpfsNewTaskMsg msg=<',msg.data.toString('utf8'),'>');
   //console.trace();
 }
 ipfs.pubsub.subscribe(ipfsSubTopicNewTask, onRcvIpfsNewTaskMsg,(err) => {
