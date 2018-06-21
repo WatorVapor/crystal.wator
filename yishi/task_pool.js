@@ -90,7 +90,7 @@ const ipfsPubTopicCatchTask = 'wai-ipfs-yishi-catch-task';
 
 
 const onRcvIpfsNewTaskMsg = (msg) => {
-  //console.log('onRcvIpfsNewTaskMsg msg=<',msg,'>');
+  console.log('onRcvIpfsNewTaskMsg msg=<',msg,'>');
   //console.log('onRcvIpfsNewTaskMsg msg=<',msg.data.toString('utf8'),'>');
   //console.trace();
   setTimeout(function(){
