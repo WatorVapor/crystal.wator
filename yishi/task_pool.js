@@ -93,13 +93,9 @@ const onRcvIpfsNewTaskMsg = (msg) => {
   //console.log('onRcvIpfsNewTaskMsg msg=<',msg,'>');
   //console.log('onRcvIpfsNewTaskMsg msg=<',msg.data.toString('utf8'),'>');
   //console.trace();
-  const msgBuff = Buffer.from('');
-  ipfs.pubsub.publish(ipfsPubTopicCatchTask, msgBuff, (err) => {
-    if (err) {
-      throw err;
-    }
-    //console.log('sented msgBuff=<',msgBuff,'>');
-  });
+  setTimeout(function(){
+    broadCastCathTask(msg);
+  },0);
   scheduleTask(msg.data.toString('utf8'));
 }
 ipfs.pubsub.subscribe(ipfsSubTopicNewTask, onRcvIpfsNewTaskMsg,(err) => {
@@ -121,6 +117,15 @@ function scheduleTask(blockCid) {
   let taskJson = {block:blockCid,task:'wator.ipfs.ostrich.app'};
   pubRedis.publish(redisPubChannel,JSON.stringify(taskJson));
 }
+function broadCastCathTask(msgBuff){
+  ipfs.pubsub.publish(ipfsPubTopicCatchTask, msgBuff, (err) => {
+    if (err) {
+      throw err;
+    }
+    //console.log('sented msgBuff=<',msgBuff,'>');
+  });
+}
+
 
 function finnishOneResourceBlock(blocks) {
   console.log('finnishOneResourceBlock blocks=<',blocks,'>');
