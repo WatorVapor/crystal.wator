@@ -1,5 +1,4 @@
 const dbBlockPathTodo = '/watorvapor/wai.storage/crystal.wator/cnwiki/todo/block';
-const dbBlockPathDoing = '/watorvapor/wai.storage/crystal.wator/cnwiki/doing/block';
 const dbBlockPathDone = '/watorvapor/wai.storage/crystal.wator/cnwiki/done/block';
 const level = require('level');
 
@@ -45,12 +44,7 @@ setTimeout(function(){
 
 function onReadTodoFinnish(){
   console.log('onReadDoneFinnish gToDoCidList=<',gToDoCidList,'>');
-  readDB2Array(dbBlockPathDoing,gDoingCidList,onReadDoingFinnish);
-}
-
-function onReadDoingFinnish(){
-  console.log('onReadDoneFinnish gDoingCidList=<',gDoingCidList,'>');
-  readDB2Array(dbBlockPathDone,gDoneCidList,onReadDoneFinnish);
+  readDB2Array(dbBlockPathDoing,gDoneCidList,onReadDoneFinnish);
 }
 
 function onReadDoneFinnish(){
