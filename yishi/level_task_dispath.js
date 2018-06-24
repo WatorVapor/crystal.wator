@@ -108,7 +108,7 @@ let myWoWa = new WoWa('./wowaself.dat');
 function broadCastNewTask(cid) {
   let sign = myWoWa.signNewKnowledge(cid);
   let taskObj = {
-    input:cid,
+    cid:cid,
     sign:sign
   };
   
