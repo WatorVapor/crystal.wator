@@ -101,9 +101,18 @@ ipfs.pubsub.peers(ipfsPubTopicCatchTask, (err, peerIds) => {
   console.log(peerIds)
 })
 
+const WoWa  = require('./wo_wa_self.js');
+let myWoWa = new WoWa('./wowaself.dat');
+
 
 function broadCastNewTask(cid) {
-  const msgBuff = Buffer.from(cid);
+  let sign = myWoWa.signNewKnowledge(cid);
+  let taskObj = {
+    input:cid,
+    sign:sign
+  };
+  
+  const msgBuff = Buffer.from(JSON.stringify(taskObj));
   ipfs.pubsub.publish(ipfsPubTopicNewTask, msgBuff, (err) => {
     if (err) {
       throw err;
@@ -111,11 +120,4 @@ function broadCastNewTask(cid) {
   });
   console.log('broadCastNewTask msgBuff=<',msgBuff,'>');
 }
-
-ipfs.swarm.addrs(function (err, addrs) {
-  if (err) {
-    throw err;
-  }
-  console.log('swarm addrs=<',addrs,'>');
-})
 
