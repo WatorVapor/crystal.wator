@@ -59,4 +59,11 @@ ipfs.swarm.connect('/ip4/192.168.0.10/tcp/4005/ws/ipfs/QmYZ4TG6YBgD3rEKMhQ9p4Bjh
   console.log('QmYZ4TG6YBgD3rEKMhQ9p4Bjhw14xbC6hXac3YY6ovR2Qu connected!!!!');
 })
 
+ipfs.swarm.connect('/ip4/192.168.0.10/tcp/4003/ws/ipfs/QmanPdBk6pR1v8C2LwWtKAA2diQgyEHs7bFyghLbJsHDzj', function (err) {
+  if (err) {
+    throw err
+  }
+  // if no err is present, connection is now open
+  console.log('QmanPdBk6pR1v8C2LwWtKAA2diQgyEHs7bFyghLbJsHDzj connected!!!!');
+})
 
