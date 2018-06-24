@@ -1,9 +1,9 @@
 version: '3'
 services:
   ipfs-dameon:
-    image: watorvapor/js-ipfs
+    image: watorvapor/js-ipfs-2
     volumes:
-      - ./storage-ipfs:/data/ipfs
+      - ./storage-ipfs:/root/.jsipfs
     networks:
       - outside
     deploy:
