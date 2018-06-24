@@ -9,14 +9,14 @@ ipfs.config.get((err, config) => {
   console.log(config)
 });
 */
-/*
 ipfs.swarm.addrs(function (err, addrs) {
   if (err) {
     throw err
   }
   console.log(addrs)
 });
-*/
+
+/*
 ipfs.id(function (err, identity) {
   if (err) {
     throw err
@@ -29,6 +29,7 @@ ipfs.id(function (err, identity) {
     console.log(peerInfos)
   })
 })
+*/
 
 
 
