@@ -34,13 +34,13 @@ ipfs.id(function (err, identity) {
 
 
 
-/*
-ipfs.swarm.connect('QmW8rAgaaA6sRydK1k6vonShQME47aDxaFidbtMevWs73t', function (err) {
+
+ipfs.swarm.connect('/ip4/192.168.0.10/tcp/4004/ipfs/QmYZ4TG6YBgD3rEKMhQ9p4Bjhw14xbC6hXac3YY6ovR2Qu', function (err) {
   if (err) {
     throw err
   }
   // if no err is present, connection is now open
 })
-*/
+
 
 
