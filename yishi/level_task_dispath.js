@@ -112,3 +112,10 @@ function broadCastNewTask(cid) {
   console.log('broadCastNewTask msgBuff=<',msgBuff,'>');
 }
 
+ipfs.swarm.addrs(function (err, addrs) {
+  if (err) {
+    throw err;
+  }
+  console.log('swarm addrs=<',addrs,'>');
+})
+
