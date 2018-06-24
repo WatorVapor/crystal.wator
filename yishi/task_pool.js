@@ -12,6 +12,8 @@ ipfs.id( (err, identity) => {
   //console.log('identity=<',identity,'>');
 });
 
+const WoWa  = require('./wo_wa_self.js');
+let myWoWa = new WoWa('./wowaself.dat');
 
 const redis = require("redis");
 let pubRedis = redis.createClient();
@@ -120,6 +122,8 @@ function scheduleTask(blockCid) {
 function broadCastCathTask(msg){
   let msgJson = JSON.parse(msg.toString('utf8'));
   console.log('broadCastCathTask::msgJson=<',msgJson,'>');
+  let catchSign = myWoWa.signNewKnowledge(msgJson.cid);
+  msgJson.catch = catchSign;
   const msgBuff = Buffer.from(JSON.stringify(msgJson));
   ipfs.pubsub.publish(ipfsPubTopicCatchTask, msgBuff, (err) => {
     if (err) {
@@ -161,8 +165,6 @@ function finnishOneResourceBlock(blocks) {
 
 
 
-const WoWa  = require('./wo_wa_self.js');
-let myWoWa = new WoWa('./wowaself.dat');
 
 function publishKnowledge(know) {
   //console.log('publishResult know=<',know,'>');
