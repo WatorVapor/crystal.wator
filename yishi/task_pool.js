@@ -117,7 +117,10 @@ function scheduleTask(blockCid) {
   let taskJson = {block:blockCid,task:'wator.ipfs.ostrich.app'};
   pubRedis.publish(redisPubChannel,JSON.stringify(taskJson));
 }
-function broadCastCathTask(msgBuff){
+function broadCastCathTask(msg){
+  let msgJson = JSON.parse(msg.toString('utf8'));
+  console.log('broadCastCathTask::msgJson=<',msgJson,'>');
+  const msgBuff = Buffer.from(JSON.stringify(msgJson));
   ipfs.pubsub.publish(ipfsPubTopicCatchTask, msgBuff, (err) => {
     if (err) {
       throw err;
