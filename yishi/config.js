@@ -34,15 +34,6 @@ ipfs.id(function (err, identity) {
 
 
 
-/*
-ipfs.swarm.connect('/ip4/192.168.0.10/tcp/4004/ipfs/QmYZ4TG6YBgD3rEKMhQ9p4Bjhw14xbC6hXac3YY6ovR2Qu', function (err) {
-  if (err) {
-    throw err
-  }
-  // if no err is present, connection is now open
-})
-*/
-
 ipfs.swarm.connect('/ip4/192.168.0.160/tcp/4005/ws/ipfs/QmW8rAgaaA6sRydK1k6vonShQME47aDxaFidbtMevWs73t', function (err) {
   if (err) {
     throw err
@@ -51,12 +42,12 @@ ipfs.swarm.connect('/ip4/192.168.0.160/tcp/4005/ws/ipfs/QmW8rAgaaA6sRydK1k6vonSh
   console.log('QmW8rAgaaA6sRydK1k6vonShQME47aDxaFidbtMevWs73t connected!!!!');
 })
 
-ipfs.swarm.connect('/ip4/192.168.0.10/tcp/4005/ws/ipfs/QmYZ4TG6YBgD3rEKMhQ9p4Bjhw14xbC6hXac3YY6ovR2Qu', function (err) {
+ipfs.swarm.connect('/ip4/192.168.0.10/tcp/4005/ws/ipfs/QmTN5KCezPN5aUM21ktfx5kpaidtudNTn8dGvgaviMj3iD', function (err) {
   if (err) {
     throw err
   }
   // if no err is present, connection is now open
-  console.log('QmYZ4TG6YBgD3rEKMhQ9p4Bjhw14xbC6hXac3YY6ovR2Qu connected!!!!');
+  console.log('QmTN5KCezPN5aUM21ktfx5kpaidtudNTn8dGvgaviMj3iD connected!!!!');
 })
 
 ipfs.swarm.connect('/ip4/192.168.0.10/tcp/4003/ws/ipfs/QmanPdBk6pR1v8C2LwWtKAA2diQgyEHs7bFyghLbJsHDzj', function (err) {
