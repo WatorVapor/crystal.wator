@@ -48,6 +48,7 @@ ipfs.swarm.connect('/ip4/192.168.0.160/tcp/4005/ws/ipfs/QmW8rAgaaA6sRydK1k6vonSh
     throw err
   }
   // if no err is present, connection is now open
+  console.log('connected!!!!');
 })
 
 
