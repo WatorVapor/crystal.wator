@@ -907,7 +907,7 @@
       "resolved": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz",
       "version": "1.0.2"
     },
-    "ws": "^5.0.0",
+    "ws": "^5.2.1",
     "xtend": {
       "integrity": "sha1-pcbVMr5lbiPbgg77lDofBJmNY68=",
       "resolved": "https://registry.npmjs.org/xtend/-/xtend-4.0.1.tgz",
