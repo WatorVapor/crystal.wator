@@ -1,7 +1,6 @@
 const ipfsAPI = require('ipfs-api');
 const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5002');
 
-const ipfsPubTopic = 'wai-test-pub';
 const ipfsSubTopic = 'wai-test-sub';
 
 
@@ -16,7 +15,7 @@ ipfs.pubsub.subscribe(ipfsSubTopic, onRcvIpfsSub,(err) => {
   }
   console.log('subscribe ipfsSubTopic=<',ipfsSubTopic,'>');
   const msgBuff = Buffer.from('test!!!!!!!!!!!!');
-  ipfs.pubsub.publish(ipfsPubTopic, msgBuff, (err) => {
+  ipfs.pubsub.publish(ipfsSubTopic, msgBuff, (err) => {
     if (err) {
       throw err;
     }
