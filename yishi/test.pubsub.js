@@ -15,6 +15,7 @@ ipfs.pubsub.subscribe(ipfsSubTopic, onRcvIpfsSub,(err) => {
     throw err
   }
   console.log('subscribe ipfsSubTopic=<',ipfsSubTopic,'>');
+  const msgBuff = Buffer.from('test!!!!!!!!!!!!');
   ipfs.pubsub.publish(ipfsPubTopic, msgBuff, (err) => {
     if (err) {
       throw err;
