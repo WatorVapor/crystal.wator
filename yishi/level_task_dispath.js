@@ -85,6 +85,8 @@ const ipfsPubTopicCatchTask = 'wai-ipfs-yishi-catch-task';
 const onRcvIpfsCatchTask = (msg) => {
   console.log('onRcvIpfsCatchTask msg=<',msg,'>');
   console.log('onRcvIpfsCatchTask msg=<',msg.data.toString('utf8'),'>');
+  let msgJson = JSON.parse(msg.data.toString('utf8'));
+  console.log('broadCastCathTask::msgJson=<',msgJson,'>');
   //console.trace();
 }
 ipfs.pubsub.subscribe(ipfsPubTopicCatchTask, onRcvIpfsCatchTask,(err) => {
