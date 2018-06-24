@@ -17,6 +17,13 @@ ipfs.swarm.addrs(function (err, addrs) {
   console.log(addrs)
 });
 */
+ipfs.id(function (err, identity) {
+  if (err) {
+    throw err
+  }
+  console.log(identity)
+})
+
 
 ipfs.swarm.peers(function (err, peerInfos) {
   if (err) {
