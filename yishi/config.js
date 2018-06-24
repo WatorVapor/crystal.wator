@@ -9,10 +9,18 @@ ipfs.config.get((err, config) => {
   console.log(config)
 });
 */
-
+/*
 ipfs.swarm.addrs(function (err, addrs) {
   if (err) {
     throw err
   }
   console.log(addrs)
 });
+*/
+
+ipfs.swarm.peers(function (err, peerInfos) {
+  if (err) {
+    throw err
+  }
+  console.log(peerInfos)
+})
