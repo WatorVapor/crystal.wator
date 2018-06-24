@@ -22,27 +22,23 @@ ipfs.id(function (err, identity) {
     throw err
   }
   console.log(identity)
+  ipfs.swarm.peers(function (err, peerInfos) {
+    if (err) {
+      throw err
+    }
+    console.log(peerInfos)
+  })
 })
 
 
-ipfs.swarm.peers(function (err, peerInfos) {
-  if (err) {
-    throw err
-  }
-  console.log(peerInfos)
-})
 
-ipfs.swarm.peers(function (err, peerInfos) {
-  if (err) {
-    throw err
-  }
-  console.log(peerInfos)
-})
-
+/*
 ipfs.swarm.connect('QmW8rAgaaA6sRydK1k6vonShQME47aDxaFidbtMevWs73t', function (err) {
   if (err) {
     throw err
   }
   // if no err is present, connection is now open
 })
+*/
+
 
