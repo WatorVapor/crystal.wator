@@ -8,3 +8,6 @@ ipfs.config.get((err, config) => {
   console.log(config)
 });
 
+ipfs.on('ready', () => {
+  console.log(ipfs)
+});
