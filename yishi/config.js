@@ -34,12 +34,12 @@ ipfs.id(function (err, identity) {
 
 
 
-ipfs.swarm.connect('/ip4/192.168.0.160/tcp/4005/ws/ipfs/QmW8rAgaaA6sRydK1k6vonShQME47aDxaFidbtMevWs73t', function (err) {
+ipfs.swarm.connect('/ip4/192.168.0.160/tcp/4005/ws/ipfs/QmXhwvxw3TQTEKfu6GxuCBq6TWYC5rgoxn8bA6hZC6r79d', function (err) {
   if (err) {
     throw err
   }
   // if no err is present, connection is now open
-  console.log('QmW8rAgaaA6sRydK1k6vonShQME47aDxaFidbtMevWs73t connected!!!!');
+  console.log('QmXhwvxw3TQTEKfu6GxuCBq6TWYC5rgoxn8bA6hZC6r79d connected!!!!');
 })
 
 ipfs.swarm.connect('/ip4/192.168.0.10/tcp/4005/ws/ipfs/QmTN5KCezPN5aUM21ktfx5kpaidtudNTn8dGvgaviMj3iD', function (err) {
