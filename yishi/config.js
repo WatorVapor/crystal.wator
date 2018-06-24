@@ -22,7 +22,7 @@ ipfs.id(function (err, identity) {
     throw err
   }
   console.log(identity)
-  ipfs.swarm.peers({verbose:true}function (err, peerInfos) {
+  ipfs.swarm.peers({verbose:true},function (err, peerInfos) {
     if (err) {
       throw err
     }
