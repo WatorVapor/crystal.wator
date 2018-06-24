@@ -48,8 +48,15 @@ ipfs.swarm.connect('/ip4/192.168.0.160/tcp/4005/ws/ipfs/QmW8rAgaaA6sRydK1k6vonSh
     throw err
   }
   // if no err is present, connection is now open
-  console.log('connected!!!!');
+  console.log('QmW8rAgaaA6sRydK1k6vonShQME47aDxaFidbtMevWs73t connected!!!!');
 })
 
+ipfs.swarm.connect('/ip4/192.168.0.10/tcp/4005/ws/ipfs/QmYZ4TG6YBgD3rEKMhQ9p4Bjhw14xbC6hXac3YY6ovR2Qu', function (err) {
+  if (err) {
+    throw err
+  }
+  // if no err is present, connection is now open
+  console.log('QmYZ4TG6YBgD3rEKMhQ9p4Bjhw14xbC6hXac3YY6ovR2Qu connected!!!!');
+})
 
 
