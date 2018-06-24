@@ -42,11 +42,13 @@ ipfs.swarm.connect('/ip4/192.168.0.10/tcp/4004/ipfs/QmYZ4TG6YBgD3rEKMhQ9p4Bjhw14
   // if no err is present, connection is now open
 })
 
+/*
 ipfs.swarm.connect('/ip4/192.168.0.10/tcp/4004/ipfs/QmW8rAgaaA6sRydK1k6vonShQME47aDxaFidbtMevWs73t', function (err) {
   if (err) {
     throw err
   }
   // if no err is present, connection is now open
 })
+*/
 
 
