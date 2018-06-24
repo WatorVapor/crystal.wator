@@ -8,4 +8,9 @@ ipfs.config.get((err, config) => {
   console.log(config)
 });
 
-console.log(ipfs)
+ipfs.swarm.addrs(function (err, addrs) {
+  if (err) {
+    throw err
+  }
+  console.log(addrs)
+});
