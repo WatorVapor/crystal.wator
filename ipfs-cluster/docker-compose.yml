@@ -4,6 +4,8 @@ services:
     image: watorvapor/js-ipfs-2
     volumes:
       - ./storage-ipfs:/root/.jsipfs
+    environment:
+      - IPFS_API_HOST=127.0.0.1
     networks:
       - outside
     deploy:
