@@ -3,6 +3,7 @@ const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
 //const ipfs = ipfsAPI('localhost', '5003', {protocol: 'http'})
 //const ipfs = ipfsAPI('ipfs.wator.xyz', '443', {protocol: 'https'})
 //console.log('ipfs=<',ipfs,'>');
+const ipfs2 = ipfsAPI('/ip4/127.0.0.1/tcp/5002');
 
 ipfs.id( (err, identity) => {
   if (err) {
@@ -195,6 +196,20 @@ ipfs.pubsub.subscribe(ipfsSubTopicVerified, onRcvIpfsVerifiedMsg,(err) => {
 });
 
 ipfs.pubsub.peers(ipfsSubTopicVerified, (err, peerIds) => {
+  if (err) {
+    return console.error(`failed to get peers subscribed to ${ipfsSubTopicVerified}`, err)
+  }
+  console.log(peerIds)
+})
+
+ipfs2.pubsub.subscribe(ipfsSubTopicVerified, onRcvIpfsVerifiedMsg,(err) => {
+  if (err) {
+    throw err
+  }
+  console.log('subscribe ipfsSubTopicVerified=<',ipfsSubTopicVerified,'>');
+});
+
+ipfs2.pubsub.peers(ipfsSubTopicVerified, (err, peerIds) => {
   if (err) {
     return console.error(`failed to get peers subscribed to ${ipfsSubTopicVerified}`, err)
   }
