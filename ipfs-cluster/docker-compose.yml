@@ -32,6 +32,22 @@ services:
         reservations:
           cpus: '0.5'
           memory: 512M
+  ipfs-dameon-pubsub-bug:
+    image: watorvapor/js-ipfs-2
+    volumes:
+      - ./pubsub-bug-storage-ipfs:/root/.jsipfs
+    environment:
+      - IPFS_API_HOST=127.0.0.1
+    networks:
+      - outside
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
 networks:
   outside:
     external:
