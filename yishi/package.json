@@ -1,2 +1,5 @@
 {
+  "dependencies": {
+    "ipfs-api": "^22.1.1"
+  }
 }
