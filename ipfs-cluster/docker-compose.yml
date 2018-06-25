@@ -19,7 +19,7 @@ services:
   ipfs-dameon-private:
     image: watorvapor/js-ipfs-2
     volumes:
-      - ./storage-ipfs-private:/root/.jsipfs
+      - ./private-storage-ipfs:/root/.jsipfs
     environment:
       - IPFS_API_HOST=127.0.0.1
     networks:
