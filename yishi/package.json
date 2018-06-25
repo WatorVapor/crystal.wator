@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "ipfs-api": "^22.1.1"
+    "ipfs-api": "^22.1.1",
+    "level": "^4.0.0",
+    "node-rsa": "^1.0.0",
+    "redis": "^2.8.0",
+    "sha3": "^1.2.2"
   }
 }
