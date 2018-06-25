@@ -105,6 +105,20 @@ ipfs.pubsub.peers(ipfsPubTopicCatchTask, (err, peerIds) => {
   console.log(peerIds)
 })
 
+ipfs2.pubsub.subscribe(ipfsPubTopicCatchTask, onRcvIpfsCatchTask,(err) => {
+  if (err) {
+    throw err
+  }
+  console.log('subscribe ipfsPubTopicCatchTask=<',ipfsPubTopicCatchTask,'>');
+});
+
+ipfs2.pubsub.peers(ipfsPubTopicCatchTask, (err, peerIds) => {
+  if (err) {
+    return console.error(`failed to get peers subscribed to ${ipfsPubTopicCatchTask}`, err)
+  }
+  console.log(peerIds)
+})
+
 const WoWa  = require('./wo_wa_self.js');
 let myWoWa = new WoWa('./wowaself.dat');
 
