@@ -1,5 +1,6 @@
 const ipfsAPI = require('ipfs-api');
 const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5002');
+const ipfs2 = ipfsAPI('/ip4/127.0.0.1/tcp/5002');
 
 const ipfsSubTopic = 'wai-test-sub';
 
@@ -16,6 +17,19 @@ ipfs.pubsub.subscribe(ipfsSubTopic, onRcvIpfsSub,(err) => {
   console.log('subscribe ipfsSubTopic=<',ipfsSubTopic,'>');
   const msgBuff = Buffer.from('test!!!!!!!!!!!!');
   ipfs.pubsub.publish(ipfsSubTopic, msgBuff, (err) => {
+    if (err) {
+      throw err;
+    }
+  });
+});
+
+ipfs2.pubsub.subscribe(ipfsSubTopic, onRcvIpfsSub,(err) => {
+  if (err) {
+    throw err
+  }
+  console.log('subscribe ipfsSubTopic=<',ipfsSubTopic,'>');
+  const msgBuff = Buffer.from('test!!!!!!!!!!!!');
+  ipfs2.pubsub.publish(ipfsSubTopic, msgBuff, (err) => {
     if (err) {
       throw err;
     }
