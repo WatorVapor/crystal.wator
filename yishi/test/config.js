@@ -33,7 +33,7 @@ ipfs.id(function (err, identity) {
 })
 
 
-
+/*
 ipfs.swarm.connect('/ip4/192.168.0.160/tcp/4005/ws/ipfs/QmXhwvxw3TQTEKfu6GxuCBq6TWYC5rgoxn8bA6hZC6r79d', function (err) {
   if (err) {
     throw err
@@ -57,4 +57,4 @@ ipfs.swarm.connect('/ip4/192.168.0.10/tcp/4003/ws/ipfs/QmanPdBk6pR1v8C2LwWtKAA2d
   // if no err is present, connection is now open
   console.log('QmanPdBk6pR1v8C2LwWtKAA2diQgyEHs7bFyghLbJsHDzj connected!!!!');
 })
-
+*/
