@@ -1,9 +1,11 @@
 const ipfsAPI = require('ipfs-api');
-const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
+//const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
+const ipfs = ipfsAPI(localhost,'9091', {protocol: 'http'});
 //const ipfs = ipfsAPI('localhost', '5003', {protocol: 'http'})
 //const ipfs = ipfsAPI('ipfs.wator.xyz', '443', {protocol: 'https'})
 //console.log('ipfs=<',ipfs,'>');
-const ipfs2 = ipfsAPI('/ip4/127.0.0.1/tcp/5004');
+//const ipfs2 = ipfsAPI('/ip4/127.0.0.1/tcp/5004');
+const ipfs2 = ipfsAPI(localhost,'9092', {protocol: 'http'});
 
 ipfs.id( (err, identity) => {
   if (err) {
