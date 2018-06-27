@@ -123,7 +123,7 @@ function scheduleTask(blockCid) {
 function broadCastCathTask(msg){
   let msgJson = JSON.parse(msg.toString('utf8'));
   console.log('broadCastCathTask::msgJson=<',msgJson,'>');
-  let catchSign = myWoWa.signNewKnowledge(msgJson.cid);
+  let catchSign = myWoWa.signNewTask(msgJson.cid);
   msgJson.catch = catchSign;
   const msgBuff = Buffer.from(JSON.stringify(msgJson));
   ipfs.pubsub.publish(ipfsPubTopicCatchTask, msgBuff, (err) => {
