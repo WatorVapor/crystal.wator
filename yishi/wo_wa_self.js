@@ -46,6 +46,24 @@ module.exports = class WoWaSelf {
     };
     return signed;
   }
+
+  signNewTask(cid) {
+    //console.log('this.pubHex=<',this.pubHex,'>');
+    let signature = this.key.sign(cid);
+    let derSign = signature.toDER();
+    let d = new SHA3.SHA3Hash();
+    let signOrig = Buffer.from(derSign).toString('base64');
+    d.update(signOrig);
+    let nounceOfContent = d.digest('hex');
+    //console.log('signKnowledge::nounceOfContent=<',nounceOfContent,'>');
+    
+    let timestamp = this.mineTimeStamp_(cid);
+    let signed = {
+      nounce:nounceOfContent,
+      ts_created:timestamp
+    };
+    return signed;
+  }
   
   createTimeStamp(sumCid) {
     let ts = this.mineTimeStamp_(sumCid);
