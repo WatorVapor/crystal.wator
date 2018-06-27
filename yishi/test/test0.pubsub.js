@@ -35,4 +35,4 @@ ipfs2.pubsub.subscribe(ipfsSubTopic, onRcvIpfsSub,(err) => {
       throw err;
     }
   });
-
+});
