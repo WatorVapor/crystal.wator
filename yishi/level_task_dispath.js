@@ -97,7 +97,7 @@ ipfs.pubsub.subscribe(ipfsSubTopicCatchTask, onRcvIpfsCatchTask,(err) => {
   if (err) {
     throw err
   }
-  console.log('subscribe ipfs ipfsSubTopicCatchTask=<',ipfsPubTopicCatchTask,'>');
+  console.log('subscribe ipfs ipfsSubTopicCatchTask=<',ipfsSubTopicCatchTask,'>');
 });
 
 ipfs.pubsub.peers(ipfsSubTopicCatchTask, (err, peerIds) => {
