@@ -33,7 +33,7 @@ const redisPubChannel = 'wai.relay.ipfs.to.redis';
 const redisSubChannel = 'wai.relay.redis.to.ipfs';
 
 
-
+/*
 
 subRedis.on("message", function(channel, msg) {
   //console.log('subRedis.on channel=<',channel,'>');
@@ -48,10 +48,6 @@ subRedis.on("message", function(channel, msg) {
       finnishOneResourceBlock(jsonMsg);
     }
   }
-  /*
-  const msgBuff = Buffer.from(msg);
-  ipfs.pubsub.publish(ipfsPubTopic,msgBuff);
-  */
 });
 
 
@@ -59,7 +55,7 @@ subRedis.on("ready", (err) => {
   console.log('subRedis err=<',err,'>');
 });
 subRedis.subscribe(redisSubChannel);
-
+*/
 
 
 
