@@ -137,13 +137,13 @@ function broadCastNewTask(cid) {
     if (err) {
       throw err;
     }
-    console.log('broadCastNewTask msgBuff=<',msgBuff,'>');
+    console.log('broadCastNewTask ipfs msgBuff=<',msgBuff,'>');
   });
   ipfs2.pubsub.publish(ipfsPubTopicNewTask, msgBuff, (err) => {
     if (err) {
       throw err;
     }
-    console.log('broadCastNewTask msgBuff=<',msgBuff,'>');
+    console.log('broadCastNewTask ipfs2 msgBuff=<',msgBuff,'>');
   });
 }
 
