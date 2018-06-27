@@ -38,7 +38,7 @@ ipfs2.id(function (err, identity) {
     throw err
   }
   console.log(identity)
-}
+});
 
 /*
 ipfs.swarm.connect('/ip4/192.168.0.160/tcp/4005/ws/ipfs/QmXhwvxw3TQTEKfu6GxuCBq6TWYC5rgoxn8bA6hZC6r79d', function (err) {
