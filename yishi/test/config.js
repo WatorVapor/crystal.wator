@@ -1,5 +1,6 @@
 const ipfsAPI = require('ipfs-api');
 const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
+const ipfs2 = ipfsAPI('/ip4/127.0.0.1/tcp/5004');
 
 /*
 ipfs.config.get((err, config) => {
@@ -32,6 +33,12 @@ ipfs.id(function (err, identity) {
   */
 })
 
+ipfs2.id(function (err, identity) {
+  if (err) {
+    throw err
+  }
+  console.log(identity)
+}
 
 /*
 ipfs.swarm.connect('/ip4/192.168.0.160/tcp/4005/ws/ipfs/QmXhwvxw3TQTEKfu6GxuCBq6TWYC5rgoxn8bA6hZC6r79d', function (err) {
