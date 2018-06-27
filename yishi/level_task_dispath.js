@@ -84,7 +84,7 @@ const ipfs = ipfsAPI('localhost','5003', {protocol: 'http'});
 const ipfs2 = ipfsAPI('localhost','5004', {protocol: 'http'});
 
 const ipfsPubTopicNewTask = 'wai-ipfs-yishi-new-task';
-const ipfsPubTopicCatchTask = 'wai-ipfs-yishi-catch-task';
+const ipfsSubTopicCatchTask = 'wai-ipfs-yishi-catch-task';
 
 const onRcvIpfsCatchTask = (msg) => {
   console.log('onRcvIpfsCatchTask msg=<',msg,'>');
@@ -93,30 +93,30 @@ const onRcvIpfsCatchTask = (msg) => {
   console.log('broadCastCathTask::msgJson=<',msgJson,'>');
   //console.trace();
 }
-ipfs.pubsub.subscribe(ipfsPubTopicCatchTask, onRcvIpfsCatchTask,(err) => {
+ipfs.pubsub.subscribe(ipfsSubTopicCatchTask, onRcvIpfsCatchTask,(err) => {
   if (err) {
     throw err
   }
-  console.log('subscribe ipfsPubTopicCatchTask=<',ipfsPubTopicCatchTask,'>');
+  console.log('subscribe ipfs ipfsSubTopicCatchTask=<',ipfsPubTopicCatchTask,'>');
 });
 
-ipfs.pubsub.peers(ipfsPubTopicCatchTask, (err, peerIds) => {
+ipfs.pubsub.peers(ipfsSubTopicCatchTask, (err, peerIds) => {
   if (err) {
-    return console.error(`failed to get peers subscribed to ${ipfsPubTopicCatchTask}`, err)
+    return console.error(`failed to get peers subscribed to ${ipfsSubTopicCatchTask}`, err)
   }
   console.log(peerIds)
 })
 
-ipfs2.pubsub.subscribe(ipfsPubTopicCatchTask, onRcvIpfsCatchTask,(err) => {
+ipfs2.pubsub.subscribe(ipfsSubTopicCatchTask, onRcvIpfsCatchTask,(err) => {
   if (err) {
     throw err
   }
-  console.log('subscribe ipfsPubTopicCatchTask=<',ipfsPubTopicCatchTask,'>');
+  console.log('subscribe ipfs2 ipfsSubTopicCatchTask=<',ipfsSubTopicCatchTask,'>');
 });
 
-ipfs2.pubsub.peers(ipfsPubTopicCatchTask, (err, peerIds) => {
+ipfs2.pubsub.peers(ipfsSubTopicCatchTask, (err, peerIds) => {
   if (err) {
-    return console.error(`failed to get peers subscribed to ${ipfsPubTopicCatchTask}`, err)
+    return console.error(`failed to get peers subscribed to ${ipfsSubTopicCatchTask}`, err)
   }
   console.log(peerIds)
 })
