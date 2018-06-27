@@ -77,11 +77,11 @@ function onDispatchTodo() {
 }
 
 const ipfsAPI = require('ipfs-api');
-//const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
-const ipfs = ipfsAPI('localhost','5003', {protocol: 'http'});
+const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5001');
+//const ipfs = ipfsAPI('localhost','5003', {protocol: 'http'});
 
-//const ipfs2 = ipfsAPI('/ip4/127.0.0.1/tcp/5004');
-const ipfs2 = ipfsAPI('localhost','5004', {protocol: 'http'});
+const ipfs2 = ipfsAPI('/ip4/127.0.0.1/tcp/5001');
+//const ipfs2 = ipfsAPI('localhost','5004', {protocol: 'http'});
 
 const ipfsPubTopicNewTask = 'wai-ipfs-yishi-new-task';
 const ipfsSubTopicCatchTask = 'wai-ipfs-yishi-catch-task';
