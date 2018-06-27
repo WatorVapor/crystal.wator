@@ -33,7 +33,6 @@ const redisPubChannel = 'wai.relay.ipfs.to.redis';
 const redisSubChannel = 'wai.relay.redis.to.ipfs';
 
 
-/*
 
 subRedis.on("message", function(channel, msg) {
   //console.log('subRedis.on channel=<',channel,'>');
@@ -55,7 +54,7 @@ subRedis.on("ready", (err) => {
   console.log('subRedis err=<',err,'>');
 });
 subRedis.subscribe(redisSubChannel);
-*/
+
 
 
 
