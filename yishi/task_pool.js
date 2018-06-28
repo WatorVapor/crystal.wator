@@ -10,6 +10,18 @@ ipfs.id( (err, identity) => {
   //console.log('identity=<',identity,'>');
 });
 
+const room = Room(ipfs, 'room-name-wai-11111111');
+room.on('peer joined', (peer) => {
+  console.log('Peer joined the room', peer)
+})
+room.on('peer left', (peer) => {
+  console.log('Peer left...', peer)
+})
+room.on('subscribed', () => {
+  console.log('Now connected!')
+})
+
+
 const WoWa  = require('./wo_wa_self.js');
 let myWoWa = new WoWa('./wowaself.dat');
 
