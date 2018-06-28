@@ -19,6 +19,9 @@ ipfs.on('ready', () => {
  
   room.on('peer joined', (peer) => {
     console.log('Peer joined the room', peer);
+    setTimeout(()=>{
+      room.broadcast('hello');
+    },1000);
   });
  
   room.on('peer left', (peer) => {
