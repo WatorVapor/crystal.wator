@@ -15,18 +15,25 @@ const ipfs = new IPFS({
  
 // IPFS node is ready, so we can start using ipfs-pubsub-room
 ipfs.on('ready', () => {
-  const room = Room(ipfs, 'wai-QmPDsajgBiyJyoCPFGkVrs8zwKdnsDnb5KcZcJ7SUfNZbM')
+  const room = Room(ipfs, 'wai-QmPDsajgBiyJyoCPFGkVrs8zwKdnsDnb5KcZcJ7SUfNZbM');
  
   room.on('peer joined', (peer) => {
-    console.log('Peer joined the room', peer)
-  })
+    console.log('Peer joined the room', peer);
+  });
  
   room.on('peer left', (peer) => {
-    console.log('Peer left...', peer)
-  })
+    console.log('Peer left...', peer);
+  });
  
   // now started to listen to room
   room.on('subscribed', () => {
-    console.log('Now connected!')
-  })
+    console.log('Now connected!');
+  });
+  room.on('message', (message) => {
+    onRoomMessage(message);
+  });
 })
+
+function onRoomMessage(msg) {
+  console.log('onRoomMessage::msg=<',msg,'>');
+}
