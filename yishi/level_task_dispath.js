@@ -43,7 +43,7 @@ setTimeout(function(){
 },1);
 
 function onReadTodoFinnish(){
-  console.log('onReadDoneFinnish gToDoCidList=<',gToDoCidList,'>');
+  //console.log('onReadDoneFinnish gToDoCidList=<',gToDoCidList,'>');
   readDB2Array(dbBlockPathDone,gDoneCidList,onReadDoneFinnish);
 }
 
