@@ -16,48 +16,21 @@ const ipfs = new IPFS({
 // IPFS node is ready, so we can start using ipfs-pubsub-room
 ipfs.on('ready', () => {
   const room = Room(ipfs, 'wai-QmPDsajgBiyJyoCPFGkVrs8zwKdnsDnb5KcZcJ7SUfNZbM');
- 
   room.on('peer joined', (peer) => {
     console.log('Peer joined the room', peer);
     setTimeout(()=>{
       room.broadcast('hello');
     },1000);
   });
- 
   room.on('peer left', (peer) => {
     console.log('Peer left...', peer);
   });
- 
   // now started to listen to room
   room.on('subscribed', () => {
     console.log('Now connected!');
   });
   room.on('message', onRoomMessage);
-
-  
-  
-  const ipfsSubTopic = 'wai-test-sub';
-  ipfs.pubsub.subscribe(ipfsSubTopic, onRcvIpfsSub,(err) => {
-    if (err) {
-      throw err
-    }
-    console.log('subscribe ipfsSubTopic=<',ipfsSubTopic,'>');
-    const msgBuff = Buffer.from('ipfs test!!!!!!!!!!!!');
-    ipfs.pubsub.publish(ipfsSubTopic, msgBuff, (err) => {
-      if (err) {
-        throw err;
-      }
-    });
-  });
-  
 })
-
-const onRcvIpfsSub = (msg) => {
-  console.log('onRcvIpfsCatchTask msg=<',msg,'>');
-  console.log('onRcvIpfsCatchTask msg=<',msg.data.toString('utf8'),'>');
-  //console.trace();
-}
-
 
 const onRoomMessage = (msg) =>{
   console.log('onRoomMessage::msg=<',msg,'>');
