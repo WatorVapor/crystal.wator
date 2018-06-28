@@ -32,11 +32,33 @@ ipfs.on('ready', () => {
   room.on('subscribed', () => {
     console.log('Now connected!');
   });
-  room.on('message', (message) => {
-    onRoomMessage(message);
+  room.on('message', onRoomMessage);
+
+  
+  
+  const ipfsSubTopic = 'wai-test-sub';
+  ipfs.pubsub.subscribe(ipfsSubTopic, onRcvIpfsSub,(err) => {
+    if (err) {
+      throw err
+    }
+    console.log('subscribe ipfsSubTopic=<',ipfsSubTopic,'>');
+    const msgBuff = Buffer.from('ipfs test!!!!!!!!!!!!');
+    ipfs.pubsub.publish(ipfsSubTopic, msgBuff, (err) => {
+      if (err) {
+        throw err;
+      }
+    });
   });
+  
 })
 
-function onRoomMessage(msg) {
+const onRcvIpfsSub = (msg) => {
+  console.log('onRcvIpfsCatchTask msg=<',msg,'>');
+  console.log('onRcvIpfsCatchTask msg=<',msg.data.toString('utf8'),'>');
+  //console.trace();
+}
+
+
+const onRoomMessage = (msg) =>{
   console.log('onRoomMessage::msg=<',msg,'>');
 }
