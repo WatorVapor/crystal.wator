@@ -21,7 +21,7 @@ const bs58 = require('bs58')
 module.exports = class WoWaP2p {
   constructor() {
     let d = new SHA3.SHA3Hash();
-    d.update('欢迎来到意识WoWa');
+    d.update('!!欢迎来到WoWa!!');
     let number = d.digest('hex');
     this.number = bs58.encode(number);
     console.log('this.number=<',this.number,'>');
