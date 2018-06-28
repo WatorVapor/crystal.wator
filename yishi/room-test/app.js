@@ -16,6 +16,12 @@ const ipfs = new IPFS({
  
 // IPFS node is ready, so we can start using ipfs-pubsub-room
 ipfs.on('ready', () => {
+  ipfs.id( (err,identity)=>{
+    if (err) {
+      throw err
+    }
+    console.log('identity=<',identity,'>');
+  });
   const room = Room(ipfs, 'wai-QmPDsajgBiyJyoCPFGkVrs8zwKdnsDnb5KcZcJ7SUfNZbM');
   room.on('peer joined', (peer) => {
     console.log('Peer joined the room', peer);
@@ -31,7 +37,8 @@ ipfs.on('ready', () => {
     console.log('Now connected!');
   });
   room.on('message', onRoomMessage);
-})
+});
+
 
 const onRoomMessage = (msg) =>{
   console.log('onRoomMessage::msg=<',msg,'>');
