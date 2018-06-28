@@ -112,7 +112,7 @@ function broadCastNewTask(cid) {
   let sign = myWoWa.signNewTask(cid);
   let taskObj = {
     cid:cid,
-    sign:sign
+    create:sign
   };
   
   const msgBuff = Buffer.from(JSON.stringify(taskObj));
