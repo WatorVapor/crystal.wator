@@ -46,5 +46,7 @@ const onRoomMessage = (msg) =>{
   console.log('onRoomMessage::minePeerID=<',minePeerID,'>');
   if(msg.from !== minePeerID) {
     console.log('onRoomMessage::msg=<',msg,'>');
+  } else {
+    console.log('onRoomMessage::ignore loopback msg=<',msg,'>');
   }
 }
