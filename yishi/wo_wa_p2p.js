@@ -19,7 +19,10 @@ const IPFS_CONF = {
 module.exports = class WoWaP2p {
   constructor() {
     this.ipfs = new IPFS(IPFS_CONF);
-    this.ipfs.on('ready', this.onInit);
+    let self = this;
+    this.ipfs.on('ready', () => {
+      self.onInit();
+    });
   }
   onInit() {
     let self = this;
