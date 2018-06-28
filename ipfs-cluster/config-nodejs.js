@@ -3,6 +3,7 @@
 module.exports = () => ({
   Addresses: {
     Swarm: [
+      '/ip4/0.0.0.0/tcp/4004',
       '/ip6/::/tcp/4004',
       '/ip4/127.0.0.1/tcp/4005/ws'
     ],
