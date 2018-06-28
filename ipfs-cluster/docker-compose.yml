@@ -37,23 +37,20 @@ services:
           cpus: '0.5'
           memory: 512M
   ipfs-dameon-pubsub-bug:
-    image: watorvapor/js-ipfs-2
+    image: ipfs/go-ipfs:release
     volumes:
-      - ./pubsub-bug-storage-ipfs:/root/.jsipfs
-      - ./init-and-daemon.sh:/usr/src/app/init-and-daemon.sh
-      - ./pubsub-bug-config-nodejs.js:/usr/src/app/src/core/runtime/config-nodejs.js
-    environment:
-      - IPFS_API_HOST=127.0.0.1
+      - ./storage-ipfs:/data/ipfs
+    command: 'daemon --migrate=true --profile=lowpower --enable-pubsub-experiment' 
     networks:
       - outside
     deploy:
       resources:
         limits:
           cpus: '1.00'
-          memory: 1G
+          memory: 128M
         reservations:
           cpus: '0.5'
-          memory: 512M
+          memory: 64M
 networks:
   outside:
     external:
