@@ -39,7 +39,7 @@ services:
   ipfs-dameon-pubsub:
     image: ipfs/go-ipfs:release
     volumes:
-      - ./storage-ipfs:/data/ipfs
+      - ./pubsub-storage-ipfs:/data/ipfs
     command: 'daemon --migrate=true --profile=lowpower --enable-pubsub-experiment' 
     networks:
       - outside
