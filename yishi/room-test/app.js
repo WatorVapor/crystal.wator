@@ -15,7 +15,7 @@ const ipfs = new IPFS({
  
 // IPFS node is ready, so we can start using ipfs-pubsub-room
 ipfs.on('ready', () => {
-  const room = Room(ipfs, 'room-name')
+  const room = Room(ipfs, 'wai-QmPDsajgBiyJyoCPFGkVrs8zwKdnsDnb5KcZcJ7SUfNZbM')
  
   room.on('peer joined', (peer) => {
     console.log('Peer joined the room', peer)
