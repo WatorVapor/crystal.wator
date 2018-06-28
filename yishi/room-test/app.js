@@ -1,6 +1,7 @@
 const Room = require('ipfs-pubsub-room')
 const IPFS = require('ipfs')
 const ipfs = new IPFS({
+  repo: './ipfs_pubsub_room_data',
   EXPERIMENTAL: {
     pubsub: true
   },
