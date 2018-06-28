@@ -36,7 +36,7 @@ services:
         reservations:
           cpus: '0.5'
           memory: 512M
-  ipfs-dameon-pubsub-bug:
+  ipfs-dameon-pubsub:
     image: ipfs/go-ipfs:release
     volumes:
       - ./storage-ipfs:/data/ipfs
