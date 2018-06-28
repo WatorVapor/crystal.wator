@@ -61,4 +61,5 @@ typings/
 .next
 
 ipfs-cluster/*storage-ipfs
+.ipfs_pubsub_room_data/
 
