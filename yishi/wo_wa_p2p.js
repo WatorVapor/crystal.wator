@@ -1,7 +1,7 @@
 const Room = require('ipfs-pubsub-room');
-const WOWAIPFS = require('ipfs');
+const IPFS = require('ipfs');
 
-const WOWA_IPFS_CONF = {
+const IPFS_CONF = {
   repo: '.ipfs_pubsub_room_data',
   EXPERIMENTAL: {
     pubsub: true
@@ -18,7 +18,7 @@ const WOWA_IPFS_CONF = {
 
 module.exports = class WoWaP2p {
   constructor() {
-    this.ipfs = new IPFS(WOWA_IPFS_CONF);
+    this.ipfs = new IPFS(IPFS_CONF);
     this.ipfs.on('ready', this.onInit);
   }
   onInit() {
