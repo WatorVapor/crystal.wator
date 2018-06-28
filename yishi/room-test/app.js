@@ -44,5 +44,7 @@ ipfs.on('ready', () => {
 
 const onRoomMessage = (msg) =>{
   console.log('onRoomMessage::minePeerID=<',minePeerID,'>');
-  console.log('onRoomMessage::msg=<',msg,'>');
+  if(msg.from !== minePeerID) {
+    console.log('onRoomMessage::msg=<',msg,'>');
+  }
 }
