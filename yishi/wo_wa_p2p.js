@@ -18,7 +18,7 @@ const IPFS_CONF = {
 const SHA3  = require('sha3');
 const bs58 = require('bs58')
 let d = new SHA3.SHA3Hash();
-d.update('欢迎来到意识WoWa');
+d.update('!!欢迎来到意识WoWa!!');
 const ROOM_NUM = bs58.encode(d.digest('bin'));
 console.log('ROOM_NUM=<',ROOM_NUM,'>');
 
