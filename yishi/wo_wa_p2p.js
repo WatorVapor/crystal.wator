@@ -40,5 +40,30 @@ module.exports = class WoWaP2p {
       console.log('identity=<',identity,'>');
       self.peer = identity.id;
     });
+    this.room = Room(this.ipfs, 'wai-' + this.number);
+    this.room.on('peer joined', (peer) => {
+      console.log('Peer joined the room', peer);
+      setTimeout(()=>{
+        self.room.broadcast('hello');
+      },1000);
+    });
+    this.room.on('peer left', (peer) => {
+      console.log('Peer left...', peer);
+    });
+    // now started to listen to room
+    this.room.on('subscribed', () => {
+      console.log('Now connected!');
+    });
+    this.room.on('message', (msg)=>{
+      self.onRoomMessage(msg);
+    });
+  }
+  onRoomMessage(msg) {
+    console.log('onRoomMessage::this.peer=<',this.peer,'>');
+    if(msg.from !== this.peer) {
+      console.log('onRoomMessage::msg=<',msg,'>');
+    } else {
+      console.log('onRoomMessage::ignore loopback msg !!!!!!!!!!!!!!');
+    }
   }
 };
