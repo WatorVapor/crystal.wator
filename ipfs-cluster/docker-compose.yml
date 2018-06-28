@@ -40,7 +40,7 @@ services:
     image: ipfs/go-ipfs:release
     volumes:
       - ./pubsub-storage-ipfs:/data/ipfs
-    command: 'daemon --migrate=true --enable-pubsub-experiment --enable-namesys-pubsub' 
+    command: 'daemon --migrate=true --enable-pubsub-experiment' 
     networks:
       - outside
     deploy:
