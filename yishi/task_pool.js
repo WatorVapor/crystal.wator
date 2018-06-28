@@ -1,6 +1,5 @@
 const ipfsAPI = require('ipfs-api');
 const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5004');
-const Room = require('ipfs-pubsub-room');
 
 ipfs.id( (err, identity) => {
   if (err) {
@@ -10,16 +9,9 @@ ipfs.id( (err, identity) => {
   //console.log('identity=<',identity,'>');
 });
 
-const room = Room(ipfs, 'room-name-wai-11111111');
-room.on('peer joined', (peer) => {
-  console.log('Peer joined the room', peer)
-})
-room.on('peer left', (peer) => {
-  console.log('Peer left...', peer)
-})
-room.on('subscribed', () => {
-  console.log('Now connected!')
-})
+
+const WoWaP2P  = require('./wo_wa_p2p.js');
+let p2p = new WoWaP2P('./wowaself.dat');
 
 
 const WoWa  = require('./wo_wa_self.js');
