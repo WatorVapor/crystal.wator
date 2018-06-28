@@ -21,10 +21,10 @@ const bs58 = require('bs58')
 module.exports = class WoWaP2p {
   constructor() {
     let d = new SHA3.SHA3Hash();
-    d.update('!!欢迎来到意识WoWa!!');
-    let number = d.digest('bin');
-    const ROOM_NUM = bs58.encode(number);
-    console.log('ROOM_NUM=<',ROOM_NUM,'>');
+    d.update('欢迎来到意识WoWa');
+    let number = d.digest('hex');
+    this.number = bs58.encode(number);
+    console.log('this.number=<',this.number,'>');
     this.ipfs = new IPFS(IPFS_CONF);
     let self = this;
     this.ipfs.on('ready', () => {
