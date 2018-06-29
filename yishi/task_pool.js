@@ -1,16 +1,8 @@
-const ipfsAPI = require('ipfs-api');
-const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
-
-ipfs.id( (err, identity) => {
-  if (err) {
-    throw err;
-    process.exit();
-  }
-  //console.log('identity=<',identity,'>');
-});
-
 const WoWa  = require('./wo_wa_self.js');
 let myWoWa = new WoWa('./wowaself.dat');
+
+const TaskStorageIpfs  = require('./task_storage.js');
+let storage = new TaskStorageIpfs();
 
 let gWorkerIsBusy = false;
 const TaskWorker = require('./task_worker.js');
@@ -18,6 +10,7 @@ let worker = new TaskWorker();
 worker.onReadyOneBlock = (blockResult) => {
   console.log('worker.onReadyOneBlock blockResult=<',blockResult,'>');
   gWorkerIsBusy = false;
+  storage.save(blockResult);
 };
 
 const crystal = require('./crystal.wator.json');
@@ -57,7 +50,7 @@ function broadCastCathTask(msgJson){
   p2p.out(CHANNEL.TASK.CATCH ,msgJson);
 }
 
-
+/*
 function finnishOneResourceBlock(blocks) {
   console.log('finnishOneResourceBlock blocks=<',blocks,'>');
   if(!blocks.finnish) {
@@ -86,6 +79,7 @@ function finnishOneResourceBlock(blocks) {
     }
   });
 }
+*/
 
 
 
@@ -108,13 +102,4 @@ function publishKnowledge(know) {
 
 function broadCastKnowlege(know) {
   const msgBuff = Buffer.from(know);
-  /*
-  ipfs.pubsub.publish(ipfsPubTopicCreated, msgBuff, (err) => {
-    if (err) {
-      throw err;
-    }
-    //console.log('sented msgBuff=<',msgBuff,'>');
-    taskPump.fetchOne(scheduleTask);
-  });
-  */
 }
