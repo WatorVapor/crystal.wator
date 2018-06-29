@@ -84,10 +84,10 @@ const WoWaP2P  = require('./wo_wa_p2p.js');
 const CHANNEL  = require('./channel.js');
 let p2p = new WoWaP2P();
 p2p.onReady = () => {
-  p2p.in(CHANNEL.TASK.NEW,onNewTask);
+  p2p.in(CHANNEL.TASK.CREATE,onCREATETask);
 }
-onNewTask = (msg)=>{
-  console.log('onNewTask::msg=<',msg,'>');
+onCreateTask = (msg)=>{
+  console.log('onCreateTask::msg=<',msg,'>');
   scheduleTask(msg.cid);
   broadCastCathTask(msg);
 };
@@ -102,7 +102,7 @@ function scheduleTask(blockCid) {
 const ipfsPubTopicCatchTask = 'wai-task-catch';
 
 function broadCastCathTask(msgJson){
-  let catchSign = myWoWa.signNewTask(msgJson.cid);
+  let catchSign = myWoWa.signCreateTask(msgJson.cid);
   msgJson.catch = catchSign;
   p2p.out(CHANNEL.TASK.CATCH ,msgJson);
 }
