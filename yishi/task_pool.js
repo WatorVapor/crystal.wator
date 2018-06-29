@@ -80,12 +80,13 @@ console.log('cTestPaymentAddress=<',cTestPaymentAddress,'>');
 
 
 
+const CHANNEL  = require('channel.js');
 
 const gChannelNewTask = 'wai-task-new';
 const WoWaP2P  = require('./wo_wa_p2p.js');
 let p2p = new WoWaP2P('./wowaself.dat');
 p2p.onReady = () => {
-  p2p.in(gChannelNewTask,onNewTask);
+  p2p.in(CHANNEL.TASK.NEW,onNewTask);
 }
 onNewTask = (msg)=>{
   console.log('onNewTask::msg=<',msg,'>');
@@ -107,15 +108,7 @@ function broadCastCathTask(msg){
   console.log('broadCastCathTask::msgJson=<',msgJson,'>');
   let catchSign = myWoWa.signNewTask(msgJson.cid);
   msgJson.catch = catchSign;
-  const msgBuff = Buffer.from(JSON.stringify(msgJson));
-  /*
-  ipfs.pubsub.publish(ipfsPubTopicCatchTask, msgBuff, (err) => {
-    if (err) {
-      throw err;
-    }
-    //console.log('sented msgBuff=<',msgBuff,'>');
-  });
-  */
+  p2p.out(CHANNEL.TASK.CATCH ,msgJson);
 }
 
 
