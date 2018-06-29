@@ -78,7 +78,7 @@ function onDispatchTodo() {
 
 const ipfsAPI = require('ipfs-api');
 const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
-const CHANNEL  = require('channel.js');
+const CHANNEL  = require('./channel.js');
 
 const WoWa  = require('./wo_wa_self.js');
 let myWoWa = new WoWa('./wowaself.dat');
