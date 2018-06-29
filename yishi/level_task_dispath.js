@@ -95,7 +95,7 @@ p2p.onJoint = (peer) => {
 }
 
 
-const gChannelNewTask = 'wai-task-created';
+const gChannelNewTask = 'wai-task-new';
 function broadCastNewTask(cid) {
   let sign = myWoWa.signNewTask(cid);
   let taskObj = {
