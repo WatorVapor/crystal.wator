@@ -84,7 +84,7 @@ const WoWa  = require('./wo_wa_self.js');
 let myWoWa = new WoWa('./wowaself.dat');
 
 const WoWaP2P  = require('./wo_wa_p2p.js');
-let p2p = new WoWaP2P('./wowaself.dat');
+let p2p = new WoWaP2P();
 
 p2p.onReady = () => {
   onDispatchTodo();
