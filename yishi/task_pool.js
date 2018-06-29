@@ -83,33 +83,8 @@ console.log('cTestPaymentAddress=<',cTestPaymentAddress,'>');
 
 
 
-const ipfsSubTopicNewTask = 'wai-ipfs-yishi-new-task';
-const ipfsPubTopicCatchTask = 'wai-ipfs-yishi-catch-task';
 
 
-
-const onRcvIpfsNewTaskMsg = (msg) => {
-  console.log('onRcvIpfsNewTaskMsg msg=<',msg,'>');
-  //console.log('onRcvIpfsNewTaskMsg msg=<',msg.data.toString('utf8'),'>');
-  //console.trace();
-  setTimeout(function(){
-    broadCastCathTask(msg.data);
-  },0);
-  scheduleTask(msg.data.toString('utf8'));
-}
-ipfs.pubsub.subscribe(ipfsSubTopicNewTask, onRcvIpfsNewTaskMsg,(err) => {
-  if (err) {
-    throw err
-  }
-  console.log('subscribe ipfsSubTopicNewTask=<',ipfsSubTopicNewTask,'>');
-});
-
-ipfs.pubsub.peers(ipfsSubTopicNewTask, (err, peerIds) => {
-  if (err) {
-    return console.error(`failed to get peers subscribed to ${ipfsSubTopicNewTask}`, err)
-  }
-  console.log(peerIds)
-})
 
 function scheduleTask(blockCid) {
   console.log('blockCid=<',blockCid,'>');
@@ -122,12 +97,14 @@ function broadCastCathTask(msg){
   let catchSign = myWoWa.signNewTask(msgJson.cid);
   msgJson.catch = catchSign;
   const msgBuff = Buffer.from(JSON.stringify(msgJson));
+  /*
   ipfs.pubsub.publish(ipfsPubTopicCatchTask, msgBuff, (err) => {
     if (err) {
       throw err;
     }
     //console.log('sented msgBuff=<',msgBuff,'>');
   });
+  */
 }
 
 
@@ -176,31 +153,12 @@ function publishKnowledge(know) {
 }
 
 
-const ipfsSubTopicVerified = 'wai-ipfs-yishi-verified';
-const ipfsPubTopicCreated = 'wai-ipfs-yishi-created';
 
-const onRcvIpfsVerifiedMsg = (msg) => {
-  console.log('onRcvIpfsVerifiedMsg msg=<',msg,'>');
-  console.log('onRcvIpfsVerifiedMsg msg=<',msg.data.toString('utf8'),'>');
-  //console.trace();
-}
-ipfs.pubsub.subscribe(ipfsSubTopicVerified, onRcvIpfsVerifiedMsg,(err) => {
-  if (err) {
-    throw err
-  }
-  console.log('subscribe ipfsSubTopicVerified=<',ipfsSubTopicVerified,'>');
-});
-
-ipfs.pubsub.peers(ipfsSubTopicVerified, (err, peerIds) => {
-  if (err) {
-    return console.error(`failed to get peers subscribed to ${ipfsSubTopicVerified}`, err)
-  }
-  console.log(peerIds)
-})
 
 
 function broadCastKnowlege(know) {
   const msgBuff = Buffer.from(know);
+  /*
   ipfs.pubsub.publish(ipfsPubTopicCreated, msgBuff, (err) => {
     if (err) {
       throw err;
@@ -208,4 +166,5 @@ function broadCastKnowlege(know) {
     //console.log('sented msgBuff=<',msgBuff,'>');
     taskPump.fetchOne(scheduleTask);
   });
+  */
 }
