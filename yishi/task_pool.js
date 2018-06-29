@@ -10,7 +10,7 @@ let worker = new TaskWorker();
 worker.onReadyOneBlock = (blockResult) => {
   console.log('worker.onReadyOneBlock blockResult=<',blockResult,'>');
   gWorkerIsBusy = false;
-  storage.save(blockResult);
+  storage.save(blockResult,onSaveCID);
 };
 
 const crystal = require('./crystal.wator.json');
@@ -50,6 +50,9 @@ function broadCastCathTask(msgJson){
   p2p.out(CHANNEL.TASK.CATCH ,msgJson);
 }
 
+function onSaveCID(cidResult) {
+  console.log('onSaveCID cidResult=<',cidResult,'>');
+}
 /*
 function finnishOneResourceBlock(blocks) {
   console.log('finnishOneResourceBlock blocks=<',blocks,'>');
