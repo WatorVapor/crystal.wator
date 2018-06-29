@@ -30,11 +30,14 @@ module.exports = class WoWaP2p {
     this.ipfs.on('ready', () => {
       self._onInit();
     });
+    this._cb = {};
   }
   out(msgObj) {
     this.room.broadcast(JSON.stringify(msgObj));
   }
-  
+  in(channel,cb) {
+    this._cb[channel] = cb;
+  }
   
   _onInit() {
     let self = this;
@@ -64,6 +67,8 @@ module.exports = class WoWaP2p {
     console.log('onRoomMessage::this.peer=<',this.peer,'>');
     if(msg.from !== this.peer) {
       console.log('onRoomMessage::msg=<',msg,'>');
+      let jsonData = JSON.parse(msg.data.toString('utf8'));
+      console.log('onRoomMessage::jsonData=<',jsonData,'>');
     } else {
       console.log('onRoomMessage::ignore loopback msg !!!!!!!!!!!!!!');
     }
