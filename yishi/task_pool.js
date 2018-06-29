@@ -84,12 +84,12 @@ console.log('cTestPaymentAddress=<',cTestPaymentAddress,'>');
 const gChannelNewTask = 'wai-task-created';
 const WoWaP2P  = require('./wo_wa_p2p.js');
 let p2p = new WoWaP2P('./wowaself.dat');
-p2p.in(gChannelNewTask,onNewTask);
+p2p.onReady = () => {
+  p2p.in(gChannelNewTask,onNewTask);
+}
 onNewTask = (msg)=>{
   console.log('onNewTask::msg=<',msg,'>');
 };
-p2p.onReady = () => {
-}
 
 
 function scheduleTask(blockCid) {
