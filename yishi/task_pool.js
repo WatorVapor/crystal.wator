@@ -14,6 +14,9 @@ let myWoWa = new WoWa('./wowaself.dat');
 
 const TaskWorker = require('./task_worker.js');
 let worker = new TaskWorker();
+worker.onReadyOneBlock = (blockResult) => {
+  console.log('worker.onReadyOneBlock blockResult=<',blockResult,'>');
+};
 
 const crystal = require('./crystal.wator.json');
 console.log('crystal=<',crystal,'>');
@@ -40,7 +43,6 @@ function scheduleTask(blockCid) {
   worker.out(blockCid);
 }
 
-const ipfsPubTopicCatchTask = 'wai-task-catch';
 
 function broadCastCathTask(msgJson){
   let catchSign = myWoWa.signTask(msgJson.cid);
