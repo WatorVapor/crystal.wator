@@ -89,6 +89,11 @@ let p2p = new WoWaP2P('./wowaself.dat');
 p2p.onReady = () => {
   onDispatchTodo();
 }
+p2p.onJoint = (peer) => {
+  console.log('p2p.onJoint peer=<',peer,'>');
+  onDispatchTodo();
+}
+
 
 const gChannelNewTask = 'wai-task-created';
 function broadCastNewTask(cid) {
