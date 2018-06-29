@@ -100,7 +100,7 @@ onCatchTask = (msg) => {
 };
 
 function broadCastNewTask(cid) {
-  let sign = myWoWa.signNewTask(cid);
+  let sign = myWoWa.signTask(cid);
   let taskObj = {
     cid:cid,
     create:sign
