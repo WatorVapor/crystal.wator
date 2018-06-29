@@ -97,6 +97,14 @@ p2p.onJoint = (peer) => {
 
 onCatchTask = (msg) => {
   console.log('onCatchTask msg=<',msg,'>');
+  if(msg && msg.cid) {
+    let cid = msg.cid;
+    if(gToDoCidList[cid]) {
+      delete gToDoCidList[cid];
+    }
+    gDoingCidList.cid = msg.catch;
+    onDispatchTodo();
+  }
 };
 
 function broadCastNewTask(cid) {
