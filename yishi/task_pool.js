@@ -7,10 +7,10 @@ let storage = new TaskStorageIpfs();
 let gWorkerIsBusy = false;
 const TaskWorker = require('./task_worker.js');
 let worker = new TaskWorker();
-worker.onReadyOneBlock = (blockResult) => {
-  console.log('worker.onReadyOneBlock blockResult=<',blockResult,'>');
+worker.onReadyOneBlock = (taskInfo,words) => {
+  console.log('worker.onReadyOneBlock taskInfo=<',taskInfo,'>');
   gWorkerIsBusy = false;
-  storage.save(blockResult,onSaveCID);
+  storage.save(words,taskInfo,onSaveCID);
 };
 
 const crystal = require('./crystal.wator.json');
@@ -50,8 +50,9 @@ function broadCastCathTask(msgJson){
   p2p.out(CHANNEL.TASK.CATCH ,msgJson);
 }
 
-function onSaveCID(cidResult) {
+function onSaveCID(cidResult,taskInfo) {
   console.log('onSaveCID cidResult=<',cidResult,'>');
+  console.log('onSaveCID taskInfo=<',taskInfo,'>');
 }
 /*
 function finnishOneResourceBlock(blocks) {
