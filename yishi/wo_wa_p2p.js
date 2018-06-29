@@ -52,6 +52,9 @@ module.exports = class WoWaP2p {
     this.room = Room(this.ipfs, 'wai-' + this.number);
     this.room.on('peer joined', (peer) => {
       console.log('Peer joined the room', peer);
+      if(typeof self.onJoint === 'function') {
+        self.onJoint(peer);
+      }
     });
     this.room.on('peer left', (peer) => {
       console.log('Peer left...', peer);
