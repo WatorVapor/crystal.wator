@@ -28,10 +28,15 @@ module.exports = class WoWaP2p {
     this.ipfs = new IPFS(IPFS_CONF);
     let self = this;
     this.ipfs.on('ready', () => {
-      self.onInit();
+      self._onInit();
     });
   }
-  onInit() {
+  out(msgObj) {
+    this.room.broadcast(JSON.stringify(msgObj));
+  }
+  
+  
+  _onInit() {
     let self = this;
     this.ipfs.id( (err,identity)=>{
       if (err) {
@@ -43,9 +48,6 @@ module.exports = class WoWaP2p {
     this.room = Room(this.ipfs, 'wai-' + this.number);
     this.room.on('peer joined', (peer) => {
       console.log('Peer joined the room', peer);
-      setTimeout(()=>{
-        self.room.broadcast('hello');
-      },1000);
     });
     this.room.on('peer left', (peer) => {
       console.log('Peer left...', peer);
@@ -55,10 +57,10 @@ module.exports = class WoWaP2p {
       console.log('Now connected!');
     });
     this.room.on('message', (msg)=>{
-      self.onRoomMessage(msg);
+      self._onRoomMessage(msg);
     });
   }
-  onRoomMessage(msg) {
+  _onRoomMessage(msg) {
     console.log('onRoomMessage::this.peer=<',this.peer,'>');
     if(msg.from !== this.peer) {
       console.log('onRoomMessage::msg=<',msg,'>');
