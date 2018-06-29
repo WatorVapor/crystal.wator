@@ -83,6 +83,9 @@ const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
 const WoWa  = require('./wo_wa_self.js');
 let myWoWa = new WoWa('./wowaself.dat');
 
+const WoWaP2P  = require('./wo_wa_p2p.js');
+let p2p = new WoWaP2P('./wowaself.dat');
+
 
 function broadCastNewTask(cid) {
   let sign = myWoWa.signNewTask(cid);
@@ -90,6 +93,6 @@ function broadCastNewTask(cid) {
     cid:cid,
     create:sign
   };
-  const msgBuff = Buffer.from(JSON.stringify(taskObj));
+  p2p.out(taskObj);
 }
 
