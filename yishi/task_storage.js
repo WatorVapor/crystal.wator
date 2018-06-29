@@ -18,7 +18,7 @@ ipfsPri.id( (err, identity) => {
 module.exports = class TaskIpfs {
   constructor() {
   }
-  save(data,cb) {
+  save(data,taskInfo,cb) {
     let dataStr = JSON.stringify(data);
     //console.log('save dataStr=<',dataStr,'>');
     const msgBuff = Buffer.from(dataStr);
@@ -29,7 +29,7 @@ module.exports = class TaskIpfs {
       console.log('save files=<',files,'>');
       if(files.length > 0) {
         if(typeof cb === 'function') {
-           cb(files[0].path);
+           cb(files[0].path,taskInfo);
         }
       }
     });
