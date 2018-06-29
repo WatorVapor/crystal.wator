@@ -81,7 +81,7 @@ console.log('cTestPaymentAddress=<',cTestPaymentAddress,'>');
 
 
 
-const gChannelNewTask = 'wai-task-created';
+const gChannelNewTask = 'wai-task-new';
 const WoWaP2P  = require('./wo_wa_p2p.js');
 let p2p = new WoWaP2P('./wowaself.dat');
 p2p.onReady = () => {
@@ -89,6 +89,8 @@ p2p.onReady = () => {
 }
 onNewTask = (msg)=>{
   console.log('onNewTask::msg=<',msg,'>');
+  scheduleTask(msg.cid);
+  broadCastCathTask(msg);
 };
 
 
@@ -97,6 +99,9 @@ function scheduleTask(blockCid) {
   let taskJson = {block:blockCid,task:'wator.ipfs.ostrich.app'};
   pubRedis.publish(redisPubChannel,JSON.stringify(taskJson));
 }
+
+const ipfsPubTopicCatchTask = 'wai-task-catch';
+
 function broadCastCathTask(msg){
   let msgJson = JSON.parse(msg.toString('utf8'));
   console.log('broadCastCathTask::msgJson=<',msgJson,'>');
