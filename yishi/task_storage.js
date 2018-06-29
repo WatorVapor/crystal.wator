@@ -1,63 +1,46 @@
 const ipfsAPI = require('ipfs-api');
-const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
+const ipfsPub = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
+const ipfsPri = ipfsAPI('/ip4/127.0.0.1/tcp/25002');
 
-ipfs.id( (err, identity) => {
+ipfsPub.id( (err, identity) => {
   if (err) {
     throw err;
-    process.exit();
   }
-  //console.log('identity=<',identity,'>');
+  console.log('ipfsPub identity=<',identity,'>');
+});
+ipfsPri.id( (err, identity) => {
+  if (err) {
+    throw err;
+  }
+  console.log('ipfsPri identity=<',identity,'>');
 });
 
-const WoWa  = require('./wo_wa_self.js');
-let myWoWa = new WoWa('./wowaself.dat');
-
-let gWorkerIsBusy = false;
-const TaskWorker = require('./task_worker.js');
-let worker = new TaskWorker();
-worker.onReadyOneBlock = (blockResult) => {
-  console.log('worker.onReadyOneBlock blockResult=<',blockResult,'>');
-  gWorkerIsBusy = false;
-};
-
-const crystal = require('./crystal.wator.json');
-console.log('crystal=<',crystal,'>');
-const cTestPaymentAddress = crystal.payaddress;
-console.log('cTestPaymentAddress=<',cTestPaymentAddress,'>');
-
-
-
-const WoWaP2P  = require('./wo_wa_p2p.js');
-const CHANNEL  = require('./channel.js');
-let p2p = new WoWaP2P();
-p2p.onReady = () => {
-  p2p.in(CHANNEL.TASK.CREATE,onCreateTask);
-};
-onCreateTask = (msg)=>{
-  console.log('onCreateTask::msg=<',msg,'>');
-  if(gWorkerIsBusy) {
-    console.log('onCreateTask:: gWorkerIsBusy=<',gWorkerIsBusy,'>','ignore!!!!');
-  } else {
-    scheduleTask(msg.cid);
-    broadCastCathTask(msg);
-    gWorkerIsBusy = true;
+module.exports = class TaskIpfs {
+  constructor() {
+  }
+  save(data,cb) {
+    let dataStr = JSON.stringify(data);
+    //console.log('save dataStr=<',dataStr,'>');
+    const msgBuff = Buffer.from(dataStr);
+    ipfsPri.add(msgBuff, function (err, files) {
+      if(err) {
+        throw err;
+      }
+      console.log('save files=<',files,'>');
+      if(files.length > 0) {
+        if(typeof cb === 'function') {
+           cb(output:files[0].path);
+        }
+      }
+    });
+  }
+  
+  publish(cid){
   }
 };
 
 
-function scheduleTask(blockCid) {
-  console.log('blockCid=<',blockCid,'>');
-  worker.out(blockCid);
-}
-
-
-function broadCastCathTask(msgJson){
-  let catchSign = myWoWa.signTask(msgJson.cid);
-  msgJson.catch = catchSign;
-  p2p.out(CHANNEL.TASK.CATCH ,msgJson);
-}
-
-
+/*
 function finnishOneResourceBlock(blocks) {
   console.log('finnishOneResourceBlock blocks=<',blocks,'>');
   if(!blocks.finnish) {
@@ -86,35 +69,5 @@ function finnishOneResourceBlock(blocks) {
     }
   });
 }
+*/
 
-
-
-
-function publishKnowledge(know) {
-  //console.log('publishResult know=<',know,'>');
-  let outputCID = know.output;
-  //console.log('publishResult outputCID=<',outputCID,'>');
-  //console.log('publishResult know=<',know,'>');
-  let output = myWoWa.signNewKnowledge(outputCID);
-  //console.log('publishResult output=<',output,'>');
-  know.output = output;
-  //console.log('publishResult know=<',JSON.stringify(know),'>');
-  broadCastKnowlege(JSON.stringify(know));
-}
-
-
-
-
-
-function broadCastKnowlege(know) {
-  const msgBuff = Buffer.from(know);
-  /*
-  ipfs.pubsub.publish(ipfsPubTopicCreated, msgBuff, (err) => {
-    if (err) {
-      throw err;
-    }
-    //console.log('sented msgBuff=<',msgBuff,'>');
-    taskPump.fetchOne(scheduleTask);
-  });
-  */
-}
