@@ -79,30 +79,6 @@ function onDispatchTodo() {
 const ipfsAPI = require('ipfs-api');
 const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
 
-const ipfsPubTopicNewTask = 'wai-ipfs-yishi-new-task';
-const ipfsSubTopicCatchTask = 'wai-ipfs-yishi-catch-task';
-
-const onRcvIpfsCatchTask = (msg) => {
-  console.log('onRcvIpfsCatchTask msg=<',msg,'>');
-  console.log('onRcvIpfsCatchTask msg=<',msg.data.toString('utf8'),'>');
-  let msgJson = JSON.parse(msg.data.toString('utf8'));
-  console.log('broadCastCathTask::msgJson=<',msgJson,'>');
-  //console.trace();
-}
-ipfs.pubsub.subscribe(ipfsSubTopicCatchTask, onRcvIpfsCatchTask,(err) => {
-  if (err) {
-    throw err
-  }
-  console.log('subscribe ipfs ipfsSubTopicCatchTask=<',ipfsSubTopicCatchTask,'>');
-});
-
-ipfs.pubsub.peers(ipfsSubTopicCatchTask, (err, peerIds) => {
-  if (err) {
-    return console.error(`failed to get peers subscribed to ${ipfsSubTopicCatchTask}`, err)
-  }
-  console.log(peerIds)
-})
-
 
 const WoWa  = require('./wo_wa_self.js');
 let myWoWa = new WoWa('./wowaself.dat');
@@ -114,13 +90,6 @@ function broadCastNewTask(cid) {
     cid:cid,
     create:sign
   };
-  
   const msgBuff = Buffer.from(JSON.stringify(taskObj));
-  ipfs.pubsub.publish(ipfsPubTopicNewTask, msgBuff, (err) => {
-    if (err) {
-      throw err;
-    }
-    console.log('broadCastNewTask ipfs msgBuff=<',msgBuff,'>');
-  });
 }
 
