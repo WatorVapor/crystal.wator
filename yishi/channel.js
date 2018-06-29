@@ -1,3 +1,3 @@
-exports.task = {};
-exports.task.new = 'wai-task-new';
-exports.task.catch = 'wai-task-catch';
+exports.TASK = {};
+exports.TASK.new = 'wai-task-new';
+exports.TASK.catch = 'wai-task-catch';
