@@ -12,10 +12,12 @@ ipfs.id( (err, identity) => {
 const WoWa  = require('./wo_wa_self.js');
 let myWoWa = new WoWa('./wowaself.dat');
 
+let gWorkerIsBusy = false;
 const TaskWorker = require('./task_worker.js');
 let worker = new TaskWorker();
 worker.onReadyOneBlock = (blockResult) => {
   console.log('worker.onReadyOneBlock blockResult=<',blockResult,'>');
+  gWorkerIsBusy = false;
 };
 
 const crystal = require('./crystal.wator.json');
@@ -33,8 +35,13 @@ p2p.onReady = () => {
 };
 onCreateTask = (msg)=>{
   console.log('onCreateTask::msg=<',msg,'>');
-  scheduleTask(msg.cid);
-  broadCastCathTask(msg);
+  if(gWorkerIsBusy) {
+    console.log('onCreateTask:: gWorkerIsBusy=<',gWorkerIsBusy,'>','ignore!!!!');
+  } else {
+    scheduleTask(msg.cid);
+    broadCastCathTask(msg);
+    gWorkerIsBusy = true;
+  }
 };
 
 
