@@ -58,6 +58,9 @@ module.exports = class WoWaP2p {
     // now started to listen to room
     this.room.on('subscribed', () => {
       console.log('Now connected!');
+      if(typeof self.onReady === 'function') {
+        self.onReady();
+      }
     });
     this.room.on('message', (msg)=>{
       self._onRoomMessage(msg);
