@@ -38,7 +38,6 @@ module.exports = class TaskWorker {
         this._collectWords(jsonMsg.word);
       } else {
         //console.log('subRedis.on jsonMsg=<',jsonMsg,'>');
-        finnishOneResourceBlock(jsonMsg);
         if(typeof this.onReadyOneBlock === 'function') {
           this.onReadyOneBlock(jsonMsg,this._oneBlockWords);
           this._oneBlockWords = {};
