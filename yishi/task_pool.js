@@ -1,5 +1,5 @@
 const ipfsAPI = require('ipfs-api');
-const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5004');
+const ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
 
 ipfs.id( (err, identity) => {
   if (err) {
