@@ -9,69 +9,11 @@ ipfs.id( (err, identity) => {
   //console.log('identity=<',identity,'>');
 });
 
-
-
 const WoWa  = require('./wo_wa_self.js');
 let myWoWa = new WoWa('./wowaself.dat');
 
-const redis = require("redis");
-let pubRedis = redis.createClient();
-let subRedis = redis.createClient();
-
-pubRedis.on("ready", (err) => {
-  console.log('pubRedis err=<',err,'>');
-});
-
-
-
-
-const redisPubChannel = 'wai.relay.ipfs.to.redis';
-const redisSubChannel = 'wai.relay.redis.to.ipfs';
-
-
-
-subRedis.on("message", function(channel, msg) {
-  //console.log('subRedis.on channel=<',channel,'>');
-  //console.log('subRedis.on msg=<',msg,'>');
-  let jsonMsg = JSON.parse(msg);
-  if(jsonMsg) {
-    //console.log('subRedis.on jsonMsg=<',jsonMsg,'>');
-    if(jsonMsg.word) {
-      collectWords(jsonMsg.word);
-    } else {
-      //console.log('subRedis.on jsonMsg=<',jsonMsg,'>');
-      finnishOneResourceBlock(jsonMsg);
-    }
-  }
-});
-
-
-subRedis.on("ready", (err) => {
-  console.log('subRedis err=<',err,'>');
-});
-subRedis.subscribe(redisSubChannel);
-
-
-
-
-
-let oneBlockWords = {};
-function collectWords(words) {
-  //console.log('collectWords words=<',words,'>');
-  for(let i = 0;i < words.length ; i++) {
-    let wordRank = words[i];
-    //console.log('collectWords wordRank=<',wordRank,'>');
-    let keys = Object.keys(wordRank);
-    //console.log('collectWords keys=<',keys,'>');
-    let word = keys[0];
-    if(oneBlockWords[word]) {
-      oneBlockWords[word] += wordRank[word];
-      //console.log('collectWords oneBlockWors[word]=<',oneBlockWors[word],'>');
-    } else {
-      oneBlockWords[word] = wordRank[word];
-    }
-  }
-}
+const TaskWorker = require('./task_worker.js');
+let worker = new TaskWorker();
 
 const crystal = require('./crystal.wator.json');
 console.log('crystal=<',crystal,'>');
@@ -95,8 +37,7 @@ onCreateTask = (msg)=>{
 
 function scheduleTask(blockCid) {
   console.log('blockCid=<',blockCid,'>');
-  let taskJson = {block:blockCid,task:'wator.ipfs.ostrich.app'};
-  pubRedis.publish(redisPubChannel,JSON.stringify(taskJson));
+  worker.out(blockCid);
 }
 
 const ipfsPubTopicCatchTask = 'wai-task-catch';
