@@ -47,7 +47,7 @@ module.exports = class WoWaSelf {
     return signed;
   }
 
-  signNewTask(cid) {
+  signTask(cid) {
     //console.log('this.pubHex=<',this.pubHex,'>');
     let signature = this.key.sign(cid);
     let derSign = signature.toDER();
