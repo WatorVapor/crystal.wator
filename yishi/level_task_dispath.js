@@ -88,7 +88,7 @@ let p2p = new WoWaP2P();
 
 p2p.onReady = () => {
   onDispatchTodo();
-  p2p.in(CHANNEL.TASK.NEW,onCatchTask);
+  p2p.in(CHANNEL.TASK.CATCH,onCatchTask);
 }
 p2p.onJoint = (peer) => {
   console.log('p2p.onJoint peer=<',peer,'>');
@@ -105,6 +105,6 @@ function broadCastNewTask(cid) {
     cid:cid,
     create:sign
   };
-  p2p.out(CHANNEL.TASK.NEW,taskObj);
+  p2p.out(CHANNEL.TASK.CREATE,taskObj);
 }
 
