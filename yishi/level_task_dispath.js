@@ -90,12 +90,13 @@ p2p.onReady = () => {
   onDispatchTodo();
 }
 
+const gChannelNewTask = 'wai-task-created';
 function broadCastNewTask(cid) {
   let sign = myWoWa.signNewTask(cid);
   let taskObj = {
     cid:cid,
     create:sign
   };
-  p2p.out(taskObj);
+  p2p.out(gChannelNewTask,taskObj);
 }
 
