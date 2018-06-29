@@ -80,11 +80,9 @@ console.log('cTestPaymentAddress=<',cTestPaymentAddress,'>');
 
 
 
-const CHANNEL  = require('channel.js');
-
-const gChannelNewTask = 'wai-task-new';
 const WoWaP2P  = require('./wo_wa_p2p.js');
-let p2p = new WoWaP2P('./wowaself.dat');
+const CHANNEL  = require('./channel.js');
+let p2p = new WoWaP2P();
 p2p.onReady = () => {
   p2p.in(CHANNEL.TASK.NEW,onNewTask);
 }
