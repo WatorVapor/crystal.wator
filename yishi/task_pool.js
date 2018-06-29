@@ -101,9 +101,7 @@ function scheduleTask(blockCid) {
 
 const ipfsPubTopicCatchTask = 'wai-task-catch';
 
-function broadCastCathTask(msg){
-  let msgJson = JSON.parse(msg.toString('utf8'));
-  console.log('broadCastCathTask::msgJson=<',msgJson,'>');
+function broadCastCathTask(msgJson){
   let catchSign = myWoWa.signNewTask(msgJson.cid);
   msgJson.catch = catchSign;
   p2p.out(CHANNEL.TASK.CATCH ,msgJson);
