@@ -29,7 +29,7 @@ module.exports = class TaskIpfs {
       console.log('save files=<',files,'>');
       if(files.length > 0) {
         if(typeof cb === 'function') {
-           cb(output:files[0].path);
+           cb(files[0].path);
         }
       }
     });
