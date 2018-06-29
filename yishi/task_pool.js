@@ -84,8 +84,8 @@ const WoWaP2P  = require('./wo_wa_p2p.js');
 const CHANNEL  = require('./channel.js');
 let p2p = new WoWaP2P();
 p2p.onReady = () => {
-  p2p.in(CHANNEL.TASK.CREATE,onCREATETask);
-}
+  p2p.in(CHANNEL.TASK.CREATE,onCreateTask);
+};
 onCreateTask = (msg)=>{
   console.log('onCreateTask::msg=<',msg,'>');
   scheduleTask(msg.cid);
