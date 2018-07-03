@@ -29,7 +29,7 @@ module.exports = class WoWaSelf {
     //console.log('this=<',this,'>');
   }
   
-  signNewKnowledge(content) {
+  signKnowledge(content) {
     //console.log('this.pubHex=<',this.pubHex,'>');
     let signature = this.key.sign(content);
     let derSign = signature.toDER();
@@ -46,6 +46,12 @@ module.exports = class WoWaSelf {
     };
     return signed;
   }
+  
+  verifyKnowledge(know){
+    console.log('verifyKnowledge::know=<',know,'>');
+    return false;
+  }
+  
 
   signTask(cid) {
     //console.log('this.pubHex=<',this.pubHex,'>');
