@@ -74,7 +74,7 @@ module.exports = class WoWaSelf {
     let pubKey = ec.keyFromPublic(ts.pub, 'hex');
     console.log('verifyKnowledge::pubKey=<',pubKey,'>');
     console.log('verifyKnowledge::pubKey=<',pubKey,'>');
-    let verify = pubKey.verify(ts.orig.hash +"ddd", ts.sign);
+    let verify = pubKey.verify(ts.orig.hash, ts.sign);
     console.log('verifyKnowledge::verify=<',verify,'>');
     return verify;
   }
