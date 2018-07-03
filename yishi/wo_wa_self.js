@@ -47,18 +47,24 @@ module.exports = class WoWaSelf {
     return signed;
   }
   
-  verifyKnowledge(know){
+  verifyKnowledge(know,ts){
     console.log('verifyKnowledge::know=<',know,'>');
-    if(!know.ts_created.hash.startsWith(diffcultyStr)) {
+    console.log('verifyKnowledge::ts=<',ts,'>');
+    if(!ts.hash.startsWith(diffcultyStr)) {
       return false;
     }
     let dT = new SHA3.SHA3Hash();
-    dT.update(know.ts_created.sign);
+    dT.update(ts.sign);
     let verifyHash = dT.digest('hex');
     console.log('verifyKnowledge::verifyHash=<',verifyHash,'>');
-    if(know.ts_created.hash !== verifyHash) {
+    if(ts.hash !== verifyHash) {
       return false;
     }
+    let pubKey = ec.keyFromPublic(ts.pub, 'hex');
+    console.log('verifyKnowledge::pubKey=<',pubKey,'>');
+    console.log('verifyKnowledge::pubKey=<',pubKey,'>');
+    let good = pubKey.verify(ts.orig.hash, ts.sign);
+    console.log('verifyKnowledge::good=<',good,'>');
     return true;
   }
   
