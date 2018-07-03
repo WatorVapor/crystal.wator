@@ -49,7 +49,17 @@ module.exports = class WoWaSelf {
   
   verifyKnowledge(know){
     console.log('verifyKnowledge::know=<',know,'>');
-    return false;
+    if(!know.hash.startsWith(diffcultyStr)) {
+      return false;
+    }
+    let dT = new SHA3.SHA3Hash();
+    dT.update(know.ts_created.sign);
+    let verifyHash = dT.digest('hex');
+    console.log('verifyKnowledge::verifyHash=<',verifyHash,'>');
+    if(know.hash !== verifyHash) {
+      return false;
+    }
+    return true;
   }
   
 
