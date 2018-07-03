@@ -54,7 +54,13 @@ module.exports = class WoWaSelf {
       return false;
     }
     let now = new Date();
-    let createdTime = new Date(ts.orig.ts);
+    let createTSTemp = ts.orig.ts.split('GMT.');
+    console.log('verifyKnowledge::createTS=<',createTSTemp,'>');
+    if(createTSTemp.length < 2) {
+      return false
+    }
+    let createTS = createTSTemp[0] + 'GMT';
+    let createdTime = new Date(createTS);
     console.log('verifyKnowledge::createdTime=<',createdTime,'>');
     console.log('verifyKnowledge::now=<',now,'>');
 
