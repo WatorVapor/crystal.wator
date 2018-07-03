@@ -65,6 +65,9 @@ module.exports = class WoWaSelf {
     console.log('verifyKnowledge::now=<',now,'>');
     let diff = now - createdTime;
     console.log('verifyKnowledge::diff=<',diff,'>');
+    if(diff > 60 * 1000) {
+       return false;
+    }
 
     let d = new SHA3.SHA3Hash();
     d.update(ts.orig.ts + know);
