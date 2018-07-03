@@ -5,9 +5,11 @@ p2p.onReady = () => {
   p2p.in(CHANNEL.KNOWLEDGE.CREATE,onKnowledgeCreate);
 };
 
-onKnowledgeCreate = (msg)=>{
+onKnowledgeCreate = (msg,from)=>{
+  console.log('onKnowledgeCreate::from=<',from,'>');
   console.log('onKnowledgeCreate::msg=<',msg,'>');
-  stampNewKnowledge(msg);
+  let verifiedMsg = stampNewKnowledge(msg);
+  console.log('onKnowledgeCreate::verifiedMsg=<',verifiedMsg,'>');
 };
 
 
@@ -21,6 +23,7 @@ function stampNewKnowledge(msgJson) {
   console.log('stampNewKnowledge msgJson=<',msgJson,'>');
   console.log('stampNewKnowledge msgJson=<',JSON.stringify(msgJson,null,' '),'>');
   //broadCastKnowlegeVerified(JSON.stringify(msgJson));
+  return msgJson;
 }
 
 /*
