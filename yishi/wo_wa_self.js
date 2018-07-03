@@ -47,24 +47,24 @@ module.exports = class WoWaSelf {
     return signed;
   }
   
-  verifyKnowledge(know,ts){
-    console.log('verifyKnowledge::know=<',know,'>');
-    console.log('verifyKnowledge::ts=<',ts,'>');
+  verifyKnowledge(know,ts,checkEscape){
+    //console.log('verifyKnowledge::know=<',know,'>');
+    //console.log('verifyKnowledge::ts=<',ts,'>');
     if(!ts.hash.startsWith(diffcultyStr)) {
       return false;
     }
     let now = new Date();
     let createTSTemp = ts.orig.ts.split('GMT.');
-    console.log('verifyKnowledge::createTS=<',createTSTemp,'>');
-    if(createTSTemp.length < 2) {
+    //console.log('verifyKnowledge::createTS=<',createTSTemp,'>');
+    if(createTSTemp.length < 2 && checkEscape === true) {
       return false
     }
     let createTS = createTSTemp[0] + 'GMT';
     let createdTime = new Date(createTS);
-    console.log('verifyKnowledge::createdTime=<',createdTime,'>');
-    console.log('verifyKnowledge::now=<',now,'>');
+    //console.log('verifyKnowledge::createdTime=<',createdTime,'>');
+    //console.log('verifyKnowledge::now=<',now,'>');
     let diff = now - createdTime;
-    console.log('verifyKnowledge::diff=<',diff,'>');
+    //console.log('verifyKnowledge::diff=<',diff,'>');
     if(diff > 60 * 1000) {
        return false;
     }
