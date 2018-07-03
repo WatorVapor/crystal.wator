@@ -2,11 +2,11 @@ const WoWaP2P  = require('./wo_wa_p2p.js');
 const CHANNEL  = require('./channel.js');
 let p2p = new WoWaP2P();
 p2p.onReady = () => {
-  p2p.in(CHANNEL.BLOCK.ANNOUNCE,onBlockAnnounce);
+  p2p.in(CHANNEL.KNOWLEDGE.CREATE,onKnowledgeCreate);
 };
 
-onBlockAnnounce = (msg)=>{
-  console.log('onBlockAnnounce::msg=<',msg,'>');
+onKnowledgeCreate = (msg)=>{
+  console.log('onKnowledgeCreate::msg=<',msg,'>');
   stampNewKnowledge(msg);
 };
 
