@@ -63,6 +63,8 @@ module.exports = class WoWaSelf {
     let createdTime = new Date(createTS);
     console.log('verifyKnowledge::createdTime=<',createdTime,'>');
     console.log('verifyKnowledge::now=<',now,'>');
+    let diff = now - createdTime;
+    console.log('verifyKnowledge::diff=<',diff,'>');
 
     let d = new SHA3.SHA3Hash();
     d.update(ts.orig.ts + know);
