@@ -72,7 +72,7 @@ module.exports = class WoWaSelf {
     let d = new SHA3.SHA3Hash();
     d.update(ts.orig.ts + know);
     let signHash = d.digest('hex');
-    console.log('verifyKnowledge::signHash=<',signHash,'>');
+    //console.log('verifyKnowledge::signHash=<',signHash,'>');
     if(ts.orig.hash !== signHash) {
       return false;
     }
@@ -80,17 +80,17 @@ module.exports = class WoWaSelf {
     let dT = new SHA3.SHA3Hash();
     dT.update(ts.sign);
     let verifyHash = dT.digest('hex');
-    console.log('verifyKnowledge::verifyHash=<',verifyHash,'>');
+    //console.log('verifyKnowledge::verifyHash=<',verifyHash,'>');
     if(ts.hash !== verifyHash) {
       return false;
     }
     
     // check ecrsa.
     let pubKey = ec.keyFromPublic(ts.pub, 'hex');
-    console.log('verifyKnowledge::pubKey=<',pubKey,'>');
-    console.log('verifyKnowledge::pubKey=<',pubKey,'>');
+    //console.log('verifyKnowledge::pubKey=<',pubKey,'>');
+    //console.log('verifyKnowledge::pubKey=<',pubKey,'>');
     let verify = pubKey.verify(ts.orig.hash, ts.sign);
-    console.log('verifyKnowledge::verify=<',verify,'>');
+    //console.log('verifyKnowledge::verify=<',verify,'>');
     return verify;
   }
   
