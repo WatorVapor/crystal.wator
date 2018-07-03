@@ -15,7 +15,7 @@ onKnowledgeCreate = (msg,from)=>{
     let ts = myWoWa.createTimeStamp(msg.output.nounce);
     msg.output.ts_verified = ts;
     console.log('onKnowledgeCreate::msg=<',msg,'>');
-    p2p.out(CHANNEL.KNOWLEDGE.VERIFY,verifiedMsg);
+    p2p.out(CHANNEL.KNOWLEDGE.VERIFY,msg);
   }
 };
 
