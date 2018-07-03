@@ -11,7 +11,7 @@ p2p.onReady = () => {
 onKnowledgeCreate = (msg,from)=>{
   //console.log('onKnowledgeCreate::from=<',from,'>');
   //console.log('onKnowledgeCreate::msg=<',msg,'>');
-  if(myWoWa.verifyKnowledge(msg.output)) {
+  if(myWoWa.verifyKnowledge(msg.output.nounce,msg.output.ts_created)) {
     let ts = myWoWa.createTimeStamp(msg.output.nounce);
     msg.output.ts_verified = ts;
     console.log('onKnowledgeCreate::msg=<',msg,'>');
