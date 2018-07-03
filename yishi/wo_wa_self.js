@@ -53,6 +53,15 @@ module.exports = class WoWaSelf {
     if(!ts.hash.startsWith(diffcultyStr)) {
       return false;
     }
+
+    let d = new SHA3.SHA3Hash();
+    d.update(ts.orig.ts + know);
+    let signHash = d.digest('hex');
+    console.log('verifyKnowledge::signHash=<',signHash,'>');
+    if(ts.orig.hash !== signHash) {
+      return false;
+    }
+    
     let dT = new SHA3.SHA3Hash();
     dT.update(ts.sign);
     let verifyHash = dT.digest('hex');
@@ -60,12 +69,14 @@ module.exports = class WoWaSelf {
     if(ts.hash !== verifyHash) {
       return false;
     }
+    
+    // check ecrsa.
     let pubKey = ec.keyFromPublic(ts.pub, 'hex');
     console.log('verifyKnowledge::pubKey=<',pubKey,'>');
     console.log('verifyKnowledge::pubKey=<',pubKey,'>');
-    let good = pubKey.verify(ts.orig.hash, ts.sign);
-    console.log('verifyKnowledge::good=<',good,'>');
-    return true;
+    let verify = pubKey.verify(ts.orig.hash +"ddd", ts.sign);
+    console.log('verifyKnowledge::verify=<',verify,'>');
+    return verify;
   }
   
 
