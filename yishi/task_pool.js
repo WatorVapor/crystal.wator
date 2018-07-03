@@ -25,6 +25,7 @@ const CHANNEL  = require('./channel.js');
 let p2p = new WoWaP2P();
 p2p.onReady = () => {
   p2p.in(CHANNEL.TASK.CREATE,onCreateTask);
+  p2p.in(CHANNEL.KNOWLEDGE.VERIFY,onKnowledgeVerify);
 };
 onCreateTask = (msg)=>{
   console.log('onCreateTask::msg=<',msg,'>');
@@ -64,3 +65,8 @@ function onSaveCID(cidResult,taskInfo) {
   console.log('onSaveCID blockAnnounce=<',blockAnnounce,'>');
   p2p.out(CHANNEL.KNOWLEDGE.CREATE,blockAnnounce);
 }
+
+onKnowledgeVerify = (msg)=>{
+  console.log('onKnowledgeVerify::msg=<',msg,'>');
+};
+
