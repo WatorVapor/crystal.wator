@@ -53,6 +53,15 @@ function broadCastCathTask(msgJson){
 function onSaveCID(cidResult,taskInfo) {
   console.log('onSaveCID cidResult=<',cidResult,'>');
   console.log('onSaveCID taskInfo=<',taskInfo,'>');
+  let output = myWoWa.signNewKnowledge(cidResult);
+  let blockAnnounce = {
+    payment:cTestPaymentAddress,
+    input:taskInfo.cid,
+    group:taskInfo.group,
+    task:taskInfo.task,
+    output:output
+  };
+  console.log('onSaveCID blockAnnounce=<',blockAnnounce,'>');
 }
 /*
 function finnishOneResourceBlock(blocks) {
