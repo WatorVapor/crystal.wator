@@ -14,30 +14,8 @@ onKnowledgeCreate = (msg,from)=>{
   if(myWoWa.verifyKnowledge(msg.output.nounce,msg.output.ts_created)) {
     let ts = myWoWa.createTimeStamp(msg.output.nounce);
     msg.output.ts_verified = ts;
-    console.log('onKnowledgeCreate::msg=<',msg,'>');
+    //console.log('onKnowledgeCreate::msg=<',msg,'>');
     p2p.out(CHANNEL.KNOWLEDGE.VERIFY,msg);
   }
 };
-
-
-
-function stampNewKnowledge(msgJson) {
-  //console.log('stampNewKnowledge msgJson=<',msgJson,'>');
-  //console.log('stampNewKnowledge msgJson=<',msgJson,'>');
-  //console.log('stampNewKnowledge msgJson=<',JSON.stringify(msgJson,null,' '),'>');
-  //broadCastKnowlegeVerified(JSON.stringify(msgJson));
-  return msgJson;
-}
-
-/*
-function broadCastKnowlegeVerified(knowVerified) {
-  const msgBuff = Buffer.from(knowVerified);
-  ipfs.pubsub.publish(ipfsPubTopicVerified, msgBuff, (err) => {
-    if (err) {
-      throw err;
-    }
-    console.log('sented msgBuff=<',msgBuff,'>');
-  });
-}
-*/
 
