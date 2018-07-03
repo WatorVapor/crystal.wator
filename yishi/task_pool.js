@@ -62,5 +62,5 @@ function onSaveCID(cidResult,taskInfo) {
     output:output
   };
   console.log('onSaveCID blockAnnounce=<',blockAnnounce,'>');
-  p2p.out(CHANNEL.TASK.BLOCK.ANNOUNCE ,blockAnnounce);
+  p2p.out(CHANNEL.BLOCK.ANNOUNCE,blockAnnounce);
 }
