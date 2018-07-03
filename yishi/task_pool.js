@@ -62,57 +62,5 @@ function onSaveCID(cidResult,taskInfo) {
     output:output
   };
   console.log('onSaveCID blockAnnounce=<',blockAnnounce,'>');
-}
-/*
-function finnishOneResourceBlock(blocks) {
-  console.log('finnishOneResourceBlock blocks=<',blocks,'>');
-  if(!blocks.finnish) {
-    return;
-  }
-  //console.log('finnishOneResourceBlock oneBlockWords=<',oneBlockWords,'>');
-  let oneBlockWordsStr = JSON.stringify(oneBlockWords);
-  //console.log('finnishOneResourceBlock oneBlockWordsStr=<',oneBlockWordsStr,'>');
-  const msgBuff = Buffer.from(oneBlockWordsStr);
-  ipfs.add(msgBuff, function (err, files) {
-    if(err) {
-      throw err;
-    }
-    console.log('finnishOneResourceBlock files=<',files,'>');
-    if(files.length > 0) {
-      let blockAnnounce = {
-        payment:cTestPaymentAddress,
-        input:blocks.cid,
-        group:blocks.group,
-        task:blocks.task,
-        output:files[0].path
-      };
-      console.log('finnishOneResourceBlock blockAnnounce=<',blockAnnounce,'>');
-      taskPump.saveDone(blockAnnounce);
-      publishKnowledge(blockAnnounce);
-    }
-  });
-}
-*/
-
-
-
-
-function publishKnowledge(know) {
-  //console.log('publishResult know=<',know,'>');
-  let outputCID = know.output;
-  //console.log('publishResult outputCID=<',outputCID,'>');
-  //console.log('publishResult know=<',know,'>');
-  let output = myWoWa.signNewKnowledge(outputCID);
-  //console.log('publishResult output=<',output,'>');
-  know.output = output;
-  //console.log('publishResult know=<',JSON.stringify(know),'>');
-  broadCastKnowlege(JSON.stringify(know));
-}
-
-
-
-
-
-function broadCastKnowlege(know) {
-  const msgBuff = Buffer.from(know);
+  p2p.out(CHANNEL.TASK.BLOCK.ANNOUNCE ,blockAnnounce);
 }
