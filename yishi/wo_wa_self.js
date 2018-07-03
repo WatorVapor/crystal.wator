@@ -53,6 +53,10 @@ module.exports = class WoWaSelf {
     if(!ts.hash.startsWith(diffcultyStr)) {
       return false;
     }
+    let now = new Date();
+    let createdTime = new Date(ts.orig.ts);
+    console.log('verifyKnowledge::createdTime=<',createdTime,'>');
+    console.log('verifyKnowledge::now=<',now,'>');
 
     let d = new SHA3.SHA3Hash();
     d.update(ts.orig.ts + know);
