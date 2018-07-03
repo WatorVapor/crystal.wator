@@ -6,10 +6,11 @@ p2p.onReady = () => {
 };
 
 onKnowledgeCreate = (msg,from)=>{
-  console.log('onKnowledgeCreate::from=<',from,'>');
-  console.log('onKnowledgeCreate::msg=<',msg,'>');
+  //console.log('onKnowledgeCreate::from=<',from,'>');
+  //console.log('onKnowledgeCreate::msg=<',msg,'>');
   let verifiedMsg = stampNewKnowledge(msg);
   console.log('onKnowledgeCreate::verifiedMsg=<',verifiedMsg,'>');
+  p2p.out(CHANNEL.KNOWLEDGE.VERIFY,verifiedMsg);
 };
 
 
@@ -20,8 +21,8 @@ function stampNewKnowledge(msgJson) {
   //console.log('stampNewKnowledge msgJson=<',msgJson,'>');
   let ts = myWoWa.createTimeStamp(msgJson.output.nounce);
   msgJson.output.ts_verified = ts;
-  console.log('stampNewKnowledge msgJson=<',msgJson,'>');
-  console.log('stampNewKnowledge msgJson=<',JSON.stringify(msgJson,null,' '),'>');
+  //console.log('stampNewKnowledge msgJson=<',msgJson,'>');
+  //console.log('stampNewKnowledge msgJson=<',JSON.stringify(msgJson,null,' '),'>');
   //broadCastKnowlegeVerified(JSON.stringify(msgJson));
   return msgJson;
 }
