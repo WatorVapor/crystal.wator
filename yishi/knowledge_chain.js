@@ -3,5 +3,8 @@ const bs58 = require('bs58')
 module.exports = class KnowledgeChain {
   constructor() {
   }
+  push(msg) {
+    console.log('push::msg=<',msg,'>');
+  }
 }
 
