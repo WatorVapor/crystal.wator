@@ -32,9 +32,13 @@ module.exports = class WoWaP2p {
     });
     this._cb = {};
   }
-  out(channel,msgObj) {
+  out(channel,msgObj,to) {
     msgObj.channel = channel;
-    this.room.broadcast(JSON.stringify(msgObj));
+    if(to) {
+      this.room.sendTo(to,JSON.stringify(msgObj));
+    } else {
+      this.room.broadcast(JSON.stringify(msgObj));
+    }
   }
   in(channel,cb) {
     this._cb[channel] = cb;
