@@ -86,8 +86,9 @@ let p2p = new WoWaP2P();
 
 p2p.onReady = () => {
   //onDispatchTodo();
-  p2p.in(CHANNEL.TASK.CATCH,onCatchTask);
   p2p.in(CHANNEL.TASK.WANT,onWantTask);
+  p2p.in(CHANNEL.TASK.CATCH,onCatchTask);
+  p2p.in(CHANNEL.TASK.DONE,onDoneTask);
 }
 p2p.onJoint = (peer) => {
   console.log('p2p.onJoint peer=<',peer,'>');
@@ -109,6 +110,12 @@ onCatchTask = (msg) => {
     gDoingCidList.cid = msg.catch;
   }
 };
+
+onDoneTask = (msg,from) => {
+  console.log('onDoneTask msg=<',msg,'>');
+  console.log('onDoneTask from=<',from,'>');
+}
+
 
 function broadCastTask(cid) {
   let sign = myWoWa.signTask(cid);
