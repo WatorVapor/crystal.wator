@@ -82,6 +82,12 @@ function onSaveCID(cidResult,taskInfo) {
   };
   console.log('onSaveCID blockAnnounce=<',blockAnnounce,'>');
   p2p.out(CHANNEL.KNOWLEDGE.CREATE,blockAnnounce);
+  let taskDone = {
+    input:taskInfo.cid,
+    output:cidResult
+  };
+  console.log('onSaveCID taskDone=<',taskDone,'>');
+  p2p.out(CHANNEL.TASK.DONE,taskDone);
 }
 
 onKnowledgeVerify = (msg)=>{
