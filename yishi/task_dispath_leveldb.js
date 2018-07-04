@@ -6,7 +6,7 @@ const level = require('level');
 let dbTodo = level(dbBlockPathTodo);
 let dbDone = level(dbBlockPathDone);
 
-function readDB2Array(path,out,cb) {
+function readDB2Array(db,out,cb) {
   let stream = db.createReadStream();
   let ts = new Date();
 
