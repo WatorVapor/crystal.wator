@@ -7,6 +7,8 @@ let p2p = new WoWaP2P();
 
 const TaskStorageIpfs  = require('./task_storage.js');
 let storage = new TaskStorageIpfs();
+const KnowledgeChain  = require('knowledge_chain.js');
+let chain = new KnowledgeChain();
 
 let gWorkerIsBusy = false;
 const TaskWorker = require('./task_worker.js');
@@ -96,5 +98,8 @@ onKnowledgeVerify = (msg)=>{
   let goodVerified = myWoWa.verifyKnowledge(msg.output.nounce,msg.output.ts_created,true);
   console.log('onKnowledgeVerify::goodCreated=<',goodCreated,'>');
   console.log('onKnowledgeVerify::goodVerified=<',goodVerified,'>');
+  if(goodCreated && goodVerified) {
+    chain.push(msg);
+  }
 };
 
