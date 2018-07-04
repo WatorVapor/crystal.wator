@@ -63,8 +63,6 @@ function runDispatchTask() {
     console.log('runDispatchTask kDone=<',kDone,'>');
     delete gToDoCidList[kDoing];
   }
-  
-  setTimeout(onDispatchTodo,1);
 }
 
 function onDispatchTodo() {
@@ -87,12 +85,17 @@ const WoWaP2P  = require('./wo_wa_p2p.js');
 let p2p = new WoWaP2P();
 
 p2p.onReady = () => {
-  onDispatchTodo();
+  //onDispatchTodo();
   p2p.in(CHANNEL.TASK.CATCH,onCatchTask);
+  p2p.in(CHANNEL.TASK.WANT,onWantTask);
 }
 p2p.onJoint = (peer) => {
   console.log('p2p.onJoint peer=<',peer,'>');
-  onDispatchTodo();
+}
+
+onWantTask = (msg,from) => {
+  console.log('onCatchTask msg=<',msg,'>');
+  console.log('onCatchTask from=<',from,'>');
 }
 
 onCatchTask = (msg) => {
@@ -103,7 +106,6 @@ onCatchTask = (msg) => {
       delete gToDoCidList[cid];
     }
     gDoingCidList.cid = msg.catch;
-    onDispatchTodo();
   }
 };
 
