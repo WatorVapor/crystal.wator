@@ -7,8 +7,9 @@ module.exports = class KnowledgeChain {
   constructor() {
     this.blockList_ = {};
   }
-  push(msg) {
-    //console.log('push::msg=<',msg,'>');
+  push(msgBlk) {
+    //console.log('push::msgBlk=<',msgBlk,'>');
+    let msg = JSON.parse(JSON.stringify(msgBlk))
     let nounce = 'n_' + msg.output.nounce;
     //console.log('push::nounce=<',nounce,'>');
     if(this.blockList_[nounce]) {
@@ -21,7 +22,7 @@ module.exports = class KnowledgeChain {
         }
       }
     } else {
-      let ts_verified = msg.output.ts_verified;
+      let ts_verified = JSON.parse(JSON.stringify(msg.output.ts_verified));
       delete msg.output.ts_verified;
       msg.output.ts_verified = [];
       msg.output.ts_verified.push(ts_verified);
