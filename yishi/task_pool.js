@@ -1,6 +1,10 @@
 const WoWa  = require('./wo_wa_self.js');
 let myWoWa = new WoWa('./wowaself.dat');
 
+const WoWaP2P  = require('./wo_wa_p2p.js');
+const CHANNEL  = require('./channel.js');
+let p2p = new WoWaP2P();
+
 const TaskStorageIpfs  = require('./task_storage.js');
 let storage = new TaskStorageIpfs();
 
@@ -11,6 +15,7 @@ worker.onReadyOneBlock = (taskInfo,words) => {
   console.log('worker.onReadyOneBlock taskInfo=<',taskInfo,'>');
   gWorkerIsBusy = false;
   storage.save(words,taskInfo,onSaveCID);
+  p2p.out(CHANNEL.TASK.WANT,{});
 };
 
 const crystal = require('./crystal.wator.json');
@@ -20,9 +25,7 @@ console.log('cTestPaymentAddress=<',cTestPaymentAddress,'>');
 
 
 
-const WoWaP2P  = require('./wo_wa_p2p.js');
-const CHANNEL  = require('./channel.js');
-let p2p = new WoWaP2P();
+
 p2p.onReady = () => {
   p2p.in(CHANNEL.TASK.CREATE,onCreateTask);
   p2p.in(CHANNEL.KNOWLEDGE.VERIFY,onKnowledgeVerify);
