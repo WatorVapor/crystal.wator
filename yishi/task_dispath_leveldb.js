@@ -3,9 +3,10 @@ const dbBlockPathDone = '/watorvapor/wai.storage/crystal.wator/cnwiki/done/block
 const level = require('level');
 
 
+let dbTodo = level(dbBlockPathTodo);
+let dbDone = level(dbBlockPathDone);
 
 function readDB2Array(path,out,cb) {
-  let db = level(path);
   let stream = db.createReadStream();
   let ts = new Date();
 
@@ -39,12 +40,12 @@ let gDoingCidList = {};
 let gDoneCidList = {};
 
 setTimeout(function(){
-  readDB2Array(dbBlockPathTodo,gToDoCidList,onReadTodoFinnish);
+  readDB2Array(dbTodo,gToDoCidList,onReadTodoFinnish);
 },1);
 
 function onReadTodoFinnish(){
   //console.log('onReadDoneFinnish gToDoCidList=<',gToDoCidList,'>');
-  readDB2Array(dbBlockPathDone,gDoneCidList,onReadDoneFinnish);
+  readDB2Array(dbDone,gDoneCidList,onReadDoneFinnish);
 }
 
 function onReadDoneFinnish(){
@@ -123,8 +124,6 @@ onDoneTask = (msg,from) => {
   let output = msg.output;
   console.log('onDoneTask output=<',output,'>');
   gDoneCidList[input] = output;
-  
-  let dbDone = level(dbBlockPathDone);
   dbDone.put(input, output);
 }
 
