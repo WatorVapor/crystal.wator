@@ -107,13 +107,24 @@ onCatchTask = (msg) => {
     if(gToDoCidList[cid]) {
       delete gToDoCidList[cid];
     }
-    gDoingCidList.cid = msg.catch;
+    gDoingCidList[cid] = msg.catch;
   }
 };
+
+let dbDone = level(dbBlockPathDone);
 
 onDoneTask = (msg,from) => {
   console.log('onDoneTask msg=<',msg,'>');
   console.log('onDoneTask from=<',from,'>');
+  let input = msg.input;
+  console.log('onDoneTask input=<',input,'>');
+  if(gDoingCidList[input]) {
+    delete gDoingCidList[input];
+  }
+  let output = msg.output;
+  console.log('onDoneTask output=<',output,'>');
+  gDoneCidList[input] = output;
+  dbDone.put(input, output);
 }
 
 
