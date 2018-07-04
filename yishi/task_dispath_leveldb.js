@@ -65,12 +65,12 @@ function runDispatchTask() {
   }
 }
 
-function onDispatchTodo() {
+function onDispatchTodo(to) {
   let keys = Object.keys(gToDoCidList);
   if(keys.length > 0) {
     let keyCID = keys[0];
     console.log('onDispatchTodo keyCID=<',keyCID,'>');
-    broadCastNewTask(keyCID);
+    sendTask(keyCID,to);
   }
 }
 
@@ -94,8 +94,9 @@ p2p.onJoint = (peer) => {
 }
 
 onWantTask = (msg,from) => {
-  console.log('onCatchTask msg=<',msg,'>');
-  console.log('onCatchTask from=<',from,'>');
+  console.log('onWantTask msg=<',msg,'>');
+  console.log('onWantTask from=<',from,'>');
+  onDispatchTodo(from);
 }
 
 onCatchTask = (msg) => {
@@ -109,7 +110,7 @@ onCatchTask = (msg) => {
   }
 };
 
-function broadCastNewTask(cid) {
+function broadCastTask(cid) {
   let sign = myWoWa.signTask(cid);
   let taskObj = {
     cid:cid,
@@ -117,4 +118,14 @@ function broadCastNewTask(cid) {
   };
   p2p.out(CHANNEL.TASK.CREATE,taskObj);
 }
+
+function sendTask(cid,to) {
+  let sign = myWoWa.signTask(cid);
+  let taskObj = {
+    cid:cid,
+    create:sign
+  };
+  p2p.out(CHANNEL.TASK.CREATE,taskObj,to);
+}
+
 
