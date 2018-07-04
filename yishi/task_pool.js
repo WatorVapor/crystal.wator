@@ -33,13 +33,14 @@ p2p.onJoint = () => {
   },1000);
 }
 
-onCreateTask = (msg)=>{
+onCreateTask = (msg,from)=>{
   console.log('onCreateTask::msg=<',msg,'>');
+  console.log('onCreateTask::from=<',from,'>');
   if(gWorkerIsBusy) {
     console.log('onCreateTask:: gWorkerIsBusy=<',gWorkerIsBusy,'>','ignore!!!!');
   } else {
     scheduleTask(msg.cid);
-    broadCastCathTask(msg);
+    sendCathTask(msg,from);
     gWorkerIsBusy = true;
   }
 };
@@ -51,11 +52,19 @@ function scheduleTask(blockCid) {
 }
 
 
+function sendCathTask(msgJson,to){
+  let catchSign = myWoWa.signTask(msgJson.cid);
+  msgJson.catch = catchSign;
+  p2p.out(CHANNEL.TASK.CATCH ,msgJson,to);
+}
+
 function broadCastCathTask(msgJson){
   let catchSign = myWoWa.signTask(msgJson.cid);
   msgJson.catch = catchSign;
   p2p.out(CHANNEL.TASK.CATCH ,msgJson);
 }
+
+
 
 function onSaveCID(cidResult,taskInfo) {
   console.log('onSaveCID cidResult=<',cidResult,'>');
