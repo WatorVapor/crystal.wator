@@ -6,7 +6,7 @@ module.exports = class KnowledgeChain {
   }
   push(msg) {
     console.log('push::msg=<',msg,'>');
-    let nounce = msg.output.nounce;
+    let nounce = 'n_' + msg.output.nounce;
     console.log('push::nounce=<',nounce,'>');
     if(this.blockList_[nounce]) {
       let block = this.blockList_[nounce];
