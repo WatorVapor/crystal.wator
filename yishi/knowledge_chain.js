@@ -19,6 +19,7 @@ module.exports = class KnowledgeChain {
       msg.output.ts_verified.push(ts_verified);
       this.blockList_[nounce] = msg;
     }
+    console.log('this.blockList_=<',this.blockList_,'>');
   }
 }
 
