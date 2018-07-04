@@ -26,8 +26,11 @@ let p2p = new WoWaP2P();
 p2p.onReady = () => {
   p2p.in(CHANNEL.TASK.CREATE,onCreateTask);
   p2p.in(CHANNEL.KNOWLEDGE.VERIFY,onKnowledgeVerify);
-  p2p.out(CHANNEL.TASK.WANT,{});
 };
+p2p.onJoint = () => {
+  p2p.out(CHANNEL.TASK.WANT,{});
+}
+
 onCreateTask = (msg)=>{
   console.log('onCreateTask::msg=<',msg,'>');
   if(gWorkerIsBusy) {
