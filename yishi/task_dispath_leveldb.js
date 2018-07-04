@@ -111,7 +111,6 @@ onCatchTask = (msg) => {
   }
 };
 
-let dbDone = level(dbBlockPathDone);
 
 onDoneTask = (msg,from) => {
   console.log('onDoneTask msg=<',msg,'>');
@@ -124,6 +123,8 @@ onDoneTask = (msg,from) => {
   let output = msg.output;
   console.log('onDoneTask output=<',output,'>');
   gDoneCidList[input] = output;
+  
+  let dbDone = level(dbBlockPathDone);
   dbDone.put(input, output);
 }
 
