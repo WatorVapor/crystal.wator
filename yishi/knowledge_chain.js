@@ -14,7 +14,7 @@ module.exports = class KnowledgeChain {
     let nounce = 'n_' + msg.output.nounce;
     //console.log('push::nounce=<',nounce,'>');
     if(this.blockTop_[nounce]) {
-      let block = this.blockList_[nounce];
+      let block = this.blockTop_[nounce];
       block.output.ts_verified.push(msg.output.ts_verified);
       //console.log('push::block=<',block,'>');
       if(block.output.ts_verified.length >= KnowledgeVerifiedTimeMin) {
