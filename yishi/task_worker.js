@@ -6,10 +6,11 @@ const SHA3  = require('sha3');
 const bs58 = require('bs58')
 
 
-let dTask = new SHA3.SHA3Hash(224);
-dTask.update('wator.ipfs.ostrich.app');
-let taskHex = dTask.digest('hex');
-const TaskID = bs58.encode(taskHex);
+//let dTask = new SHA3.SHA3Hash(224);
+//dTask.update('wator.ipfs.ostrich.app');
+//let taskHex = dTask.digest('hex');
+//const TaskID = bs58.encode(taskHex);
+const TaskID ='wator.ipfs.ostrich.app';
 console.log('TaskID=<',TaskID,'>');
 
 module.exports = class TaskWorker {
