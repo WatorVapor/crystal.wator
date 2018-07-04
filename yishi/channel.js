@@ -1,4 +1,5 @@
 exports.TASK = {};
+exports.TASK.WANT = 'wai-task-want';
 exports.TASK.CREATE = 'wai-task-create';
 exports.TASK.CATCH  = 'wai-task-catch';
 exports.KNOWLEDGE = {};
