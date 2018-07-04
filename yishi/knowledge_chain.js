@@ -36,6 +36,7 @@ module.exports = class KnowledgeChain {
     if(typeof this.onKnowBlock === 'function') {
       this.onKnowBlock();
     }
+    return true;
   }
 }
 
