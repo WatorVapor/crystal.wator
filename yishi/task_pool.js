@@ -28,7 +28,9 @@ p2p.onReady = () => {
   p2p.in(CHANNEL.KNOWLEDGE.VERIFY,onKnowledgeVerify);
 };
 p2p.onJoint = () => {
-  p2p.out(CHANNEL.TASK.WANT,{});
+  setTimeout( () => {
+    p2p.out(CHANNEL.TASK.WANT,{});
+  },1000);
 }
 
 onCreateTask = (msg)=>{
