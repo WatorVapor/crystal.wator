@@ -7,7 +7,7 @@ let p2p = new WoWaP2P();
 
 const TaskStorageIpfs  = require('./task_storage.js');
 let storage = new TaskStorageIpfs();
-const KnowledgeChain  = require('knowledge_chain.js');
+const KnowledgeChain  = require('./knowledge_chain.js');
 let chain = new KnowledgeChain();
 
 let gWorkerIsBusy = false;
