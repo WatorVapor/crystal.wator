@@ -6,9 +6,9 @@ const SHA3  = require('sha3');
 const bs58 = require('bs58')
 
 
-let d = new SHA3.SHA3Hash(224);
-d.update('wator.ipfs.ostrich.app');
-let taskHex = d.digest('hex');
+let dTask = new SHA3.SHA3Hash(224);
+dTask.update('wator.ipfs.ostrich.app');
+let taskHex = dTask.digest('hex');
 const TaskID = bs58.encode(taskHex);
 console.log('TaskID=<',TaskID,'>');
 
