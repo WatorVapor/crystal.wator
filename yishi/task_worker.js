@@ -2,6 +2,16 @@ const redis = require("redis");
 const redisPubChannel = 'wai.relay.ipfs.to.redis';
 const redisSubChannel = 'wai.relay.redis.to.ipfs';
 
+const SHA3  = require('sha3');
+const bs58 = require('bs58')
+
+
+let d = new SHA3.SHA3Hash(224);
+d.update('wator.ipfs.ostrich.app');
+let taskHex = d.digest('hex');
+const TaskID = bs58.encode(taskHex);
+console.log('TaskID=<',TaskID,'>');
+
 module.exports = class TaskWorker {
   constructor() {
     this.pub = redis.createClient();
@@ -24,7 +34,7 @@ module.exports = class TaskWorker {
     this._oneBlockWords = {};
   }
   out(cid) {
-    let taskJson = {block:cid,task:'wator.ipfs.ostrich.app'};
+    let taskJson = {block:cid,task:TaskID};
     this.pub.publish(redisPubChannel,JSON.stringify(taskJson));
   }
   
