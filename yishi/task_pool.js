@@ -96,8 +96,8 @@ onKnowledgeVerify = (msg)=>{
   //console.log('onKnowledgeVerify::msg=<',msg,'>');
   let goodCreated = myWoWa.verifyKnowledge(msg.output.nounce,msg.output.ts_created);
   let goodVerified = myWoWa.verifyKnowledge(msg.output.nounce,msg.output.ts_created,true);
-  //console.log('onKnowledgeVerify::goodCreated=<',goodCreated,'>');
-  //console.log('onKnowledgeVerify::goodVerified=<',goodVerified,'>');
+  console.log('onKnowledgeVerify::goodCreated=<',goodCreated,'>');
+  console.log('onKnowledgeVerify::goodVerified=<',goodVerified,'>');
   if(goodCreated && goodVerified) {
     chain.push(msg);
   }
