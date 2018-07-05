@@ -75,6 +75,7 @@ function onSaveCID(cidResult,taskInfo) {
   console.log('onSaveCID output cidResult=<',cidResult,'>');
   console.log('onSaveCID input taskInfo.cid=<',taskInfo.cid,'>');
   let output = myWoWa.signKnowledge(cidResult);
+  console.log('onSaveCID output=<',output,'>');
   let blockAnnounce = {
     payment:cTestPaymentAddress,
     input:taskInfo.cid,
