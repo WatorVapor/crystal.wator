@@ -82,22 +82,22 @@ function onSaveCID(cidResult,taskInfo) {
     task:taskInfo.task,
     output:output
   };
-  console.log('onSaveCID blockAnnounce=<',blockAnnounce,'>');
+  //console.log('onSaveCID blockAnnounce=<',blockAnnounce,'>');
   p2p.out(CHANNEL.KNOWLEDGE.CREATE,blockAnnounce);
   let taskDone = {
     input:taskInfo.cid,
     output:cidResult
   };
-  console.log('onSaveCID taskDone=<',taskDone,'>');
+  //console.log('onSaveCID taskDone=<',taskDone,'>');
   p2p.out(CHANNEL.TASK.DONE,taskDone);
 }
 
 onKnowledgeVerify = (msg)=>{
-  console.log('onKnowledgeVerify::msg=<',msg,'>');
+  //console.log('onKnowledgeVerify::msg=<',msg,'>');
   let goodCreated = myWoWa.verifyKnowledge(msg.output.nounce,msg.output.ts_created);
   let goodVerified = myWoWa.verifyKnowledge(msg.output.nounce,msg.output.ts_created,true);
-  console.log('onKnowledgeVerify::goodCreated=<',goodCreated,'>');
-  console.log('onKnowledgeVerify::goodVerified=<',goodVerified,'>');
+  //console.log('onKnowledgeVerify::goodCreated=<',goodCreated,'>');
+  //console.log('onKnowledgeVerify::goodVerified=<',goodVerified,'>');
   if(goodCreated && goodVerified) {
     chain.push(msg);
   }
