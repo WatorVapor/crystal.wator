@@ -39,8 +39,8 @@ p2p.onJoint = () => {
 }
 
 onCreateTask = (msg,from)=>{
-  console.log('onCreateTask::msg=<',msg,'>');
-  console.log('onCreateTask::from=<',from,'>');
+  //console.log('onCreateTask::msg=<',msg,'>');
+  //console.log('onCreateTask::from=<',from,'>');
   if(gWorkerIsBusy) {
     console.log('onCreateTask:: gWorkerIsBusy=<',gWorkerIsBusy,'>','ignore!!!!');
   } else {
@@ -52,7 +52,7 @@ onCreateTask = (msg,from)=>{
 
 
 function scheduleTask(blockCid) {
-  console.log('blockCid=<',blockCid,'>');
+  //console.log('blockCid=<',blockCid,'>');
   worker.out(blockCid);
 }
 
