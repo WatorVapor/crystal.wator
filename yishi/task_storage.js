@@ -26,7 +26,7 @@ module.exports = class TaskIpfs {
       if(err) {
         throw err;
       }
-      console.log('save files=<',files,'>');
+      //console.log('save files=<',files,'>');
       if(files.length > 0) {
         if(typeof cb === 'function') {
            cb(files[0].path,taskInfo);
