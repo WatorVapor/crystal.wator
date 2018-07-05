@@ -14,7 +14,7 @@ let gWorkerIsBusy = false;
 const TaskWorker = require('./task_worker.js');
 let worker = new TaskWorker();
 worker.onReadyOneBlock = (taskInfo,words) => {
-  console.log('worker.onReadyOneBlock taskInfo=<',taskInfo,'>');
+  //console.log('worker.onReadyOneBlock taskInfo=<',taskInfo,'>');
   gWorkerIsBusy = false;
   storage.save(words,taskInfo,onSaveCID);
   p2p.out(CHANNEL.TASK.WANT,{});
