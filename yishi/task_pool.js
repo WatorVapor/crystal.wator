@@ -72,8 +72,8 @@ function broadCastCathTask(msgJson){
 
 
 function onSaveCID(cidResult,taskInfo) {
-  console.log('onSaveCID cidResult=<',cidResult,'>');
-  console.log('onSaveCID taskInfo.cid=<',taskInfo.cid,'>');
+  console.log('onSaveCID output cidResult=<',cidResult,'>');
+  console.log('onSaveCID input taskInfo.cid=<',taskInfo.cid,'>');
   let output = myWoWa.signKnowledge(cidResult);
   let blockAnnounce = {
     payment:cTestPaymentAddress,
