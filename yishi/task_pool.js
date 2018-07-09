@@ -105,3 +105,6 @@ onKnowledgeVerify = (msg)=>{
   }
 };
 
+chain.onKnowBlock = (block) => {
+  console.log('chain.onKnowBlock::block=<',block,'>');
+}
