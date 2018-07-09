@@ -38,6 +38,9 @@ module.exports = class TaskIpfs {
       }
     });
   }
+  saveNounce(nounce,cid) {
+    db.put(nounce,cid);
+  }
   
   publish(cid){
   }
