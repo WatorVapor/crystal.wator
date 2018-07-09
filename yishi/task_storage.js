@@ -2,6 +2,10 @@ const ipfsAPI = require('ipfs-api');
 const ipfsPub = ipfsAPI('/ip4/127.0.0.1/tcp/5003');
 const ipfsPri = ipfsAPI('/ip4/127.0.0.1/tcp/25002');
 
+const dbPath = '.task_cid_storage';
+const level = require('level');
+let db = level(dbPath);
+
 ipfsPub.id( (err, identity) => {
   if (err) {
     throw err;
