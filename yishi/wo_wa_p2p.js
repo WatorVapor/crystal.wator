@@ -1,8 +1,17 @@
 const Room = require('ipfs-pubsub-room');
 const IPFS = require('ipfs');
+const SHA3  = require('sha3');
+const bs58 = require('bs58')
+
+let nowTag = new Date();
+
+let dNowTag = new SHA3.SHA3Hash(224);
+dNowTag.update(nowTag);
+const pubsubRepos = bs58.encode(dNowTag.digest('hex'));
+console.log('pubsubRepos=<',pubsubRepos,'>');
 
 const IPFS_CONF = {
-  repo: '.ipfs_pubsub_room_data',
+  repo: '.ipfs_pubsub_room_data_' + pubsubRepos,
   EXPERIMENTAL: {
     pubsub: true
   },
@@ -15,8 +24,6 @@ const IPFS_CONF = {
   }
 };
 
-const SHA3  = require('sha3');
-const bs58 = require('bs58')
 
 module.exports = class WoWaP2p {
   constructor() {
