@@ -57,7 +57,7 @@ module.exports = class KnowledgeChain {
     let d = new SHA3.SHA3Hash();
     d.update(JSON.stringify(know));
     let blockHash = d.digest('hex');
-    //console.log('blockHash=<',blockHash,'>');
+    console.log('blockHash=<',blockHash,'>');
     let blockChain = {};
     blockChain.prev = this.topBlockId_;
     let d2 = new SHA3.SHA3Hash();
