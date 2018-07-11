@@ -73,6 +73,7 @@ module.exports = class KnowledgeChain {
     return true;
   }
   
+  /*
   addVerifySort_(verfifyList,verify) {
     //console.log('addVerifySort_:verfifyList=<',verfifyList,'>');
     //console.log('addVerifySort_:verify=<',verify,'>');
@@ -92,6 +93,29 @@ module.exports = class KnowledgeChain {
     }
     verfifyList.push(verify);
   }
+  */
+
+  addVerifySort_(verfifyList,verify) {
+    //console.log('addVerifySort_:verfifyList=<',verfifyList,'>');
+    //console.log('addVerifySort_:verify=<',verify,'>');
+    let hash_addto = verify.hash;  
+    for(let i = 0;i < verfifyList.length;i++) {
+      let hash_in_que = verfifyList[i].hash;
+      //console.log('addVerifySort_:ts_in=<',ts_inq,'>');
+      //console.log('addVerifySort_:ts_addto=<',ts_addto,'>');
+      let youger = hash_in_que > hash_addto;
+      console.log('addVerifySort_:youger=<',youger,'>');
+      if(youger) {
+        verfifyList.splice(i-1, 0,verify);
+        //console.log('addVerifySort_:youger=<',youger,'>');
+        return;
+      } else {
+        //console.log('addVerifySort_:youger=<',youger,'>');
+      }
+    }
+    verfifyList.push(verify);
+  }
+
   
   isYoungerTS_(a,b) {
     let createTSTemp_A = a.split('GMT.');
