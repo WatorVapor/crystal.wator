@@ -51,10 +51,11 @@ module.exports = class KnowledgeChain {
     this.topBlockId_ = blockId;   
   }
   
-  addKnowledge_(block) {
-    console.log('addKnowledge_::block=<',JSON.stringify(block,null,2),'>');
+  addKnowledge_(know) {
+    //console.log('addKnowledge_::know=<',JSON.stringify(know,null,2),'>');
+    console.log('addKnowledge_::know.input=<',know.input,'>');
     let d = new SHA3.SHA3Hash();
-    d.update(JSON.stringify(block));
+    d.update(JSON.stringify(know));
     let blockHash = d.digest('hex');
     //console.log('blockHash=<',blockHash,'>');
     let blockChain = {};
