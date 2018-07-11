@@ -109,7 +109,9 @@ module.exports = class KnowledgeChain {
       return true;
     }
     if(diff === 0) {
+      console.log('isYoungerTS_:createTSTemp_A[1]=<',createTSTemp_A[1],'>');
       console.log('isYoungerTS_:m_A=<',m_A,'>');
+      console.log('isYoungerTS_:createdTime_B[1]=<',createdTime_B[1],'>');
       console.log('isYoungerTS_:m_B=<',m_B,'>');
       if(m_A < m_B) {
         return true;
