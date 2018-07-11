@@ -7,8 +7,6 @@ let p2p = new WoWaP2P();
 
 const TaskStorageIpfs  = require('./task_storage.js');
 let storage = new TaskStorageIpfs();
-const KnowledgeChain  = require('./knowledge_chain.js');
-let chain = new KnowledgeChain();
 
 let gWorkerIsBusy = false;
 const TaskWorker = require('./task_worker.js');
@@ -30,7 +28,6 @@ console.log('cTestPaymentAddress=<',cTestPaymentAddress,'>');
 
 p2p.onReady = () => {
   p2p.in(CHANNEL.TASK.CREATE,onCreateTask);
-  p2p.in(CHANNEL.KNOWLEDGE.VERIFY,onKnowledgeVerify);
 };
 p2p.onJoint = () => {
   setTimeout( () => {
@@ -94,17 +91,4 @@ function onSaveCID(cidResult,taskInfo) {
   p2p.out(CHANNEL.TASK.DONE,taskDone);
 }
 
-onKnowledgeVerify = (msg)=>{
-  //console.log('onKnowledgeVerify::msg=<',msg,'>');
-  let goodCreated = myWoWa.verifyKnowledge(msg.output.nounce,msg.output.ts_created);
-  let goodVerified = myWoWa.verifyKnowledge(msg.output.nounce,msg.output.ts_created,true);
-  console.log('onKnowledgeVerify::goodCreated=<',goodCreated,'>');
-  console.log('onKnowledgeVerify::goodVerified=<',goodVerified,'>');
-  if(goodCreated && goodVerified) {
-    chain.push(msg);
-  }
-};
 
-chain.onKnowBlock = (block) => {
-  console.log('chain.onKnowBlock::block=<',block,'>');
-}
