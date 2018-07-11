@@ -68,7 +68,7 @@ module.exports = class KnowledgeChain {
     this.topBlockId_ = blockId;   
     
     if(typeof this.onKnowBlock === 'function') {
-      //this.onKnowBlock(this.topBlockId_);
+      this.onKnowBlock(this.topBlockId_);
     }
     return true;
   }
@@ -79,15 +79,15 @@ module.exports = class KnowledgeChain {
     let ts_addto = verify.orig.ts;  
     for(let i = 0;i < verfifyList.length;i++) {
       let ts_inq = verfifyList[i].orig.ts;
-      console.log('addVerifySort_:ts_in=<',ts_inq,'>');
-      console.log('addVerifySort_:ts_addto=<',ts_addto,'>');
+      //console.log('addVerifySort_:ts_in=<',ts_inq,'>');
+      //console.log('addVerifySort_:ts_addto=<',ts_addto,'>');
       let youger = this.isYoungerTS_(ts_inq,ts_addto);
       if(youger) {
         verfifyList.splice(i-1, 0,verify);
-        console.log('addVerifySort_:youger=<',youger,'>');
+        //console.log('addVerifySort_:youger=<',youger,'>');
         return;
       } else {
-        console.log('addVerifySort_:youger=<',youger,'>');
+        //console.log('addVerifySort_:youger=<',youger,'>');
       }
     }
     verfifyList.push(verify);
@@ -104,15 +104,15 @@ module.exports = class KnowledgeChain {
     let createdTime_B = new Date(createTS_B);
     let m_B = parseInt(createTSTemp_B[1]);
     let diff = createdTime_B - createdTime_A;
-    console.log('isYoungerTS_:diff=<',diff,'>');
+    //console.log('isYoungerTS_:diff=<',diff,'>');
     if(diff < 0) {
       return true;
     }
     if(diff === 0) {
-      console.log('isYoungerTS_:createTSTemp_A[1]=<',createTSTemp_A[1],'>');
-      console.log('isYoungerTS_:m_A=<',m_A,'>');
-      console.log('isYoungerTS_:createTSTemp_B[1]=<',createTSTemp_B[1],'>');
-      console.log('isYoungerTS_:m_B=<',m_B,'>');
+      //console.log('isYoungerTS_:createTSTemp_A[1]=<',createTSTemp_A[1],'>');
+      //console.log('isYoungerTS_:m_A=<',m_A,'>');
+      //console.log('isYoungerTS_:createTSTemp_B[1]=<',createTSTemp_B[1],'>');
+      //console.log('isYoungerTS_:m_B=<',m_B,'>');
       if(m_B - m_A < 0) {
         return true;
       }
