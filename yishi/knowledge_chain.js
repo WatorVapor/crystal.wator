@@ -1,7 +1,7 @@
 const SHA3  = require('sha3');
 const bs58 = require('bs58')
 
-const KnowledgeVerifiedTimeMin = 2;
+const KnowledgeVerifiedTimeMin = 3;
 
 module.exports = class KnowledgeChain {
   constructor() {
