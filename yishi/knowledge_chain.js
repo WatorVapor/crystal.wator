@@ -13,7 +13,7 @@ module.exports = class KnowledgeChain {
     //console.log('push::msgKnow=<',msgKnow,'>');
     let msg = JSON.parse(JSON.stringify(msgKnow))
     let nounce = 'n_' + msg.output.nounce;
-    console.log('push::nounce=<',nounce,'>');
+    //console.log('push::nounce=<',nounce,'>');
     if(this.blockTop_[nounce]) {
       let block = this.blockTop_[nounce];
       block.output.ts_verified.push(msg.output.ts_verified);
@@ -68,7 +68,7 @@ module.exports = class KnowledgeChain {
     this.topBlockId_ = blockId;   
     
     if(typeof this.onKnowBlock === 'function') {
-      this.onKnowBlock(this.topBlockId_);
+      //this.onKnowBlock(this.topBlockId_);
     }
     return true;
   }
