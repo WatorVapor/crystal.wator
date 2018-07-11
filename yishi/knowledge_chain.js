@@ -76,6 +76,18 @@ module.exports = class KnowledgeChain {
   addVerifySort_(verfifyList,verify) {
     console.log('addVerifySort_:verfifyList=<',verfifyList,'>');
     console.log('addVerifySort_:verify=<',verify,'>');
+    let ts_to = verify.orig.ts;
+    for(let i = 0;i < verfifyList.length;i++) {
+      let in=verfifyList[i];
+      let ts_in = verfifyList[i].orig.ts;
+      console.log('addVerifySort_:ts_in=<',ts_in,'>');
+      console.log('addVerifySort_:ts_to=<',ts_to,'>');
+      if(ts_to < ts_in) {
+        verfifyList.splice(i-1, 0,verify);
+        return;
+      }
+    }
+    verfifyList.push(verify);
   }
 }
 
