@@ -6,7 +6,7 @@ const bs58 = require('bs58')
 let nowTag = new Date();
 
 let dNowTag = new SHA3.SHA3Hash(224);
-dNowTag.update(nowTag);
+dNowTag.update(nowTag.toISOString());
 const pubsubRepos = bs58.encode(dNowTag.digest('hex'));
 console.log('pubsubRepos=<',pubsubRepos,'>');
 
