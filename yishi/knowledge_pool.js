@@ -6,7 +6,12 @@ const CHANNEL  = require('./channel.js');
 let p2p = new WoWaP2P();
 p2p.onReady = () => {
   p2p.in(CHANNEL.KNOWLEDGE.CREATE,onKnowledgeCreate);
+  p2p.in(CHANNEL.KNOWLEDGE.VERIFY,onKnowledgeVerify);
 };
+
+const KnowledgeChain  = require('./knowledge_chain.js');
+let chain = new KnowledgeChain();
+
 
 onKnowledgeCreate = (msg,from)=>{
   //console.log('onKnowledgeCreate::from=<',from,'>');
@@ -19,3 +24,17 @@ onKnowledgeCreate = (msg,from)=>{
   }
 };
 
+chain.onKnowBlock = (block) => {
+  console.log('chain.onKnowBlock::block=<',block,'>');
+}
+
+onKnowledgeVerify = (msg)=>{
+  //console.log('onKnowledgeVerify::msg=<',msg,'>');
+  let goodCreated = myWoWa.verifyKnowledge(msg.output.nounce,msg.output.ts_created);
+  let goodVerified = myWoWa.verifyKnowledge(msg.output.nounce,msg.output.ts_created,true);
+  console.log('onKnowledgeVerify::goodCreated=<',goodCreated,'>');
+  console.log('onKnowledgeVerify::goodVerified=<',goodVerified,'>');
+  if(goodCreated && goodVerified) {
+    chain.push(msg);
+  }
+};
