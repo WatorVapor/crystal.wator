@@ -21,6 +21,7 @@ onKnowledgeCreate = (msg,from)=>{
     msg.output.ts_verified = ts;
     //console.log('onKnowledgeCreate::msg=<',msg,'>');
     p2p.out(CHANNEL.KNOWLEDGE.VERIFY,msg);
+    chain.push(msg);
   }
 };
 
