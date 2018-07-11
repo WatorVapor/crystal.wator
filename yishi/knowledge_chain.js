@@ -74,14 +74,14 @@ module.exports = class KnowledgeChain {
   }
   
   addVerifySort_(verfifyList,verify) {
-    console.log('addVerifySort_:verfifyList=<',verfifyList,'>');
-    console.log('addVerifySort_:verify=<',verify,'>');
-    let ts_to = verify.orig.ts;  
+    //console.log('addVerifySort_:verfifyList=<',verfifyList,'>');
+    //console.log('addVerifySort_:verify=<',verify,'>');
+    let ts_addto = verify.orig.ts;  
     for(let i = 0;i < verfifyList.length;i++) {
-      let ts_in = verfifyList[i].orig.ts;
-      console.log('addVerifySort_:ts_in=<',ts_in,'>');
-      console.log('addVerifySort_:ts_to=<',ts_to,'>');
-      let youger = this.isYoungerTS_(ts_in,ts_to);
+      let ts_inq = verfifyList[i].orig.ts;
+      console.log('addVerifySort_:ts_in=<',ts_inq,'>');
+      console.log('addVerifySort_:ts_addto=<',ts_addto,'>');
+      let youger = this.isYoungerTS_(ts_inq,ts_addto);
       if(youger) {
         verfifyList.splice(i-1, 0,verify);
         console.log('addVerifySort_:youger=<',youger,'>');
