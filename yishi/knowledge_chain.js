@@ -16,7 +16,7 @@ module.exports = class KnowledgeChain {
     //console.log('push::nounce=<',nounce,'>');
     if(this.blockTop_[nounce]) {
       let block = this.blockTop_[nounce];
-      block.output.ts_verified.push(msg.output.ts_verified);
+      this.addVerifySort_(block.output.ts_verified,msg.output.ts_verified);
       //console.log('push::block=<',block,'>');
       console.log('push::block.output.ts_verified.length=<',block.output.ts_verified.length,'>');
       if(block.output.ts_verified.length >= KnowledgeVerifiedTimeMin) {
@@ -71,6 +71,11 @@ module.exports = class KnowledgeChain {
       //this.onKnowBlock(this.topBlockId_);
     }
     return true;
+  }
+  
+  addVerifySort_(verfifyList,verify) {
+    console.log('addVerifySort_:verfifyList=<',verfifyList,'>');
+    console.log('addVerifySort_:verify=<',verify,'>');
   }
 }
 
