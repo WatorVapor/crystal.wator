@@ -102,10 +102,12 @@ module.exports = class KnowledgeChain {
     let createTS_B = createTSTemp_B[0] + 'GMT';
     let createdTime_B = new Date(createTS_B);
     let m_B = parseInt(createdTime_B[1]);
-    if(createdTime_B < createdTime_A) {
+    let diff = createdTime_B - createdTime_A;
+    console.log('isYoungerTS_:ts_to < diff=<',diff,'>');
+    if(diff < 0) {
       return true;
     }
-    if(createdTime_B === createdTime_A) {
+    if(diff === 0) {
       if(m_A < m_B) {
         return true;
       }
