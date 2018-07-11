@@ -52,8 +52,8 @@ module.exports = class KnowledgeChain {
   }
   
   addKnowledge_(know) {
-    //console.log('addKnowledge_::know=<',JSON.stringify(know,null,2),'>');
-    console.log('addKnowledge_::know.input=<',know.input,'>');
+    console.log('addKnowledge_::know=<',JSON.stringify(know,null,2),'>');
+    //console.log('addKnowledge_::know.input=<',know.input,'>');
     let d = new SHA3.SHA3Hash();
     d.update(JSON.stringify(know));
     let blockHash = d.digest('hex');
