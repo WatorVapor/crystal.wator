@@ -76,12 +76,12 @@ module.exports = class KnowledgeChain {
   addVerifySort_(verfifyList,verify) {
     console.log('addVerifySort_:verfifyList=<',verfifyList,'>');
     console.log('addVerifySort_:verify=<',verify,'>');
-    let ts_to = verify.orig.ts;
+    let ts_to = verify.orig.ts;  
     for(let i = 0;i < verfifyList.length;i++) {
       let ts_in = verfifyList[i].orig.ts;
       console.log('addVerifySort_:ts_in=<',ts_in,'>');
       console.log('addVerifySort_:ts_to=<',ts_to,'>');
-      if(ts_to < ts_in) {
+      if(this.isYoungerTS_(ts_to,ts_in)) {
         verfifyList.splice(i-1, 0,verify);
         console.log('addVerifySort_:ts_to < ts_in=<',ts_to < ts_in,'>');
         return;
@@ -90,6 +90,27 @@ module.exports = class KnowledgeChain {
       }
     }
     verfifyList.push(verify);
+  }
+  
+  isYoungerTS_(a,b) {
+    let createTSTemp_A = a.orig.ts.split('GMT.');
+    let createTS_A = createTSTemp_A[0] + 'GMT';
+    let createdTime_A = new Date(createTS_A);
+    let m_A = parseInt(createTSTemp_A[1]);
+
+    let createTSTemp_B = a.orig.ts.split('GMT.');
+    let createTS_B = createTSTemp_B[0] + 'GMT';
+    let createdTime_B = new Date(createTS_B);
+    let m_B = parseInt(createdTime_B[1]);
+    if(createdTime_B < createdTime_A) {
+      return true;
+    }
+    if(createdTime_B === createdTime_A) {
+      if(m_A < m_B) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 
