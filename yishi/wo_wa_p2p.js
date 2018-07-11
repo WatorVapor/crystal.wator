@@ -86,7 +86,7 @@ module.exports = class WoWaP2p {
           delete jsonData.channel;
           cb(jsonData,msg.from);
         } else {
-          console.log('onRoomMessage::jsonData=<',jsonData,'>');
+          //console.log('onRoomMessage::jsonData=<',jsonData,'>');
         }
       }
     } else {
