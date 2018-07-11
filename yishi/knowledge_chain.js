@@ -8,11 +8,12 @@ module.exports = class KnowledgeChain {
     this.blockTop_ = {};
     this.genisis_();
   }
-  push(msgBlk) {
-    //console.log('push::msgBlk=<',msgBlk,'>');
-    let msg = JSON.parse(JSON.stringify(msgBlk))
+  
+  push(msgKnow) {
+    //console.log('push::msgKnow=<',msgKnow,'>');
+    let msg = JSON.parse(JSON.stringify(msgKnow))
     let nounce = 'n_' + msg.output.nounce;
-    //console.log('push::nounce=<',nounce,'>');
+    console.log('push::nounce=<',nounce,'>');
     if(this.blockTop_[nounce]) {
       let block = this.blockTop_[nounce];
       block.output.ts_verified.push(msg.output.ts_verified);
