@@ -81,7 +81,7 @@ module.exports = class KnowledgeChain {
       let ts_in = verfifyList[i].orig.ts;
       console.log('addVerifySort_:ts_in=<',ts_in,'>');
       console.log('addVerifySort_:ts_to=<',ts_to,'>');
-      let youger = this.isYoungerTS_(ts_to,ts_in);
+      let youger = this.isYoungerTS_(ts_in,ts_to);
       if(youger) {
         verfifyList.splice(i-1, 0,verify);
         console.log('addVerifySort_:youger=<',youger,'>');
