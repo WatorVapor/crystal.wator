@@ -73,28 +73,6 @@ module.exports = class KnowledgeChain {
     return true;
   }
   
-  /*
-  addVerifySort_(verfifyList,verify) {
-    //console.log('addVerifySort_:verfifyList=<',verfifyList,'>');
-    //console.log('addVerifySort_:verify=<',verify,'>');
-    let ts_addto = verify.orig.ts;  
-    for(let i = 0;i < verfifyList.length;i++) {
-      let ts_inq = verfifyList[i].orig.ts;
-      //console.log('addVerifySort_:ts_in=<',ts_inq,'>');
-      //console.log('addVerifySort_:ts_addto=<',ts_addto,'>');
-      let youger = this.isYoungerTS_(ts_inq,ts_addto);
-      if(youger) {
-        verfifyList.splice(i-1, 0,verify);
-        //console.log('addVerifySort_:youger=<',youger,'>');
-        return;
-      } else {
-        //console.log('addVerifySort_:youger=<',youger,'>');
-      }
-    }
-    verfifyList.push(verify);
-  }
-  */
-
   addVerifySort_(verfifyList,verify) {
     //console.log('addVerifySort_:verfifyList=<',verfifyList,'>');
     //console.log('addVerifySort_:verify=<',verify,'>');
@@ -115,33 +93,6 @@ module.exports = class KnowledgeChain {
     }
     verfifyList.push(verify);
   }
-
   
-  isYoungerTS_(a,b) {
-    let createTSTemp_A = a.split('GMT.');
-    let createTS_A = createTSTemp_A[0] + 'GMT';
-    let createdTime_A = new Date(createTS_A);
-    let m_A = parseInt(createTSTemp_A[1]);
-
-    let createTSTemp_B = b.split('GMT.');
-    let createTS_B = createTSTemp_B[0] + 'GMT';
-    let createdTime_B = new Date(createTS_B);
-    let m_B = parseInt(createTSTemp_B[1]);
-    let diff = createdTime_B - createdTime_A;
-    //console.log('isYoungerTS_:diff=<',diff,'>');
-    if(diff < 0) {
-      return true;
-    }
-    if(diff === 0) {
-      //console.log('isYoungerTS_:createTSTemp_A[1]=<',createTSTemp_A[1],'>');
-      //console.log('isYoungerTS_:m_A=<',m_A,'>');
-      //console.log('isYoungerTS_:createTSTemp_B[1]=<',createTSTemp_B[1],'>');
-      //console.log('isYoungerTS_:m_B=<',m_B,'>');
-      if(m_B - m_A < 0) {
-        return true;
-      }
-    }
-    return false;
-  }
 }
 
