@@ -93,12 +93,12 @@ module.exports = class KnowledgeChain {
   }
   
   isYoungerTS_(a,b) {
-    let createTSTemp_A = a.orig.ts.split('GMT.');
+    let createTSTemp_A = a.split('GMT.');
     let createTS_A = createTSTemp_A[0] + 'GMT';
     let createdTime_A = new Date(createTS_A);
     let m_A = parseInt(createTSTemp_A[1]);
 
-    let createTSTemp_B = a.orig.ts.split('GMT.');
+    let createTSTemp_B = b.split('GMT.');
     let createTS_B = createTSTemp_B[0] + 'GMT';
     let createdTime_B = new Date(createTS_B);
     let m_B = parseInt(createdTime_B[1]);
