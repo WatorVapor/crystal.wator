@@ -10,6 +10,8 @@ dNowTag.update(nowTag.toISOString());
 const pubsubRepos = bs58.encode(dNowTag.digest('hex'));
 console.log('pubsubRepos=<',pubsubRepos,'>');
 
+const WORLD_MESSAGE = '熊大,快看光头强的头被割了韭菜';
+
 const IPFS_CONF = {
   repo: '.ipfs_pubsub_room_data_' + pubsubRepos,
   EXPERIMENTAL: {
@@ -28,7 +30,7 @@ const IPFS_CONF = {
 module.exports = class WoWaP2p {
   constructor() {
     let d = new SHA3.SHA3Hash(224);
-    d.update('!!欢迎来到WoWa!!');
+    d.update(WORLD_MESSAGE);
     let number = d.digest('hex');
     this.number = bs58.encode(number);
     console.log('this.number=<',this.number,'>');
