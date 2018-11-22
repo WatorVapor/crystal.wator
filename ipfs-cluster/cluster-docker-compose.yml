@@ -1,11 +1,11 @@
 version: '3'
 services:
   ipfs-public:
-    image: watorvapor/js-ipfs-2
+    image: node:10
     volumes:
       - ./storage-ipfs:/root/.jsipfs
-      - ./init-and-daemon.sh:/usr/src/app/init-and-daemon.sh
-      - ./config-nodejs.js:/usr/src/app/src/core/runtime/config-nodejs.js
+      - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
+      - ./config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
     environment:
       - IPFS_API_HOST=127.0.0.1
     networks:
@@ -19,11 +19,11 @@ services:
           cpus: '0.5'
           memory: 512M
   ipfs-private:
-    image: watorvapor/js-ipfs-2
+    image: node:10
     volumes:
       - ./private-storage-ipfs:/root/.jsipfs
-      - ./init-and-daemon.sh:/usr/src/app/init-and-daemon.sh
-      - ./private-config-nodejs.js:/usr/src/app/src/core/runtime/config-nodejs.js
+      - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
+      - ./private-config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
     environment:
       - IPFS_API_HOST=127.0.0.1
     networks:
