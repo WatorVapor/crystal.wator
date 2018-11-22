@@ -7,6 +7,7 @@ services:
       - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
       - ./storage-ipfs:/root/.jsipfs
       - ./config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
+    working_dir: "/opt/app"
     command: node -v
     environment:
       - IPFS_PATH=/root/.jsipfs
@@ -28,6 +29,7 @@ services:
       - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
       - ./private-storage-ipfs:/root/.jsipfs
       - ./private-config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
+    working_dir: "/opt/app"
     command: node_modules/ipfs/init-and-daemon.sh
     environment:
       - IPFS_PATH=/root/.jsipfs
