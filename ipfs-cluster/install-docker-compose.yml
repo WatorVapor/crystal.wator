@@ -3,11 +3,9 @@ services:
   ipfs-dameon:
     image: node:10
     volumes:
-      - ./storage-ipfs:/root/.jsipfs
-      - ./init-and-daemon.sh:/usr/src/app/init-and-daemon.sh
-      - ./config-nodejs.js:/usr/src/app/src/core/runtime/config-nodejs.js
-    environment:
-      - IPFS_API_HOST=127.0.0.1
+      - ./app:/opt/app
+    working_dir: "/opt/app"
+    command: npm i --save ipfs
     networks:
       - outside
     deploy:
