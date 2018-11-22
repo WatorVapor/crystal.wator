@@ -3,8 +3,9 @@ services:
   ipfs-public:
     image: node:10
     volumes:
-      - ./storage-ipfs:/root/.jsipfs
+      - ./app:/opt/app
       - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
+      - ./storage-ipfs:/root/.jsipfs
       - ./config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
     command: node_modules/ipfs/init-and-daemon.sh
     environment:
@@ -23,8 +24,9 @@ services:
   ipfs-private:
     image: node:10
     volumes:
-      - ./private-storage-ipfs:/root/.jsipfs
+      - ./app:/opt/app
       - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
+      - ./private-storage-ipfs:/root/.jsipfs
       - ./private-config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
     command: node_modules/ipfs/init-and-daemon.sh
     environment:
