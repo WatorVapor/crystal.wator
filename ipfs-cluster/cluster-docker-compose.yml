@@ -7,8 +7,8 @@ services:
       - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
       - ./storage-ipfs:/root/.jsipfs
       - ./config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
-    working_dir: "/opt/app/node_modules/ipfs"
-    command: init-and-daemon.sh
+    working_dir: "/opt/app"
+    command: node_modules/ipfs/init-and-daemon.sh
     environment:
       - IPFS_PATH=/root/.jsipfs
       - IPFS_API_HOST=127.0.0.1
