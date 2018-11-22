@@ -64,3 +64,5 @@ ipfs-cluster/*storage-ipfs
 .ipfs_pubsub_room_data/
 copy-yishi/
 
+ipfs-cluster/app/package-lock.json
+
