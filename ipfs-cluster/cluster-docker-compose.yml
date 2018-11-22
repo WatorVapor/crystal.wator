@@ -6,6 +6,7 @@ services:
       - ./storage-ipfs:/root/.jsipfs
       - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
       - ./config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
+    command: node_modules/ipfs/init-and-daemon.sh
     environment:
       - IPFS_API_HOST=127.0.0.1
     networks:
@@ -24,6 +25,7 @@ services:
       - ./private-storage-ipfs:/root/.jsipfs
       - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
       - ./private-config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
+    command: node_modules/ipfs/init-and-daemon.sh
     environment:
       - IPFS_API_HOST=127.0.0.1
     networks:
