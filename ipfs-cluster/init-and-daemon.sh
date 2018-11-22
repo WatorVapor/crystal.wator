@@ -11,6 +11,6 @@ fi
 
 # Initialize the repo but ignore if error if it already exists
 # This can be the case when we restart a container without stopping/removing it
-node src/cli/bin.js init || true
+node node_modules/ipfs/src/cli/bin.js init || true
 
-node src/cli/bin.js daemon
+node node_modules/ipfs/src/cli/bin.js daemon
