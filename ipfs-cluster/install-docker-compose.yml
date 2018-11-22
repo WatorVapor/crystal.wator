@@ -1,0 +1,24 @@
+version: '3'
+services:
+  ipfs-dameon:
+    image: node:10
+    volumes:
+      - ./storage-ipfs:/root/.jsipfs
+      - ./init-and-daemon.sh:/usr/src/app/init-and-daemon.sh
+      - ./config-nodejs.js:/usr/src/app/src/core/runtime/config-nodejs.js
+    environment:
+      - IPFS_API_HOST=127.0.0.1
+    networks:
+      - outside
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+networks:
+  outside:
+    external:
+      name: "host"
