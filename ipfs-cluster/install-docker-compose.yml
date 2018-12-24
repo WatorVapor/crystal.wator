@@ -5,7 +5,7 @@ services:
     volumes:
       - ./app:/opt/app
     working_dir: "/opt/app"
-    command: npm i --save ipfs
+    command: npm update --save ipfs
     networks:
       - outside
     deploy:
