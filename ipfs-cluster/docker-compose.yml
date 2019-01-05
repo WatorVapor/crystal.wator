@@ -4,11 +4,10 @@ services:
     image: node:10
     volumes:
       - ./app:/opt/app
-      - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
       - ./storage-ipfs:/root/.jsipfs
-      - ./config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
+      - ./config-nodejs.js:/opt/app/config-nodejs.js
     working_dir: "/opt/app"
-    command: node_modules/ipfs/init-and-daemon.sh
+    command: entry.sh
     environment:
       - IPFS_PATH=/root/.jsipfs
       - IPFS_API_HOST=127.0.0.1
@@ -26,11 +25,10 @@ services:
     image: node:10
     volumes:
       - ./private-app:/opt/app
-      - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
       - ./private-storage-ipfs:/root/.jsipfs
-      - ./private-config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
+      - ./private-config-nodejs.js:/opt/app/config-nodejs.js
     working_dir: "/opt/app"
-    command: node_modules/ipfs/init-and-daemon.sh
+    command: entry.sh
     environment:
       - IPFS_PATH=/root/.jsipfs
       - IPFS_API_HOST=127.0.0.1
