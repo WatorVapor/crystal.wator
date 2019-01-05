@@ -1,12 +1,16 @@
 version: '3'
 services:
-  ipfs-dameon:
-    image: watorvapor/js-ipfs-2
+  ipfs-public:
+    image: node:10
     volumes:
+      - ./app:/opt/app
+      - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
       - ./storage-ipfs:/root/.jsipfs
-      - ./init-and-daemon.sh:/usr/src/app/init-and-daemon.sh
-      - ./config-nodejs.js:/usr/src/app/src/core/runtime/config-nodejs.js
+      - ./config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
+    working_dir: "/opt/app"
+    command: node_modules/ipfs/init-and-daemon.sh
     environment:
+      - IPFS_PATH=/root/.jsipfs
       - IPFS_API_HOST=127.0.0.1
     networks:
       - outside
@@ -16,15 +20,19 @@ services:
           cpus: '1.00'
           memory: 1G
         reservations:
-          cpus: '0.5'
-          memory: 512M
-  ipfs-dameon-private:
-    image: watorvapor/js-ipfs-2
+          cpus: '0.1'
+          memory: 256M
+  ipfs-private:
+    image: node:10
     volumes:
+      - ./app:/opt/app
+      - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
       - ./private-storage-ipfs:/root/.jsipfs
-      - ./init-and-daemon.sh:/usr/src/app/init-and-daemon.sh
-      - ./private-config-nodejs.js:/usr/src/app/src/core/runtime/config-nodejs.js
+      - ./private-config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
+    working_dir: "/opt/app"
+    command: node_modules/ipfs/init-and-daemon.sh
     environment:
+      - IPFS_PATH=/root/.jsipfs
       - IPFS_API_HOST=127.0.0.1
     networks:
       - outside
@@ -34,10 +42,9 @@ services:
           cpus: '1.00'
           memory: 1G
         reservations:
-          cpus: '0.5'
-          memory: 512M
+          cpus: '0.1'
+          memory: 256M
 networks:
   outside:
     external:
       name: "host"
-
