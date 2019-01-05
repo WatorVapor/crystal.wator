@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-npm install --save
+npm update --save
 set -e
 if [ -n "$IPFS_PATH" ]; then
   echo "Using $IPFS_PATH as IPFS repository"
