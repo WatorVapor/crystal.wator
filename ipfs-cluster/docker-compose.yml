@@ -8,7 +8,7 @@ services:
       - ./storage-ipfs:/root/.jsipfs
       - ./config-nodejs.js:/opt/app/config-nodejs.js
     working_dir: "/opt/app"
-    command: find ./
+    command: ./entry.sh
     environment:
       - IPFS_PATH=/root/.jsipfs
       - IPFS_API_HOST=127.0.0.1
@@ -30,7 +30,7 @@ services:
       - ./private-storage-ipfs:/root/.jsipfs
       - ./private-config-nodejs.js:/opt/app/config-nodejs.js
     working_dir: "/opt/app"
-    command: find ./
+    command: ./entry.sh
     environment:
       - IPFS_PATH=/root/.jsipfs
       - IPFS_API_HOST=127.0.0.1
