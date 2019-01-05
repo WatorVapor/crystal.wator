@@ -25,7 +25,7 @@ services:
   ipfs-private:
     image: node:10
     volumes:
-      - ./app:/opt/app
+      - ./private-app:/opt/app
       - ./init-and-daemon.sh:/opt/app/node_modules/ipfs/init-and-daemon.sh
       - ./private-storage-ipfs:/root/.jsipfs
       - ./private-config-nodejs.js:/opt/app/node_modules/ipfs/src/core/runtime/config-nodejs.js
