@@ -5,14 +5,12 @@ ipfs.config.set('API.HTTPHeaders.Access-Control-Allow-Origin', '["https://ipfs.w
   if (err) {
     throw err
   }
-  // MDNS Discovery was set to false
 })
 
 ipfs.config.set('API.HTTPHeaders.Access-Control-Allow-Methods', '["PUT", "GET", "POST"]', (err) => {
   if (err) {
     throw err
   }
-  // MDNS Discovery was set to false
 })
 
 
