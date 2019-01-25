@@ -24,6 +24,12 @@ node.on('ready', () => {
   doShowID();
   doSubscribe();
 })
+node.on('error', (error) => {
+  console.log('error=<',error,'>');
+})
+node.on('start', () => {
+  console.log('Node started!')
+});
 
 doShowID = () => {
   node.id((err, identity) =>{
