@@ -27,3 +27,17 @@ ipfs.swarm.connect(addr, (err) =>{
   }
 })
 
+const topic = 'fruit-of-the-day';
+const receiveMsg = (msg) => {
+  console.log('receiveMsg msg.data.toString()=<',msg.data.toString(),'>');
+}
+
+ipfs.pubsub.subscribe(topic, receiveMsg, (err) => {
+  if (err) {
+    throw err
+  }
+  console.log(`subscribed to ${topic}`)
+  console.log('ipfs.pubsub.subscribe topic=<',topic,'>');
+})
+
+
