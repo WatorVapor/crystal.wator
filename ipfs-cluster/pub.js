@@ -12,15 +12,19 @@ const IPFS_CONF = {
   }
 };
 
+const topic = 'fruit-of-the-day';
 
 const node = new IPFS(IPFS_CONF);
 node.on('ready', () => {
   console.log('ready');
+/*  
   node.id(function (err, identity) {
     if (err) {
       throw err
     }
     console.log('identity=<',identity,'>');
   })
+*/
+  node.pubsub.publish(topic,'hello world')
 })
 
