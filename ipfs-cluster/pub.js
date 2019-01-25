@@ -23,6 +23,12 @@ node.on('ready', () => {
   connectSwarm();
   doShowID();
 })
+node.on('error', (error) => {
+  console.log('error=<',error,'>');
+})
+node.on('start', () => {
+  console.log('Node started!')
+});
 
 const swarmAddr = multiaddr('/ip6/2400:2412:13e0:9d00:2ce:39ff:fece:132/tcp/4006/ipfs/QmcdUnSFqTE9rYC2w623heJyWFKNtsbDemhpv7MPCFvbLa');
 console.log('swarmAddr=<',swarmAddr,'>');
