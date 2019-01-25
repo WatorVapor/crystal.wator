@@ -31,7 +31,7 @@ const swarmAddr = '/ip6/2400:2412:13e0:9d00:2ce:39ff:fece:132/tcp/4006/ipfs/Qmcd
 connectSwarm = () => {
   node.swarm.connect(swarmAddr, (err) =>{
     if (err) {
-      throw err
+      return console.log('err=<',err,'>');
     }
   })
 }
@@ -39,7 +39,7 @@ connectSwarm = () => {
 doShowID = () => {
   node.id((err, identity) =>{
     if (err) {
-      throw err
+       return console.log('err=<',err,'>');
     }
     console.log('identity=<',identity,'>');
   })
@@ -47,7 +47,7 @@ doShowID = () => {
 publishHello = () => {
   node.pubsub.publish(topic,msg,(err) =>{
     if(err) {
-      throw err;
+       return console.log('err=<',err,'>');
     }
   });
 }
