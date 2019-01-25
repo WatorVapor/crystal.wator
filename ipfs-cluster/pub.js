@@ -26,6 +26,10 @@ node.on('ready', () => {
     console.log('identity=<',identity,'>');
   })
 */
-  node.pubsub.publish(topic,msg);
+  node.pubsub.publish(topic,msg,(err) =>{
+    if(err) {
+      throw err;
+    }
+  });
 })
 
