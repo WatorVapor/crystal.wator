@@ -15,6 +15,8 @@ const IPFS_CONF = {
   }
 };
 
+const swarmList = '/ip6/2400:2412:13e0:9d00:8639:beff:fe67:dcc9/tcp/4006/ipfs/QmRKdj3KvE9myo9JXaC5QRAfjDAKbJxfHx2UBxvLzi9eVy';
+
 
 const node = new IPFS(IPFS_CONF);
 node.on('ready', () => {
