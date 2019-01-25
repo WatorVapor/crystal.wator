@@ -25,7 +25,7 @@ node.on('ready', () => {
   publishHello();
 })
 
-const swarmList = '/ip6/2400:2412:13e0:9d00:8639:beff:fe67:dcc9/tcp/4006/ipfs/QmRKdj3KvE9myo9JXaC5QRAfjDAKbJxfHx2UBxvLzi9eVy';
+const swarmList = '/ip6/2400:2412:13e0:9d00:2ce:39ff:fece:132/tcp/4006/ipfs/QmcdUnSFqTE9rYC2w623heJyWFKNtsbDemhpv7MPCFvbLa';
 
 
 doShowID = () => {
