@@ -18,18 +18,22 @@ const msg = Buffer.from('hello world');
 const node = new IPFS(IPFS_CONF);
 node.on('ready', () => {
   console.log('ready');
-/*  
-  node.id(function (err, identity) {
+  doShowID();
+  publishHello();
+})
+
+doShowID = () => {
+  node.id((err, identity) =>{
     if (err) {
       throw err
     }
     console.log('identity=<',identity,'>');
   })
-*/
+}
+publishHello = () => {
   node.pubsub.publish(topic,msg,(err) =>{
     if(err) {
       throw err;
     }
   });
-})
-
+}
