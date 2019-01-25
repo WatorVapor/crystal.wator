@@ -21,6 +21,7 @@ const swarmList = '/ip6/2400:2412:13e0:9d00:8639:beff:fe67:dcc9/tcp/4006/ipfs/Qm
 const node = new IPFS(IPFS_CONF);
 node.on('ready', () => {
   console.log('ready');
+  connectSwarm();
   doShowID();
   doSubscribe();
 })
@@ -34,6 +35,13 @@ doShowID = () => {
   })
 }
 
+connectSwarm = () => {
+  node.swarm.connect(swarmAddr, (err) =>{
+    if (err) {
+      return console.log('err=<',err,'>');
+    }
+  })
+}
 
 
 const topic = 'fruit-of-the-day';
