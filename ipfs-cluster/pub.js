@@ -34,13 +34,20 @@ connectSwarm = () => {
       return console.log('err=<',err,'>');
     }
   })
-  
+  node.bootstrap.add(swarmAddr,(err, res) => {
+    if (err) {
+      return console.log('err=<',err,'>');
+    }
+    console.log('res=<',res,'>');
+  })
+  /*
   node.swarm.peers((err, peerInfos) => {
     if (err) {
       return console.log('err=<',err,'>');
     }
     console.log('peerInfos=<',peerInfos,'>');
-  })  
+  })
+  */
 }
 
 doShowID = () => {
