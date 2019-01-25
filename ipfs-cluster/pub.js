@@ -19,7 +19,7 @@ const msg = Buffer.from('hello world');
 
 const node = new IPFS(IPFS_CONF);
 node.on('ready', () => {
-  //console.log('ready node=<',node,'>');
+  console.log('ready node=<',node,'>');
   console.log('ready node_peerInfo.id.toB58String()=<',node._peerInfo.id.toB58String(),'>');
   
   connectSwarm();
