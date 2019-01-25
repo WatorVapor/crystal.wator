@@ -35,7 +35,7 @@ connectSwarm = () => {
     }
   })
   
-  ipfs.swarm.peers((err, peerInfos) => {
+  node.swarm.peers((err, peerInfos) => {
     if (err) {
       return console.log('err=<',err,'>');
     }
