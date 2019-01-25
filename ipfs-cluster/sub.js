@@ -1,23 +1,29 @@
-const ipfsClient = require('ipfs-http-client');
-let ipfs = ipfsClient('/ip4/127.0.0.1/tcp/5003');
-//console.log('ipfs=<',ipfs,'>');
-
-/*
-ipfs.swarm.addrs( (err, addrs) =>{
-  if (err) {
-    throw err
+const IPFS = require('ipfs');
+const IPFS_CONF = {
+  repo: '.ipfs_pubsub_room_data',
+  EXPERIMENTAL: {
+    pubsub: true
+  },
+  config: {
+    Addresses: {
+      Swarm: [
+      ]
+    }
   }
-  console.log('ipfs.swarm.addrs addrs=<',addrs,'>');
-})
-*/
+};
 
 
-ipfs.id((err, identity) =>{
-  if (err) {
-    throw err
-  }
-  console.log('ipfs.swarm.addrs identity=<',identity,'>');
+const node = new IPFS(IPFS_CONF);
+node.on('ready', () => {
+  console.log('ready');
+  node.id(function (err, identity) {
+    if (err) {
+      throw err
+    }
+    console.log('identity=<',identity,'>');
+  })
 })
+
 
 
 const topic = 'fruit-of-the-day';
@@ -25,6 +31,7 @@ const receiveMsg = (msg) => {
   console.log('receiveMsg msg.data.toString()=<',msg.data.toString(),'>');
 }
 
+/*
 ipfs.pubsub.subscribe(topic, receiveMsg, (err) => {
   if (err) {
     throw err
@@ -32,5 +39,6 @@ ipfs.pubsub.subscribe(topic, receiveMsg, (err) => {
   console.log(`subscribed to ${topic}`)
   console.log('ipfs.pubsub.subscribe topic=<',topic,'>');
 })
+*/
 
 
