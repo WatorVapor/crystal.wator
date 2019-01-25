@@ -22,7 +22,6 @@ node.on('ready', () => {
   console.log('ready');
   connectSwarm();
   doShowID();
-  publishHello();
 })
 
 const swarmAddr = multiaddr('/ip6/2400:2412:13e0:9d00:2ce:39ff:fece:132/tcp/4006/ipfs/QmcdUnSFqTE9rYC2w623heJyWFKNtsbDemhpv7MPCFvbLa');
@@ -41,6 +40,7 @@ connectSwarm = () => {
       return console.log('err=<',err,'>');
     }
     console.log('res=<',res,'>');
+    publishHello();
   })
   /*
   node.swarm.peers((err, peerInfos) => {
