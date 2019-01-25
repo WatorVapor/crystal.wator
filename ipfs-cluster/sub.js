@@ -9,9 +9,7 @@ const IPFS_CONF = {
   config: {
     Addresses: {
       Swarm: [
-        '/ip4/0.0.0.0/tcp/4006',
-        '/ip6/::/tcp/4006',
-        '/ip4/127.0.0.1/tcp/4007/ws'
+        '/ip6/::/tcp/4006'
       ]
     }
   }
