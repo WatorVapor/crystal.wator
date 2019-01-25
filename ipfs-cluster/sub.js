@@ -16,22 +16,18 @@ const IPFS_CONF = {
 const node = new IPFS(IPFS_CONF);
 node.on('ready', () => {
   console.log('ready');
-  /*
-  node.id(function (err, identity) {
+  doShowID();
+  doSubscribe();
+})
+
+doShowID = () => {
+  node.id((err, identity) =>{
     if (err) {
       throw err
     }
     console.log('identity=<',identity,'>');
   })
-  */
-  node.pubsub.subscribe(topic, receiveMsg, (err) => {
-    if (err) {
-      throw err
-    }
-    console.log(`subscribed to ${topic}`)
-    console.log('ipfs.pubsub.subscribe topic=<',topic,'>');
-  })  
-})
+}
 
 
 
@@ -40,14 +36,12 @@ const receiveMsg = (msg) => {
   console.log('receiveMsg msg.data.toString()=<',msg.data.toString(),'>');
 }
 
-/*
-ipfs.pubsub.subscribe(topic, receiveMsg, (err) => {
-  if (err) {
-    throw err
-  }
-  console.log(`subscribed to ${topic}`)
-  console.log('ipfs.pubsub.subscribe topic=<',topic,'>');
-})
-*/
-
-
+doSubscribe = () => {
+  node.pubsub.subscribe(topic, receiveMsg, (err) => {
+    if (err) {
+      throw err
+    }
+    console.log(`subscribed to ${topic}`)
+    console.log('ipfs.pubsub.subscribe topic=<',topic,'>');
+  })  
+}
