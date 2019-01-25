@@ -9,10 +9,12 @@ ipfs.swarm.addrs( (err, addrs) =>{
   console.log('ipfs.swarm.addrs addrs=<',addrs,'>');
 })
 */
-
+/*
 ipfs.id((err, identity) =>{
   if (err) {
     throw err
   }
   console.log('ipfs.swarm.addrs identity=<',identity,'>');
 })
+*/
+console.log('ipfs.peerId=<',ipfs.peerId,'>');
