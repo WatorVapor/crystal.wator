@@ -1,4 +1,5 @@
 const IPFS = require('ipfs');
+const multiaddr = require('multiaddr');
 const IPFS_CONF = {
   repo: '.ipfs_pubsub_room_data',
   EXPERIMENTAL: {
@@ -26,7 +27,7 @@ node.on('ready', () => {
   publishHello();
 })
 
-const swarmAddr = '/ip6/2400:2412:13e0:9d00:2ce:39ff:fece:132/tcp/4006/ipfs/QmcdUnSFqTE9rYC2w623heJyWFKNtsbDemhpv7MPCFvbLa';
+const swarmAddr = multiaddr('/ip6/2400:2412:13e0:9d00:2ce:39ff:fece:132/tcp/4006/ipfs/QmcdUnSFqTE9rYC2w623heJyWFKNtsbDemhpv7MPCFvbLa');
 
 connectSwarm = () => {
   node.swarm.connect(swarmAddr, (err) =>{
