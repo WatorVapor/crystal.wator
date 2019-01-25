@@ -11,11 +11,19 @@ ipfs.swarm.addrs( (err, addrs) =>{
 })
 */
 
+/*
 ipfs.id((err, identity) =>{
   if (err) {
     throw err
   }
   console.log('ipfs.swarm.addrs identity=<',identity,'>');
 })
+*/
+const addr = '/ip6/2400:2412:13e0:9d00:2ce:39ff:fece:132/tcp/4004/ipfs/QmfHFh3DrZc44cbRet5iUuM4Ci5YtKePxZp5jwmDCVYqDr'
 
-console.log('ipfs.peerId=<',ipfs.peerId,'>');
+ipfs.swarm.connect(addr, (err) =>{
+  if (err) {
+    throw err
+  }
+})
+
