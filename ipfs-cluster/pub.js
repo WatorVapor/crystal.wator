@@ -29,11 +29,18 @@ const swarmAddr = multiaddr('/ip6/2400:2412:13e0:9d00:2ce:39ff:fece:132/tcp/4006
 console.log('swarmAddr=<',swarmAddr,'>');
 
 connectSwarm = () => {
-  node.swarm.connect(swarmAddr, (err) =>{
+  node.swarm.connect(swarmAddr, (err) => {
     if (err) {
       return console.log('err=<',err,'>');
     }
   })
+  
+  ipfs.swarm.peers((err, peerInfos) => {
+    if (err) {
+      return console.log('err=<',err,'>');
+    }
+    console.log('peerInfos=<',peerInfos,'>');
+  })  
 }
 
 doShowID = () => {
