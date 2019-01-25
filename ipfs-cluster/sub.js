@@ -65,5 +65,12 @@ doSubscribe = () => {
     }
     console.log(`subscribed to ${topic}`)
     console.log('ipfs.pubsub.subscribe topic=<',topic,'>');
-  })  
+    node.pubsub.ls((err, topics) => {
+      if(err) {
+         return console.log('err=<',err,'>');
+      }
+      console.log('topics=<',topics,'>');
+    });
+
+  });  
 }
