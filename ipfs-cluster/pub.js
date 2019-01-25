@@ -42,14 +42,14 @@ connectSwarm = () => {
     console.log('res=<',res,'>');
     publishHello();
   })
-  /*
+  
   node.swarm.peers((err, peerInfos) => {
     if (err) {
       return console.log('err=<',err,'>');
     }
     console.log('peerInfos=<',peerInfos,'>');
   })
-  */
+  
 }
 
 doShowID = () => {
