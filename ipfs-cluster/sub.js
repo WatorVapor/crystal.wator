@@ -37,11 +37,19 @@ doShowID = () => {
 const swarmAddr = multiaddr('/ip6/2400:2412:13e0:9d00:8639:beff:fe67:dcc9/tcp/4006/ipfs/QmRKdj3KvE9myo9JXaC5QRAfjDAKbJxfHx2UBxvLzi9eVy');
 
 connectSwarm = () => {
+  /*
   node.swarm.connect(swarmAddr, (err) =>{
     if (err) {
       return console.log('err=<',err,'>');
     }
   })
+  */
+  node.bootstrap.add(swarmAddr,(err, res) => {
+    if (err) {
+      return console.log('err=<',err,'>');
+    }
+    console.log('res=<',res,'>');
+  })  
 }
 
 
