@@ -13,6 +13,7 @@ const IPFS_CONF = {
 };
 
 const topic = 'fruit-of-the-day';
+const msg = Buffer.from('hello world');
 
 const node = new IPFS(IPFS_CONF);
 node.on('ready', () => {
@@ -25,6 +26,6 @@ node.on('ready', () => {
     console.log('identity=<',identity,'>');
   })
 */
-  node.pubsub.publish(topic,'hello world')
+  node.pubsub.publish(topic,msg);
 })
 
