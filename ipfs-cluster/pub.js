@@ -61,6 +61,12 @@ doShowID = () => {
   })
 }
 publishHello = () => {
+  node.pubsub.ls((err, topics) => {
+    if(err) {
+       return console.log('err=<',err,'>');
+    }
+    console.log('topics=<',topics,'>');
+  });
   node.pubsub.publish(topic,msg,(err) =>{
     if(err) {
        return console.log('err=<',err,'>');
