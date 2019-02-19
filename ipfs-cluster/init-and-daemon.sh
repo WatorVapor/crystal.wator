@@ -1,4 +1,16 @@
 #! /usr/bin/env bash
-npm update --save
-cp -f config-nodejs.js node_modules/ipfs/src/core/runtime/config-nodejs.js
-cd node_modules/ipfs && ./init-and-daemon.sh
+
+set -e
+
+if [ -n "$IPFS_PATH" ]; then
+  echo "Using $IPFS_PATH as IPFS repository"
+else
+  echo "You need to set IPFS_PATH environment variable to use this script"
+  exit 1
+fi
+
+# Initialize the repo but ignore if error if it already exists
+# This can be the case when we restart a container without stopping/removing it
+node src/cli/bin.js init || true
+
+node src/cli/bin.js daemon
