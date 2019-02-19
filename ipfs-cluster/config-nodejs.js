@@ -18,6 +18,9 @@ module.exports = () => ({
     }
   },
   Bootstrap: [
+    '/ip6/2400:2412:13e0:9d00:2ce:39ff:fece:132/tcp/4004/ipfs/QmdVA7g41XcNbZcXgc2ZdHpGtMyVdGkyMEv8P147BGhXjp',
+    '/ip6/2400:2412:13e0:9d00:8639:beff:fe67:dcc9/tcp/4004/ipfs/QmQ3vC4DCh48EzJgeSDeuGZhsnaEVuyB1QKuqRFGpXpwaT'
+/*    
     '/ip4/104.236.176.52/tcp/4001/ipfs/QmSoLnSGccFuZQJzRadHn95W2CrSFmZuTdDWP8HXaHca9z',
     '/ip4/104.131.131.82/tcp/4001/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ',
     '/ip4/104.236.179.241/tcp/4001/ipfs/QmSoLPppuBtQSGwKDZT2M73ULpjvfd3aZ6ha4oFGL1KrGM',
@@ -37,5 +40,6 @@ module.exports = () => ({
     '/ip6/2604:a880:1:20::1d9:6001/tcp/4001/ipfs/QmSoLju6m7xTh3DuokvT3886QRYqxAzb1kShaanJgW36yx',
     '/dns4/node0.preload.ipfs.io/tcp/443/wss/ipfs/QmZMxNdpMkewiVZLMRxaNxUeZpDUb34pWjZ1kZvsd16Zic',
     '/dns4/node1.preload.ipfs.io/tcp/443/wss/ipfs/Qmbut9Ywz9YEDrz8ySBSgWyJk41Uvm2QJPhwDJzJyGFsD6'
+  */
   ]
 })
