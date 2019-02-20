@@ -5,6 +5,7 @@ services:
     volumes:
       - ./export-ipfs:/export
       - ./storage-ipfs:/data/ipfs
+    command:daemon --migrate=true --enable-gc=true
     networks:
       - outside
     deploy:
