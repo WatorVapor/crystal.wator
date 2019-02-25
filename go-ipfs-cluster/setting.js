@@ -8,7 +8,7 @@ ipfs.id((err, identity) =>{
   console.log('ipfs.id identity=<',identity,'>');
 });
 
-ipfs.config.get((err, config) => {
+ipfs.config.get('API.Addresses',(err, config) => {
   if (err) {
     throw err
   }
