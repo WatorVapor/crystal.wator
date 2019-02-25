@@ -15,5 +15,13 @@ ipfs.config.get((err, config) => {
   if (err) {
     throw err
   }
-  console.log('ipfs.config.get config=<',config,'>');
+  console.log('ipfs.config.get * config=<',config,'>');
 })
+
+ipfs.config.get('Addresses',(err, config) => {
+  if (err) {
+    throw err
+  }
+  console.log('ipfs.config.get Addresses config=<',config,'>');
+})
+
