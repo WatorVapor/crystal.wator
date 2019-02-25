@@ -11,7 +11,7 @@ ipfs.id((err, identity) =>{
 */
 
 
-ipfs.config.get('API.Addresses',(err, config) => {
+ipfs.config.get((err, config) => {
   if (err) {
     throw err
   }
