@@ -12,5 +12,5 @@ ipfs.config.get((err, config) => {
   if (err) {
     throw err
   }
-  console.log(config)
+  console.log('ipfs.config.get config=<',config,'>');
 })
