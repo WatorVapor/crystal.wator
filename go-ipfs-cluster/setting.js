@@ -10,18 +10,27 @@ ipfs.id((err, identity) =>{
 });
 */
 
-
+/*
 ipfs.config.get((err, config) => {
   if (err) {
     throw err
   }
   console.log('ipfs.config.get * config=<',config,'>');
 })
+*/
 
-ipfs.config.get('Addresses',(err, config) => {
+ipfs.config.get('Addresses.API',(err, config) => {
   if (err) {
     throw err
   }
-  console.log('ipfs.config.get Addresses config=<',config,'>');
+  console.log('ipfs.config.get Addresses.API config=<',config,'>');
 })
+
+ipfs.config.get('Addresses.Gateway',(err, config) => {
+  if (err) {
+    throw err
+  }
+  console.log('ipfs.config.get Addresses.Gateway config=<',config,'>');
+})
+
 
