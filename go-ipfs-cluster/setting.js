@@ -7,3 +7,10 @@ ipfs.id((err, identity) =>{
   }
   console.log('ipfs.id identity=<',identity,'>');
 });
+
+ipfs.config.get((err, config) => {
+  if (err) {
+    throw err
+  }
+  console.log(config)
+})
