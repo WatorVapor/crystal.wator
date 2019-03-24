@@ -16,10 +16,11 @@ p2pPlay.onReady = () => {
   //console.log('p2pPlay=<',p2pPlay,'>');
 }
 
-p2pDeal.in(()=> {
-  onDealMsg();
+p2pDeal.in((msg,from)=> {
+  onDealMsg(msg,from);
 });
 
-onDealMsg = (msg) => {
+onDealMsg = (msg,from) => {
   console.log('onDealMsg::msg=<',msg,'>');
+  console.log('onDealMsg::from=<',from,'>');
 }

@@ -4,7 +4,7 @@ const RouletteP2p = require('../p2p/roulette_p2p');
 let bDealReady = false;
 let bPlayReady = false;
 let bStorageReady = false;
-
+const iConstFirstBlockDelay = 1000 * 20;
 
 const DEAL_WORLD_MESSAGE = '三十年河东，三十年河西，风水轮流转';
 const p2pDeal = new RouletteP2p(DEAL_WORLD_MESSAGE);
@@ -12,7 +12,7 @@ const p2pDeal = new RouletteP2p(DEAL_WORLD_MESSAGE);
 p2pDeal.onReady = () => {
   bDealReady = true;
   if(bDealReady && bPlayReady && bStorageReady) {
-    setTimeout(onReadTopBlock,1);
+    setTimeout(onReadTopBlock,iConstFirstBlockDelay);
   }
 }
 
@@ -22,7 +22,7 @@ const p2pPlay = new RouletteP2p(PLAY_WORLD_MESSAGE);
 p2pPlay.onReady = () => {
   bPlayReady = true;
   if(bDealReady && bPlayReady && bStorageReady) {
-    setTimeout(onReadTopBlock,1);
+    setTimeout(onReadTopBlock,iConstFirstBlockDelay);
   }
 }
 
@@ -45,11 +45,13 @@ let ipfs = new IPFS(IPFS_CONF);
 ipfs.on('ready', () => {
   bStorageReady = true;
   if(bDealReady && bPlayReady && bStorageReady) {
-    setTimeout(onReadTopBlock,1);
+    setTimeout(onReadTopBlock,iConstFirstBlockDelay);
   }
 });
 
 let gTopBlockCID = 'QmaQiuGocvEsf7WwpG5Kt9d6J44V7TjfGy1GbZ3BKDgwyt';
+
+const iConstBlockDealDelay = 1000 * 10;
 
 onReadTopBlock = async () => {
   //console.log('onReadTopBlock ipfs=<',ipfs,'>');
@@ -64,6 +66,7 @@ onReadTopBlock = async () => {
       gTopBlockCID = prev;
       let card = {cid : gTopBlockCID};
       p2pDeal.out(card);
+      setTimeout(onReadTopBlock,iConstBlockDealDelay);
     }
   } catch(e) {
     console.log('onReadTopBlock e=<',e,'>');
