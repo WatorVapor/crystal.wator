@@ -7,10 +7,9 @@ let nowTag = new Date();
 
 let dNowTag = new SHA3.SHA3Hash(224);
 dNowTag.update(nowTag.toISOString());
-const pubsubRepos = bs58.encode(dNowTag.digest('hex'));
+let buffNowTag = Buffer.from(dNowTag.digest('hex'),'hex');
+const pubsubRepos = bs58.encode(buffNowTag);
 console.log('pubsubRepos=<',pubsubRepos,'>');
-
-const WORLD_MESSAGE = '熊大,快看光头强的头被割了韭菜';
 
 const IPFS_CONF = {
   repo: '.ipfs_pubsub_room_data_' + pubsubRepos,
@@ -28,12 +27,12 @@ const IPFS_CONF = {
 
 
 module.exports = class WoWaP2p {
-  constructor() {
+  constructor(wold_msg) {
     let d = new SHA3.SHA3Hash(224);
-    d.update(WORLD_MESSAGE);
-    let number = d.digest('hex');
+    d.update(wold_msg);
+    let number = Buffer.from(d.digest('hex'),'hex');
     this.number = bs58.encode(number);
-    console.log('this.number=<',this.number,'>');
+    //console.log('this.number=<',this.number,'>');
     this.ipfs = new IPFS(IPFS_CONF);
     let self = this;
     this.ipfs.on('ready', () => {
@@ -53,6 +52,8 @@ module.exports = class WoWaP2p {
     this._cb[channel] = cb;
   }
   
+  
+  // internal
   _onInit() {
     let self = this;
     this.ipfs.id( (err,identity)=>{
