@@ -37,6 +37,9 @@ module.exports = class WoWaP2p {
     let self = this;
     this.ipfs.on('ready', () => {
       self._onInit();
+      if(typeof self.onReady === 'function') {
+        self.onReady();
+      }
     });
     this._cb = {};
   }
