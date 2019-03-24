@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "ipfs": "~=0.35.0-rc.3",
+    "ipfs": "~=0.34.4",
     "ipfs-pubsub-room": "~=1.4.1",
     "level": "~=4.0.0",
     "redis": "~=2.8.0",

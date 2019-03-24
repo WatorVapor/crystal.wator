@@ -3,16 +3,9 @@ const IPFS = require('ipfs');
 const SHA3  = require('sha3');
 const bs58 = require('bs58')
 
-let nowTag = new Date();
 
-let dNowTag = new SHA3.SHA3Hash(224);
-dNowTag.update(nowTag.toISOString());
-let buffNowTag = Buffer.from(dNowTag.digest('hex'),'hex');
-const pubsubRepos = bs58.encode(buffNowTag);
-console.log('pubsubRepos=<',pubsubRepos,'>');
-
+const REPO_PREFIX = '.ipfs_pubsub_room_data_';
 const IPFS_CONF = {
-  repo: '.ipfs_pubsub_room_data_' + pubsubRepos,
   EXPERIMENTAL: {
     pubsub: true
   },
@@ -26,8 +19,15 @@ const IPFS_CONF = {
 };
 
 
-module.exports = class WoWaP2p {
+module.exports = class RouletteP2p {
   constructor(wold_msg) {
+    let nowTag = new Date();
+    let dNowTag = new SHA3.SHA3Hash(224);
+    dNowTag.update(nowTag.toISOString() + nowTag.getMilliseconds().toString());
+    let buffNowTag = Buffer.from(dNowTag.digest('hex'),'hex');
+    const pubsubRepos = bs58.encode(buffNowTag);
+    console.log('pubsubRepos=<',pubsubRepos,'>');
+    IPFS_CONF.repo = REPO_PREFIX + pubsubRepos;
     let d = new SHA3.SHA3Hash(224);
     d.update(wold_msg);
     let number = Buffer.from(d.digest('hex'),'hex');
@@ -41,18 +41,13 @@ module.exports = class WoWaP2p {
         self.onReady();
       }
     });
-    this._cb = {};
+    this._cb = false;
   }
-  out(channel,msgObj,to) {
-    msgObj.channel = channel;
-    if(to) {
-      this.room.sendTo(to,JSON.stringify(msgObj));
-    } else {
-      this.room.broadcast(JSON.stringify(msgObj));
-    }
+  out(msgObj) {
+    this.room.broadcast(JSON.stringify(msgObj));
   }
-  in(channel,cb) {
-    this._cb[channel] = cb;
+  in(cb) {
+    this._cb = cb;
   }
   
   
@@ -90,14 +85,12 @@ module.exports = class WoWaP2p {
   _onRoomMessage(msg) {
     //console.log('onRoomMessage::this.peer=<',this.peer,'>');
     if(msg.from !== this.peer) {
-      //console.log('onRoomMessage::msg=<',msg,'>');
+      console.log('onRoomMessage::msg=<',msg,'>');
       let jsonData = JSON.parse(msg.data.toString('utf8'));
       //console.log('onRoomMessage::jsonData=<',jsonData,'>');
-      if(jsonData && jsonData.channel) {
-        let cb = this._cb[jsonData.channel];
-        if(typeof(cb) === 'function') {
-          delete jsonData.channel;
-          cb(jsonData,msg.from);
+      if(jsonData) {
+        if(typeof(this._cb) === 'function') {
+          this._cb(jsonData,msg.from);
         } else {
           //console.log('onRoomMessage::jsonData=<',jsonData,'>');
         }
