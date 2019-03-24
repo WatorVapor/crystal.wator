@@ -1,5 +1,5 @@
-const uri = "ws://127.0.0.1:18020";
-//const uri = "ws://node4.ceph.wator.xyz:18020";
+//const uri = "ws://127.0.0.1:18020";
+const uri = "ws://node4.ceph.wator.xyz:18020";
 const ws = new WebSocket(uri);
 ws.onopen = onOpen;
 ws.onmessage = onMessage;
