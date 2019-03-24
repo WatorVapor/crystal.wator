@@ -26,7 +26,7 @@ console.log('storageRepos=<',storageRepos,'>');
 
 
 const IPFS_CONF = {
-  repo: '.ipfs_pubsub_room_data_/' + storageRepos
+  repo: '.ipfs_pubsub_room_data_' + storageRepos
 };
 let ipfs = new IPFS(IPFS_CONF);
 ipfs.on('ready', () => {
