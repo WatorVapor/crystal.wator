@@ -6,9 +6,10 @@ chair.onReady = (node) => {
   onReadTopBlock(node);
 }
 
+const iConstBlockDealDelay = 1000 * 10;
 
 let gTopBlockCID = 'QmaQiuGocvEsf7WwpG5Kt9d6J44V7TjfGy1GbZ3BKDgwyt';
-const iConstBlockDealDelay = 1000 * 10;
+let gRecentPublished = '';
 onReadTopBlock = async (node) => {
   //console.log('onReadTopBlock node=<',node,'>');
   //console.log('onReadTopBlock blockIpfs=<',blockIpfs,'>');
@@ -18,10 +19,16 @@ onReadTopBlock = async (node) => {
       let block = JSON.parse(blockIpfs[0].content);
       //console.log('onReadTopBlock block=<',block,'>');
       let prev = block.prev;
-      console.log('onReadTopBlock prev=<',prev,'>');
+      //console.log('onReadTopBlock prev=<',prev,'>');
       gTopBlockCID = prev;
-      let card = {cid : gTopBlockCID};
-      chair.publish(card);
+      if(gRecentPublished !==  gTopBlockCID) {
+        let card = {cid : gTopBlockCID};
+        console.log('onReadTopBlock card=<',card,'>');
+        chair.publish(card);
+        gRecentPublished = gTopBlockCID;
+      } else {
+        console.log('onReadTopBlock sent!! ??? prev=<',prev,'>');
+      }
       setTimeout(()=>{
         onReadTopBlock(node);
       },iConstBlockDealDelay);
