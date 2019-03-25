@@ -32,29 +32,13 @@ class RouletteTable {
     let self = this;
     this.p2pDealer.onReady = () => {
       self.bDealerReady = true;
-      if(self.bDealerReady && self.bPlayerReady && self.bStorageReady) {
-        if(typeof self.onReady === 'function') {
-          if(self.position === 'chair') {
-            setTimeout(self.onReady,iConstFirstBlockDelay);
-          } else {
-            setTimeout(self.onReady,0);            
-          }
-        }
-      }
+      self.tryCallReadyCallBack_();
     }
     this.p2pPlayer = new RouletteP2P(PLAY_WORLD_MESSAGE);
     //console.log('p2pPlayer=<',p2pPlayer,'>');
     this.p2pPlayer.onReady = () => {
       self.bPlayerReady = true;
-      if(self.bDealerReady && self.bPlayerReady && self.bStorageReady) {
-        if(typeof self.onReady === 'function') {
-          if(self.position === 'chair') {
-            setTimeout(self.onReady,iConstFirstBlockDelay);
-          } else {
-            setTimeout(self.onReady,0);            
-          }
-        }
-      }
+      self.tryCallReadyCallBack_();
     }
 
     const dStorageTag = new SHA3.SHA3Hash(224);
@@ -90,19 +74,28 @@ class RouletteTable {
     this.ipfs = new IPFS(IPFS_CONF);
     this.ipfs.on('ready', () => {
       self.bStorageReady = true;
-      if(self.bDealerReady && self.bPlayerReady && self.bStorageReady) {
-        if(typeof self.onReady === 'function') {
-          if(self.position === 'chair') {
-            setTimeout(self.onReady,iConstFirstBlockDelay);
-          } else {
-            setTimeout(self.onReady,0);            
-          }
-        }
-      }
+      self.tryCallReadyCallBack_();
     });
     this.ipfs.on('error', error => {
       console.error('error.message=<',error.message,'>');    
     })
+  }
+  
+  tryCallReadyCallBack_() {
+    if(this.bDealerReady && this.bPlayerReady && this.bStorageReady) {
+      if(typeof this.onReady === 'function') {
+        let self = this;
+        if(this.position === 'chair') {
+          setTimeout(()=> {
+            self.onReady(self.ipfs);
+          },iConstFirstBlockDelay);
+        } else {
+          setTimeout(()=> {
+            self.onReady(self.ipfs);
+          },0);
+        }
+      }
+    }
   }
 }
 
