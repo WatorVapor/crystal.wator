@@ -2,9 +2,11 @@ const Room = require('ipfs-pubsub-room');
 const IPFS = require('ipfs');
 const SHA3  = require('sha3');
 const bs58 = require('bs58')
+const execSync = require('child_process').execSync;
 
 
-const REPO_PREFIX = '.ipfs_pubsub_room_data_';
+
+const REPO_PREFIX = '.ipfs_pubsub_room_data/';
 const IPFS_CONF = {
   EXPERIMENTAL: {
     pubsub: true
@@ -19,7 +21,7 @@ const IPFS_CONF = {
 };
 
 
-module.exports = class RouletteP2p {
+module.exports = class RouletteP2P {
   constructor(wold_msg) {
     let nowTag = new Date();
     let dNowTag = new SHA3.SHA3Hash(224);
@@ -27,6 +29,7 @@ module.exports = class RouletteP2p {
     let buffNowTag = Buffer.from(dNowTag.digest('hex'),'hex');
     const pubsubRepos = bs58.encode(buffNowTag);
     console.log('pubsubRepos=<',pubsubRepos,'>');
+    execSync('mkdir -p ' + REPO_PREFIX);
     IPFS_CONF.repo = REPO_PREFIX + pubsubRepos;
     let d = new SHA3.SHA3Hash(224);
     d.update(wold_msg);
@@ -43,10 +46,10 @@ module.exports = class RouletteP2p {
     });
     this._cb = false;
   }
-  out(msgObj) {
+  publish(msgObj) {
     this.room.broadcast(JSON.stringify(msgObj));
   }
-  in(cb) {
+  subscribe(cb) {
     this._cb = cb;
   }
   

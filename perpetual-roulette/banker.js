@@ -1,27 +1,28 @@
-const RouletteP2p = require('../p2p/roulette_p2p');
-//console.log('RouletteP2p=<',RouletteP2p,'>');
+/*
+const RouletteP2P = require('../p2p/roulette_p2p');
+//console.log('RouletteP2P=<',RouletteP2P,'>');
 
-let bDealReady = false;
-let bPlayReady = false;
+let bDealerReady = false;
+let bPlayerReady = false;
 let bStorageReady = false;
 const iConstFirstBlockDelay = 1000 * 20;
 
 const DEAL_WORLD_MESSAGE = '三十年河东，三十年河西，风水轮流转';
-const p2pDeal = new RouletteP2p(DEAL_WORLD_MESSAGE);
-//console.log('p2pDeal=<',p2pDeal,'>');
-p2pDeal.onReady = () => {
-  bDealReady = true;
-  if(bDealReady && bPlayReady && bStorageReady) {
+const p2pDealer = new RouletteP2P(DEAL_WORLD_MESSAGE);
+//console.log('p2pDealer=<',p2pDealer,'>');
+p2pDealer.onReady = () => {
+  bDealerReady = true;
+  if(bDealerReady && bPlayerReady && bStorageReady) {
     setTimeout(onReadTopBlock,iConstFirstBlockDelay);
   }
 }
 
 const PLAY_WORLD_MESSAGE = '等的我花都凉了';
-const p2pPlay = new RouletteP2p(PLAY_WORLD_MESSAGE);
+const p2pPlay = new RouletteP2P(PLAY_WORLD_MESSAGE);
 //console.log('p2pPlay=<',p2pPlay,'>');
 p2pPlay.onReady = () => {
-  bPlayReady = true;
-  if(bDealReady && bPlayReady && bStorageReady) {
+  bPlayerReady = true;
+  if(bDealerReady && bPlayerReady && bStorageReady) {
     setTimeout(onReadTopBlock,iConstFirstBlockDelay);
   }
 }
@@ -37,22 +38,33 @@ const storageRepos = bs58.encode(buffBankTag);
 console.log('storageRepos=<',storageRepos,'>');
 
 
+const execSync = require('child_process').execSync;
+const REPO_PREFIX = '.ipfs_pubsub_room_data/';
+execSync('mkdir -p ' + REPO_PREFIX);
 
 const IPFS_CONF = {
-  repo: '.ipfs_pubsub_room_data_' + storageRepos
+  repo: REPO_PREFIX + storageRepos
 };
 let ipfs = new IPFS(IPFS_CONF);
 ipfs.on('ready', () => {
   bStorageReady = true;
-  if(bDealReady && bPlayReady && bStorageReady) {
+  if(bDealerReady && bPlayerReady && bStorageReady) {
     setTimeout(onReadTopBlock,iConstFirstBlockDelay);
   }
 });
+*/
+
+const Chair = require('./round-table').Chair;
+//console.log('Chair=<',Chair,'>');
+let chair = new Chair();
+chair.onReady = () => {
+  //console.log('chair=<',chair,'>');
+  onReadTopBlock();
+}
+
 
 let gTopBlockCID = 'QmaQiuGocvEsf7WwpG5Kt9d6J44V7TjfGy1GbZ3BKDgwyt';
-
 const iConstBlockDealDelay = 1000 * 10;
-
 onReadTopBlock = async () => {
   //console.log('onReadTopBlock ipfs=<',ipfs,'>');
   //console.log('onReadTopBlock blockIpfs=<',blockIpfs,'>');
@@ -65,7 +77,7 @@ onReadTopBlock = async () => {
       console.log('onReadTopBlock prev=<',prev,'>');
       gTopBlockCID = prev;
       let card = {cid : gTopBlockCID};
-      p2pDeal.out(card);
+      chair.publish(card);
       setTimeout(onReadTopBlock,iConstBlockDealDelay);
     }
   } catch(e) {
