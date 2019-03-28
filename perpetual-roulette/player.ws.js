@@ -12,3 +12,23 @@ onDealMsg = (msg,from) => {
   console.log('onDealMsg::msg=<',msg,'>');
   console.log('onDealMsg::from=<',from,'>');
 }
+
+const server = require("ws").Server;
+const options = {
+  host:'127.0.0.1',
+  port: 5001
+};
+const s = new server(options);
+
+
+onWSConnected = (ws) => {
+  ws.on("message", onWSMessage);  
+}
+s.on("connection", onWSConnected);
+
+onWSMessage = (msg)  => {
+  console.log('onWSMessage::msg=<',msg,'>');
+}
+
+
+
