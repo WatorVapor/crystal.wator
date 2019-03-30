@@ -22,6 +22,7 @@ const s = new server(options);
 
 
 onWSConnected = (ws) => {
+  //console.log('onWSConnected::ws=<',ws,'>');
   ws.on("message", onWSMessage);  
 }
 s.on("connection", onWSConnected);
