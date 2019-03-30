@@ -6,7 +6,7 @@ chair.onReady = (node) => {
   onReadTopBlock(node);
 }
 
-const iConstBlockDealDelay = 1000 * 10;
+const iConstBlockDealDelay = 1000 * 30;
 
 let gTopBlockCID = 'QmaQiuGocvEsf7WwpG5Kt9d6J44V7TjfGy1GbZ3BKDgwyt';
 let gRecentPublished = '';

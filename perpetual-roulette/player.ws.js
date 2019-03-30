@@ -11,25 +11,34 @@ seat.subscribe((msg,from)=> {
 onDealMsg = (msg,from) => {
   console.log('onDealMsg::msg=<',msg,'>');
   console.log('onDealMsg::from=<',from,'>');
+  broadCastWS(msg);
 }
 
-const server = require("ws").Server;
+const WebSocket = require('ws');
+const server = WebSocket.Server;
 const options = {
   host:'127.0.0.1',
   port: 8051
 };
-const s = new server(options);
+const wss = new server(options);
 
 
 onWSConnected = (ws) => {
   //console.log('onWSConnected::ws=<',ws,'>');
   ws.on("message", onWSMessage);  
 }
-s.on("connection", onWSConnected);
+wss.on("connection", onWSConnected);
 
 onWSMessage = (msg)  => {
   console.log('onWSMessage::msg=<',msg,'>');
 }
 
-
+broadCastWS = (msg) => {
+  console.log('broadCastWS::msg=<',msg,'>');
+  wss.clients.forEach(function each(client) {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify(msg));
+    }
+  });
+}
 
