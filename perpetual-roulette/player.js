@@ -12,3 +12,5 @@ onDealMsg = (msg,from) => {
   console.log('onDealMsg::msg=<',msg,'>');
   console.log('onDealMsg::from=<',from,'>');
 }
+
+shake256('Message to hash', 512);
