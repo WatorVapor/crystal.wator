@@ -26,7 +26,6 @@ class RouletteTable {
     this.position = position;
     this.bDealerReady = false;
     this.bPlayerReady = false;
-    this.bStorageReady = false;
     this.p2pDealer = new RouletteP2P(DEAL_WORLD_MESSAGE);
     //console.log('p2pDealer=<',p2pDealer,'>');
     let self = this;
@@ -40,49 +39,10 @@ class RouletteTable {
       self.bPlayerReady = true;
       self.tryCallReadyCallBack_();
     }
-
-    const dStorageTag = new SHA3.SHA3Hash(224);
-    if(this.position === 'chair') {
-      dStorageTag.update(DEAL_WORLD_MESSAGE);
-    } else {
-      dStorageTag.update(PLAY_WORLD_MESSAGE);      
-    }
-    let buffStorageTag = Buffer.from(dStorageTag.digest('hex'),'hex');
-    const storageRepos = bs58.encode(buffStorageTag);
-    console.log('storageRepos=<',storageRepos,'>');    
-    
-    const IPFS_CONF = {
-      repo: REPO_PREFIX + storageRepos,
-      Addresses: {
-        Swarm: [
-          '/ip6/::/tcp/4012'
-        ],
-        API: '/ip4/127.0.0.1/tcp/5012',
-        Gateway: '/ip4/127.0.0.1/tcp/9190'
-      }      
-    };
-    if(this.position === 'chair') {
-      IPFS_CONF.Addresses = {
-        Swarm: [
-          '/ip6/::/tcp/4013'
-        ],
-        API: '/ip4/127.0.0.1/tcp/5013',
-        Gateway: '/ip4/127.0.0.1/tcp/9191'
-      };
-    }
-
-    this.ipfs = new IPFS(IPFS_CONF);
-    this.ipfs.on('ready', () => {
-      self.bStorageReady = true;
-      self.tryCallReadyCallBack_();
-    });
-    this.ipfs.on('error', error => {
-      console.error('error.message=<',error.message,'>');    
-    })
   }
   
   tryCallReadyCallBack_() {
-    if(this.bDealerReady && this.bPlayerReady && this.bStorageReady) {
+    if(this.bDealerReady && this.bPlayerReady) {
       if(typeof this.onReady === 'function') {
         let self = this;
         if(this.position === 'chair') {

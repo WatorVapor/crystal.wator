@@ -3,38 +3,59 @@ const Chair = require('./round-table').Chair;
 let chair = new Chair();
 chair.onReady = (node) => {
   //console.log('chair=<',chair,'>');
-  onReadTopBlock(node);
+  onReadTopBlock();
 }
 
-const iConstBlockDealDelay = 1000 * 30;
+const iConstBlockDealDelay = 1000 * 1;
 
-let gTopBlockCID = 'QmaQiuGocvEsf7WwpG5Kt9d6J44V7TjfGy1GbZ3BKDgwyt';
+let gTopBlockAddress = '3gdwU8E3TJPHw2LLSLKn1ommiLrf';
 let gRecentPublished = '';
-onReadTopBlock = async (node) => {
-  //console.log('onReadTopBlock node=<',node,'>');
-  //console.log('onReadTopBlock blockIpfs=<',blockIpfs,'>');
-  try {
-    let blockIpfs = await node.get(gTopBlockCID);
-    if(blockIpfs.length > 0) {
-      let block = JSON.parse(blockIpfs[0].content);
-      //console.log('onReadTopBlock block=<',block,'>');
-      let prev = block.prev;
-      //console.log('onReadTopBlock prev=<',prev,'>');
-      gTopBlockCID = prev;
-      if(gRecentPublished !==  gTopBlockCID) {
-        let card = {cid : gTopBlockCID};
-        console.log('onReadTopBlock card=<',card,'>');
-        chair.publish(card);
-        gRecentPublished = gTopBlockCID;
-      } else {
-        console.log('onReadTopBlock sent!! ??? prev=<',prev,'>');
-      }
-      setTimeout(()=>{
-        onReadTopBlock(node);
-      },iConstBlockDealDelay);
-    }
-  } catch(e) {
-    console.log('onReadTopBlock e=<',e,'>');
-  }
+onReadTopBlock = () => {
+  readCrystalBlockByAddress(gTopBlockAddress,(block)=>{
+    onBlockContents(block);
+  });
 };
+
+onBlockContents = (block) => {
+  //console.log('onReadTopBlock block=<',block,'>');  
+}
+
+const https = require('https');
+const strConstCrystalRoot = 'https://crystal.wator.xyz:8443/crystal';
+readCrystalBlockByAddress = (address,cb) => {
+  //console.log('readCrystalBlockByAddress address=<',address,'>');
+  let uri = strConstCrystalRoot;
+  uri += '/' + address;
+  //console.log('readCrystalBlockByAddress uri=<',uri,'>');
+  https.get(uri,(res) => {
+    let body = '';
+    res.on('data', (d) => {
+      //console.log('readCrystalBlockByAddress d=<',d,'>');
+      body += d.toString('utf-8');
+    });
+    res.on('end', (evt) => {
+      //console.log('readCrystalBlockByAddress body=<',body,'>');
+      let checkAddress = addressOfContent(body);
+      if(checkAddress === address) {
+        cb(body);
+      }
+    });
+  }).on('error', (e) => {
+    console.log('readCrystalBlockByAddress e=<',e,'>');
+  });
+  //console.log('readCrystalBlockByAddress req=<',req,'>');
+}
+
+const shake256=require('js-sha3').shake256;
+const sha3_224=require('js-sha3').sha3_224;
+const bs58 = require('bs58');
+
+addressOfContent = (content) => {
+  let shake = shake256(content,160);
+  //console.log('addressOfContent shake=<',shake,'>');
+  const bytes = Buffer.from(shake,'hex');
+  const address = bs58.encode(bytes);
+  //console.log('addressOfContent address=<',address,'>');  
+  return address;
+}
 
