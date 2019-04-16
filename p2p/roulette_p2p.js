@@ -40,9 +40,6 @@ module.exports = class RouletteP2P {
     let self = this;
     this.ipfs.on('ready', () => {
       self._onInit();
-      if(typeof self.onReady === 'function') {
-        self.onReady();
-      }
     });
     this._cb = false;
   }

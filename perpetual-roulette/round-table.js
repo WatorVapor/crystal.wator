@@ -3,11 +3,7 @@ const RouletteP2P = require('../p2p/roulette_p2p');
 
 const DEAL_WORLD_MESSAGE = '三十年河东，三十年河西，风水轮流转';
 const PLAY_WORLD_MESSAGE = '等的我花都凉了';
-const iConstFirstBlockDelay = 1000 * 20;
-
-const SHA3  = require('sha3');
-const IPFS = require('ipfs');
-const bs58 = require('bs58')
+const iConstFirstBlockDelay = 1000 * 1;
 
 
 
@@ -31,27 +27,31 @@ class RouletteTable {
     let self = this;
     this.p2pDealer.onReady = () => {
       self.bDealerReady = true;
+      console.log('RouletteTable self.bDealerReady =<',self.bDealerReady,'>');
       self.tryCallReadyCallBack_();
     }
     this.p2pPlayer = new RouletteP2P(PLAY_WORLD_MESSAGE);
     //console.log('p2pPlayer=<',p2pPlayer,'>');
     this.p2pPlayer.onReady = () => {
       self.bPlayerReady = true;
+      console.log('RouletteTable self.bPlayerReady =<',self.bPlayerReady,'>');
       self.tryCallReadyCallBack_();
     }
   }
   
   tryCallReadyCallBack_() {
+    console.log('RouletteTable this.bDealerReady =<',this.bDealerReady,'>');
+    console.log('RouletteTable this.bPlayerReady =<',this.bPlayerReady,'>');
     if(this.bDealerReady && this.bPlayerReady) {
       if(typeof this.onReady === 'function') {
         let self = this;
         if(this.position === 'chair') {
           setTimeout(()=> {
-            self.onReady(self.ipfs);
+            self.onReady();
           },iConstFirstBlockDelay);
         } else {
           setTimeout(()=> {
-            self.onReady(self.ipfs);
+            self.onReady();
           },0);
         }
       }

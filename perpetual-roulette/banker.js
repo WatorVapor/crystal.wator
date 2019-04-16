@@ -2,11 +2,11 @@ const Chair = require('./round-table').Chair;
 //console.log('Chair=<',Chair,'>');
 let chair = new Chair();
 chair.onReady = (node) => {
-  //console.log('chair=<',chair,'>');
+  //console.log('node=<',node,'>');
   onReadTopBlock();
 }
 
-const iConstBlockDealDelay = 1000 * 1;
+const iConstBlockDealDelay = 1000 * 20;
 
 let gTopBlockAddress = '3gdwU8E3TJPHw2LLSLKn1ommiLrf';
 let gRecentPublished = '';
@@ -17,7 +17,17 @@ onReadTopBlock = () => {
 };
 
 onBlockContents = (block) => {
-  //console.log('onReadTopBlock block=<',block,'>');  
+  //console.log('onBlockContents block=<',block,'>');
+  console.log('onBlockContents gTopBlockAddress=<',gTopBlockAddress,'>');
+  try {
+    let jsonBlock = JSON.parse(block);
+    gTopBlockAddress = jsonBlock.prev;
+    setTimeout(()=>{
+      onReadTopBlock();
+    },iConstBlockDealDelay);
+  } catch (e) {
+    console.log('onBlockContents e=<',e,'>');
+  }
 }
 
 const https = require('https');
