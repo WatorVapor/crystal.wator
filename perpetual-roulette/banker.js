@@ -22,6 +22,9 @@ onBlockContents = (block) => {
   try {
     let jsonBlock = JSON.parse(block);
     gTopBlockAddress = jsonBlock.prev;
+    let card = {cid : gTopBlockAddress};
+    console.log('onBlockContents card=<',card,'>');
+    chair.publish(card);
     setTimeout(()=>{
       onReadTopBlock();
     },iConstBlockDealDelay);
