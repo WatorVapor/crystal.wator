@@ -19,15 +19,15 @@ onRequestCrystalHash = (request, h) => {
   //console.log('onRequest::h=<',h,'>');
   if(request && request.params && request.params.name) {
     let hash = request.params.name
-    console.log('onRequestCrystalHash:: hash=<',hash,'>');
+    //console.log('onRequestCrystalHash:: hash=<',hash,'>');
     let path = ROOT_HASH_ACHIVE;
     path += '/' + hash.slice(0,2);
     path += '/' + hash.slice(2,4);
     path += '/' + hash.slice(4,6);
     path += '/' + hash;
-    console.log('onRequestCrystalHash:: path=<',path,'>');
+    //console.log('onRequestCrystalHash:: path=<',path,'>');
     const msg = fs.readFileSync(path, {encoding: 'utf-8'});
-    console.log('onRequestCrystalHash:: msg=<',msg,'>');
+    //console.log('onRequestCrystalHash:: msg=<',msg,'>');
     return msg;
   }
   return '';
