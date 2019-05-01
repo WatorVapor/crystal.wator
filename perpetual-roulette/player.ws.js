@@ -33,10 +33,10 @@ onWSMessage = (msg)  => {
   //console.log('onWSMessage::msg=<',msg,'>');
   let jsonMsg = JSON.parse(msg);
   if(jsonMsg.stage === 'catch') {
-    onCardCatched(jsonMsg);
+    onCardCatched(jsonMsg,msg);
   }
   if(jsonMsg.stage === 'finnish') {
-    onCardFinnished(jsonMsg);
+    onCardFinnished(jsonMsg,msg);
   }
 }
 
@@ -53,9 +53,11 @@ const ShuffleMachine = require('./shuffle-machine').ShuffleMachine;
 const shuffle = new ShuffleMachine();
 console.log('shuffle=<',shuffle,'>');
 
-onCardCatched = (msg) => {
+onCardCatched = (msg,msgStr) => {
   console.log('onCardCatched::msg=<',msg,'>');
 }
-onCardFinnished = (msg) => {
-  console.log('onCardFinnished::msg=<',msg,'>');
+onCardFinnished = (msg,msgStr) => {
+  //console.log('onCardFinnished::msg=<',msg,'>');
+  let address = shuffle.address(msgStr);
+  console.log('onCardFinnished::address=<',address,'>');
 }
