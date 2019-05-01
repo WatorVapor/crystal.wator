@@ -30,7 +30,14 @@ onWSConnected = (ws) => {
 wss.on("connection", onWSConnected);
 
 onWSMessage = (msg)  => {
-  console.log('onWSMessage::msg=<',msg,'>');
+  //console.log('onWSMessage::msg=<',msg,'>');
+  let jsonMsg = JSON.parse(msg);
+  if(jsonMsg.stage === 'catch') {
+    onCardCatched(jsonMsg);
+  }
+  if(jsonMsg.stage === 'finnish') {
+    onCardFinnished(jsonMsg);
+  }
 }
 
 broadCastWS = (msg) => {
@@ -42,3 +49,13 @@ broadCastWS = (msg) => {
   });
 }
 
+const ShuffleMachine = require('./shuffle-machine').ShuffleMachine;
+const shuffle = new ShuffleMachine();
+console.log('shuffle=<',shuffle,'>');
+
+onCardCatched = (msg) => {
+  console.log('onCardCatched::msg=<',msg,'>');
+}
+onCardFinnished = (msg) => {
+  console.log('onCardFinnished::msg=<',msg,'>');
+}
