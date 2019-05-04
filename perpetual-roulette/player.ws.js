@@ -58,6 +58,8 @@ onCardCatched = (msg,msgStr) => {
 }
 onCardFinnished = (msg,msgStr) => {
   //console.log('onCardFinnished::msg=<',msg,'>');
-  let address = shuffle.address(msgStr);
-  console.log('onCardFinnished::address=<',address,'>');
+  shuffle.address(msg,msgStr,onCardShuffleAddress);
+}
+onCardShuffleAddress = (address) => {
+  console.log('onCardShuffleAddress::address=<',address,'>');
 }

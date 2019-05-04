@@ -66,6 +66,8 @@ copy-yishi/
 
 .ipfs_pubsub_room_data_*
 .ipfs_storage_data
+.block_chain_storage
+.ipf_repos_address_only
 
 package-lock.json
 
