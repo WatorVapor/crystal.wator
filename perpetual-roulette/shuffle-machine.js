@@ -25,7 +25,7 @@ const BLOCK_CHAIN_STORAGE_ROOT = './.block_chain_storage';
 class ShuffleMachine_ {
   constructor() {
     let code = execSync('mkdir -p ' + BLOCK_CHAIN_STORAGE_ROOT);
-    console.log('ShuffleMachine_ code=<',code,'>');
+    //console.log('ShuffleMachine_ code=<',code,'>');
     this.bond_ = new BondCrypto();
   }
   async address(jContent,content,cb) {
@@ -36,7 +36,7 @@ class ShuffleMachine_ {
     if(results.length > 0) {
       let msgAddress = results[0].hash;
       this.save2Local_(content,msgAddress);
-      this.mining_(jContent,msgAddress,cb);
+      this.signMine_(jContent,msgAddress,cb);
     }
   }
   save2Local_(content,contentAdd) {
@@ -45,8 +45,10 @@ class ShuffleMachine_ {
     console.log('save2Local_ path=<',path,'>');
     fs.writeFileSync(path,content);
   }
-  mining_(jContent,contentAdd,cb){
-    console.log('mining_ contentAdd=<',contentAdd,'>');
+  signMine_(jContent,contentAdd,cb){
+    console.log('signMine_ contentAdd=<',contentAdd,'>');
+    let msgMine = this.bond_.signMine(jContent.cid,contentAdd);
+    console.log('signMine_ msgMine=<',msgMine,'>');
   }
 };
 
