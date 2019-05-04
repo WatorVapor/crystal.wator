@@ -16,6 +16,8 @@ onIpfsReady = (ipfs) => {
   });
 };
 
+const BondCrypto = require('../bond/bond');
+
 const fs = require('fs');
 const execSync = require('child_process').execSync;
 const BLOCK_CHAIN_STORAGE_ROOT = './.block_chain_storage';
@@ -24,6 +26,7 @@ class ShuffleMachine_ {
   constructor() {
     let code = execSync('mkdir -p ' + BLOCK_CHAIN_STORAGE_ROOT);
     console.log('ShuffleMachine_ code=<',code,'>');
+    this.bond_ = new BondCrypto();
   }
   async address(jContent,content,cb) {
     let contentBuf = Buffer.from( content);

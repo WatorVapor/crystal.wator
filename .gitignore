@@ -68,6 +68,7 @@ copy-yishi/
 .ipfs_storage_data
 .block_chain_storage
 .ipf_repos_address_only
+.keys
 
 package-lock.json
 

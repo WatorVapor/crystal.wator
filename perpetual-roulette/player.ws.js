@@ -51,7 +51,7 @@ broadCastWS = (msg) => {
 
 const ShuffleMachine = require('./shuffle-machine').ShuffleMachine;
 const shuffle = new ShuffleMachine();
-console.log('shuffle=<',shuffle,'>');
+//console.log('shuffle=<',shuffle,'>');
 
 onCardCatched = (msg,msgStr) => {
   console.log('onCardCatched::msg=<',msg,'>');
